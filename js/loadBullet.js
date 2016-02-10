@@ -7,7 +7,7 @@ class loadBullet {
 
         var me = this;
         var loader = new THREE.ObjectLoader();
-        loader.load("/CS312/objects/bullet.json", function (obj) {
+        loader.load("/objects/bullet.json", function (obj) {
             obj.name = "bullet";
 
             me.model = obj;

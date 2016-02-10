@@ -11,7 +11,7 @@
             bulletAngle = tank01Movement.shootAngle;
 
             //Sets the position of the bullet to fire from where the tank is
-            bullet.model.position.set(tank01.position.x, tank01.position.y, tank01.position.z);
+            bullet.model.position.set(tank01.position.x, tank01.position.y + 2.5, tank01.position.z);
             //console.log("BULLET ANGLE -- " + bulletAngle);
             bullet.model.rotation.y = bulletAngle;
             //sets the name of the bullet to its spot in the array

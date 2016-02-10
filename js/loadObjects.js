@@ -1,7 +1,7 @@
 function loadObjects() {
 
     var loader = new THREE.ObjectLoader();
-    loader.load("/CS312/objects/tank/tank.json",function ( obj ) {
+    loader.load("/objects/tank/tank.json",function ( obj ) {
         obj.position.z = -20;
         scene.add( obj );
         tank01 = obj;
@@ -24,7 +24,7 @@ function loadObjects() {
     });   
     
     var loader = new THREE.ObjectLoader();
-    loader.load("/CS312/objects/tank02/tank02.json",function ( obj ) {
+    loader.load("/objects/tank02/tank02.json",function ( obj ) {
         obj.scale.set(1.3, 1.3, 1.3);
         obj.position.z = -50;
         scene.add( obj );

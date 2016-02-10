@@ -28,6 +28,24 @@ function updateBullet() {
 
             tank01.bullets[i].bulletBox.setFromObject(tank01.bullets[i].model);
 
+            for (var a = 0; a < parkingGarages.length; a++){
+                if(tank01.bullets[i].bulletBox.intersectsBox(parkingGarages[a])){
+                    console.log("I HIT IT!!!");
+                    var tmp = tank01.bullets[i];
+                    //increment my bulletsRemoved to know where to start next time in the array.
+                    tank01.bulletsRemoved++;
+                    scene.remove(tmp.model);
+                }
+            }
+            for ( var b = 0; b < brickWalls.length; b++){
+                if(tank01.bullets[i].bulletBox.intersectsBox(brickWalls[b])){
+                    console.log("I HIT IT!!!");
+                    var tmp = tank01.bullets[i];
+                    //increment my bulletsRemoved to know where to start next time in the array.
+                    tank01.bulletsRemoved++;
+                    scene.remove(tmp.model);
+                }
+            }
 
             //Removes the bullet if there is a collision with a wall.
 //            if(tank01.bullets[i].bulletBox.intersectsBox(wallBox)){
