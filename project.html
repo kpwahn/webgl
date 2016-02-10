@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Fi Fy Fo Fum</title>
+</head>
+<body>
+    <script src="bower_components/three.js/build/three.js"></script>
+    <script src="bower_components/three.js/examples/js/loaders/OBJLoader.js"></script>
+    <script src="bower_components/three.js/examples/js/loaders/MTLLoader.js"></script>
+    <script src="bower_components/three.js/examples/js/loaders/OBJMTLLoader.js"></script>
+    <script src="bower_components/OrbitControls.js"></script>   
+    <script src="bower_components/THREEx.KeyboardState.js"></script> 
+    
+    <script src="js/loadObjects.js"></script>
+    <script src="js/keyboard.js"></script>
+    <script src="js/advance.js"></script>
+    <script src="js/bullet.js"></script>
+    <script src="js/loadBullet.js"></script>
+    
+    <script src="js/parkingGarage.js"></script>
+    <script src="js/brickWalls.js"></script>
+    
+  <script>
+    
+    var tank01, tank01Box, tank01BoxDisplay;    
+    var tank01Movement = {speed: 2, turnSpeed: .02, driveAngle: 0, shootAngle: 0}; 
+    var reload = false; //Should be in the object
+      var mainBullet = new loadBullet(); // As well
+      
+    var tank02, tank02Box, tank02BoxDisplay;    
+    var tank02Movement = {speed: 2, turnSpeed: .02, driveAngle: 0, shootAngle: 0};  
+
+    var scene, camera, renderer, keyboard;
+    var WIDTH, HEIGHT;
+    var aspect = WIDTH / HEIGHT;
+      
+      
+      
+      
+    var camera2;
+      
+      
+    var wall, wallBox; 
+
+    var bullet = null;
+    var bulletBox = null;
+    var bulletAngle = 0;
+
+    var theVoid;
+
+    init();
+    animate();
+
+/***********************************************************************************************************************
+* INIT()
+*    Sets up the scene.
+*
+************************************************************************************************************************/
+    function init() {
+
+        // Create the scene and set the scene size.
+        scene = new THREE.Scene();
+        WIDTH = window.innerWidth - 5, HEIGHT = window.innerHeight - 5;
+
+        // Create a renderer and add it to the DOM.
+        renderer = new THREE.WebGLRenderer({antialias:true});
+        renderer.setSize(WIDTH, HEIGHT);
+        renderer.setClearColor(0x333F47, 1);                                    // Set background color of scene
+        renderer.autoClear = false;
+        document.body.appendChild(renderer.domElement);
+
+        // Create a camera, zoom it out from the model a bit
+        camera = new THREE.PerspectiveCamera(45, WIDTH / HEIGHT, 0.1, 20000);
+        camera2 = new THREE.PerspectiveCamera(45, WIDTH / HEIGHT, 0.1, 20000);
+        
+        scene.add(camera2);
+        
+        // Add OrbitControls so that we can pan around with the mouse.
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls = new THREE.OrbitControls(camera2, renderer.domElement);
+
+        // Create an event listener that resizes the renderer with the browser window.
+        window.addEventListener('resize', function() {
+        var WIDTH = window.innerWidth,
+            HEIGHT = window.innerHeight;
+        renderer.setSize(WIDTH, HEIGHT);
+        camera.aspect = WIDTH / HEIGHT;
+        camera.updateProjectionMatrix();
+        });
+        
+        // Set up controls for the keyboard
+        keyboard = new THREEx.KeyboardState();
+        
+        setUpLight();
+        loadObjects();      
+        
+        scene.add(brickWall);
+        scene.add(parkingGarage);
+    }
+
+/****************************************************************************************************************************
+*ANITMATE  
+*   Renders the scene and updates the render as needed.
+*
+******************************************************************************************************************************/
+    function animate() {
+
+    requestAnimationFrame(animate);
+    render();
+
+    keypress();
+    updateBullet();
+    advance();
+        
+    tank01Box.setFromObject(tank01);
+
+    //Update just the display box    
+    tank01BoxDisplay.update();
+    }      
+      
+/*******************************************************************************************************************************
+* Render
+*
+*
+*******************************************************************************************************************************/
+    function render() {   
+    renderer.clear();    
+    renderer.setViewport( 0, 0, WIDTH / 2, HEIGHT);   
+    renderer.render( scene, camera);   
+        
+    renderer.setViewport( WIDTH / 2, 0, WIDTH / 2, HEIGHT);
+	renderer.render( scene, camera2 );
+    }
+
+/*******************************************************************************************************************************
+* Keyboard
+*
+*
+*******************************************************************************************************************************/
+      function keypress() {
+        if(keyboard.pressed("left")) { keyboardLeft(); } 
+        if(keyboard.pressed("right")) { keyboardRight(); } 
+        if(keyboard.pressed("up")) { keyboardUp(); }
+        if(keyboard.pressed("down")) { keyboardDown(); } 
+        if(keyboard.pressed("space")) { keyboardSpace(); }
+        if(keyboard.pressed("a")) { keyboardA(); }
+        if(keyboard.pressed("d")) { keyboardD(); }   
+      }
+      
+/*******************************************************************************************************************************
+* setUpLight
+*
+*
+*******************************************************************************************************************************/
+    function setUpLight() {
+        var light = new THREE.AmbientLight(0xffffff);
+        light.position.set(-100,200,100);
+        scene.add(light);   
+    }
+
+      
+
+      
+      
+
+      
+      
+//        var g = new THREE.CubeGeometry( .0001, .0001, .0001, 1, 1, 1 );
+//        var m = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+//        theVoid = new THREE.Mesh(g, m);
+//        theVoid.position.set(-10000, -10000, -10000);
+//        scene.add(theVoid);
+//
+//        //Test wall
+//        var wallGeometry = new THREE.CubeGeometry( 100, 100, 20, 1, 1, 1 );
+//        var wallMaterial = new THREE.MeshBasicMaterial( {color: 0x8888ff} );
+//
+//        //make an array of these up top so i can set up boxes and such
+//        wall = new THREE.Mesh(wallGeometry, wallMaterial);
+//        wall.position.set(100, 50, -50);
+//        scene.add(wall);
+//        
+//        wallBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+//        wallBox.setFromObject(wall); 
+
+  </script>
+
+</body>
+</html>
