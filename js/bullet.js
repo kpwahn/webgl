@@ -37,6 +37,7 @@ function updateBullet() {
                     scene.remove(tmp.model);
                 }
             }
+            //MODIFICATION
             for ( var b = 0; b < brickWalls.length; b++){
                 if(tank01.bullets[i].bulletBox.intersectsBox(brickWalls[b])){
                     console.log("I HIT IT!!!");
