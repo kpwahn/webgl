@@ -1,7 +1,7 @@
 function loadObjects() {
 
     var loader = new THREE.ObjectLoader();
-    loader.load("/objects/tank/tank.json",function ( obj ) {
+    loader.load("/webgl/objects/tank/tank.json",function ( obj ) {
         obj.position.z = -20;
         scene.add( obj );
         tank01 = obj;
@@ -24,16 +24,21 @@ function loadObjects() {
     });   
     
     var loader = new THREE.ObjectLoader();
-    loader.load("/objects/tank02/tank02.json",function ( obj ) {
+    loader.load("/webgl/objects/tank02/tank02.json",function ( obj ) {
         obj.scale.set(1.3, 1.3, 1.3);
         obj.position.z = -50;
         scene.add( obj );
         tank02 = obj;
         
+        tank02.bullets = [];
+        tank02.bulletsRemoved = 0;
+        
         tank02.add(camera2);
         camera2.position.set( 0, 50 , -5 );    
         camera2.lookAt( new THREE.Vector3( 0, 0, 0 ) );
         
+        tank02Box = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+        tank02Box.setFromObject(tank02);
     });   
       
 }

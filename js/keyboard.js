@@ -3,26 +3,26 @@
 *
 *
 *******************************************************************************************************************************/  
-    function keyboardSpace() {
+    function keyboardShoot(tank, tankMovement) {
         if (!reload) {
             var bullet = new Bullet(mainBullet.model);
 
             //Sets the bullet Angle
-            bulletAngle = tank01Movement.shootAngle;
+            bulletAngle = tankMovement.shootAngle;
 
             //Sets the position of the bullet to fire from where the tank is
-            bullet.model.position.set(tank01.position.x, tank01.position.y + 2.5, tank01.position.z);
+            bullet.model.position.set(tank.position.x, tank.position.y + 2.5, tank.position.z);
             //console.log("BULLET ANGLE -- " + bulletAngle);
             bullet.model.rotation.y = bulletAngle;
             //sets the name of the bullet to its spot in the array
-            bullet.model.name = tank01.bullets.length;
+            bullet.model.name = tank.bullets.length;
 
             //Set the bounding box tied to the given bullet
             bullet.bulletBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
             bullet.bulletBox.setFromObject(bullet.model);
 
             //Add to the Array on tank01
-            tank01.bullets.push(bullet);
+            tank.bullets.push(bullet);
 
             //Sets reload to true to make the shooting slower
             reload = true;
@@ -39,17 +39,17 @@
 *
 *
 *******************************************************************************************************************************/  
-      function keyboardUp() {
+      function keyboardUp(tank, tankBox, tankMovement) {
           
         for (var a = 0; a < parkingGarages.length; a++){  
-            if(tank01Box.intersectsBox(parkingGarages[a])){return;}
+            if(tankBox.intersectsBox(parkingGarages[a])){return;}
         }
         for ( var b = 0; b < brickWalls.length; b++){
-            if(tank01Box.intersectsBox(brickWalls[b])){return;}
+            if(tankBox.intersectsBox(brickWalls[b])){return;}
         }
           
-        tank01.position.x += Math.sin(-tank01Movement.driveAngle) * tank01Movement.speed; 
-        tank01.position.z += Math.cos(-tank01Movement.driveAngle) * tank01Movement.speed;  
+        tank.position.x += Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 
+        tank.position.z += Math.cos(-tankMovement.driveAngle) * tankMovement.speed;  
       }
 
 /*******************************************************************************************************************************
@@ -57,9 +57,9 @@
 *
 *
 *******************************************************************************************************************************/  
-    function keyboardDown() {
-        tank01.position.x -= Math.sin(-tank01Movement.driveAngle) * tank01Movement.speed; 
-        tank01.position.z -= Math.cos(-tank01Movement.driveAngle) * tank01Movement.speed; 
+    function keyboardDown(tank, tankBox, tankMovement) {
+        tank.position.x -= Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 
+        tank.position.z -= Math.cos(-tankMovement.driveAngle) * tankMovement.speed; 
     }
 
 /*******************************************************************************************************************************
@@ -67,10 +67,10 @@
 *
 *
 *******************************************************************************************************************************/  
-      function keyboardLeft() {
-        tank01.rotation.y += tank01Movement.turnSpeed; 
-        tank01Movement.driveAngle -= tank01Movement.turnSpeed;
-        tank01Movement.shootAngle -= tank01Movement.turnSpeed;  
+      function keyboardLeft(tank, tankBox, tankMovement) {
+        tank.rotation.y += tankMovement.turnSpeed; 
+        tankMovement.driveAngle -= tankMovement.turnSpeed;
+        tankMovement.shootAngle -= tankMovement.turnSpeed;  
       }
 
 /*******************************************************************************************************************************
@@ -78,10 +78,10 @@
 *
 *
 *******************************************************************************************************************************/    
-    function keyboardRight() {
-        tank01.rotation.y -= tank01Movement.turnSpeed; 
-        tank01Movement.driveAngle += tank01Movement.turnSpeed; 
-        tank01Movement.shootAngle += tank01Movement.turnSpeed;
+    function keyboardRight(tank, tankBox, tankMovement) {
+        tank.rotation.y -= tankMovement.turnSpeed; 
+        tankMovement.driveAngle += tankMovement.turnSpeed; 
+        tankMovement.shootAngle += tankMovement.turnSpeed;
     }
 
 /*******************************************************************************************************************************

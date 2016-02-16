@@ -109,10 +109,12 @@
     render();
 
     keypress();
-    updateBullet();
+    updateBullet(tank01);
+    updateBullet(tank02)
     advance();
         
     tank01Box.setFromObject(tank01);
+    tank02Box.setFromObject(tank02);
 
     //Update just the display box    
     tank01BoxDisplay.update();
@@ -138,13 +140,23 @@
 *
 *******************************************************************************************************************************/
       function keypress() {
-        if(keyboard.pressed("left")) { keyboardLeft(); } 
-        if(keyboard.pressed("right")) { keyboardRight(); } 
-        if(keyboard.pressed("up")) { keyboardUp(); }
-        if(keyboard.pressed("down")) { keyboardDown(); } 
-        if(keyboard.pressed("space")) { keyboardSpace(); }
-        if(keyboard.pressed("a")) { keyboardA(); }
-        if(keyboard.pressed("d")) { keyboardD(); }   
+        //Tank01
+        if(keyboard.pressed("left")) { keyboardLeft(tank01, tank01Box, tank01Movement); } 
+        if(keyboard.pressed("right")) { keyboardRight(tank01, tank01Box, tank01Movement); } 
+        if(keyboard.pressed("up")) { keyboardUp(tank01, tank01Box, tank01Movement); }
+        if(keyboard.pressed("down")) { keyboardDown(tank01, tank01Box, tank01Movement); } 
+        if(keyboard.pressed("shift")) { keyboardShoot(tank01, tank01Movement); }
+        //if(keyboard.pressed("a")) { keyboardA(); }
+        //if(keyboard.pressed("d")) { keyboardD(); }   
+       
+    //Tank02      
+    if(keyboard.pressed("a")) { keyboardLeft(tank02, tank02Box, tank02Movement); } 
+        if(keyboard.pressed("d")) { keyboardRight(tank02, tank02Box, tank02Movement); } 
+        if(keyboard.pressed("w")) { keyboardUp(tank02, tank02Box, tank02Movement); }
+        if(keyboard.pressed("s")) { keyboardDown(tank02, tank02Box, tank02Movement); } 
+        if(keyboard.pressed("f")) { keyboardShoot(tank02, tank02Movement); }
+        //if(keyboard.pressed("a")) { keyboardA(); }
+        //if(keyboard.pressed("d")) { keyboardD(); }         
       }
       
 /*******************************************************************************************************************************

@@ -21,29 +21,31 @@ class Bullet {
     }
 }
 
-function updateBullet() {
-    if (tank01.bullets[0] != undefined) {
+function updateBullet(tank) {
+    //pass in bullet object
+    
+    if (tank.bullets[0] != undefined) {
         //goes through the entire array of bullets
-        for (var i = tank01.bulletsRemoved; i < tank01.bullets.length; i++) {
+        for (var i = tank.bulletsRemoved; i < tank.bullets.length; i++) {
 
-            tank01.bullets[i].bulletBox.setFromObject(tank01.bullets[i].model);
+            tank.bullets[i].bulletBox.setFromObject(tank.bullets[i].model);
 
             for (var a = 0; a < parkingGarages.length; a++){
-                if(tank01.bullets[i].bulletBox.intersectsBox(parkingGarages[a])){
+                if(tank.bullets[i].bulletBox.intersectsBox(parkingGarages[a])){
                     console.log("I HIT IT!!!");
-                    var tmp = tank01.bullets[i];
+                    var tmp = tank.bullets[i];
                     //increment my bulletsRemoved to know where to start next time in the array.
-                    tank01.bulletsRemoved++;
+                    tank.bulletsRemoved++;
                     scene.remove(tmp.model);
                 }
             }
             //MODIFICATION
             for ( var b = 0; b < brickWalls.length; b++){
-                if(tank01.bullets[i].bulletBox.intersectsBox(brickWalls[b])){
+                if(tank.bullets[i].bulletBox.intersectsBox(brickWalls[b])){
                     console.log("I HIT IT!!!");
-                    var tmp = tank01.bullets[i];
+                    var tmp = tank.bullets[i];
                     //increment my bulletsRemoved to know where to start next time in the array.
-                    tank01.bulletsRemoved++;
+                    tank.bulletsRemoved++;
                     scene.remove(tmp.model);
                 }
             }
@@ -58,11 +60,11 @@ function updateBullet() {
 //            }
 
             //If bullet distance is farther than 1000, remove it from the scene
-            if (tank01.bullets[i].distance > 1000) {
+            if (tank.bullets[i].distance > 1000) {
                 console.log("TOO FAR AWAY");
-                var tmp = tank01.bullets[i];
+                var tmp = tank.bullets[i];
                 //increment my bulletsRemoved to know where to start next time in the array.
-                tank01.bulletsRemoved++;
+                tank.bulletsRemoved++;
                 scene.remove(tmp.model);
             }
         }
