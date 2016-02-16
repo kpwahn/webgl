@@ -21,7 +21,7 @@ class Bullet {
     }
 }
 
-function updateBullet(tank) {
+function updateBullet(tank, otherTank) {
     //pass in bullet object
     
     if (tank.bullets[0] != undefined) {
@@ -49,6 +49,16 @@ function updateBullet(tank) {
                     scene.remove(tmp.model);
                 }
             }
+            
+            if(tank.bullets[i].bulletBox.intersectsBox(otherTank)){
+                console.log("You hit the other guy!");
+                
+                var tmp = tank.bullets[i];
+                //increment my bulletsRemoved to know where to start next time in the array.
+                tank.bulletsRemoved++;
+                scene.remove(tmp.model);       
+            }
+            
 
             //Removes the bullet if there is a collision with a wall.
 //            if(tank01.bullets[i].bulletBox.intersectsBox(wallBox)){

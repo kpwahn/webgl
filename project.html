@@ -7,7 +7,6 @@
     <script src="bower_components/three.js/build/three.js"></script>
     <script src="bower_components/three.js/examples/js/loaders/OBJLoader.js"></script>
     <script src="bower_components/three.js/examples/js/loaders/MTLLoader.js"></script>
-    <script src="bower_components/three.js/examples/js/loaders/OBJMTLLoader.js"></script>
     <script src="bower_components/OrbitControls.js"></script>   
     <script src="bower_components/THREEx.KeyboardState.js"></script> 
     
@@ -22,31 +21,23 @@
     
   <script>
     
+    //Tank01
     var tank01, tank01Box, tank01BoxDisplay;    
-    var tank01Movement = {speed: 2, turnSpeed: .02, driveAngle: 0, shootAngle: 0}; 
-    var reload = false; //Should be in the object
-      var mainBullet = new loadBullet(); // As well
-      
+    var tank01Movement = {speed: 2, turnSpeed: .02, driveAngle: 0, shootAngle: 0};
+    
+    //Tank02  
     var tank02, tank02Box, tank02BoxDisplay;    
     var tank02Movement = {speed: 2, turnSpeed: .02, driveAngle: 0, shootAngle: 0};  
 
-    var scene, camera, renderer, keyboard;
+    //Important stuff  
+    var scene, camera, camera2, renderer, keyboard;
     var WIDTH, HEIGHT;
-    var aspect = WIDTH / HEIGHT;
-      
-      
-      
-      
-    var camera2;
-      
-      
-    var wall, wallBox; 
 
+    var reload = false; //Should be in the object
+    var mainBullet = new loadBullet(); // As well
     var bullet = null;
     var bulletBox = null;
     var bulletAngle = 0;
-
-    var theVoid;
 
     init();
     animate();
@@ -105,19 +96,19 @@
 ******************************************************************************************************************************/
     function animate() {
 
-    requestAnimationFrame(animate);
-    render();
+        requestAnimationFrame(animate);
+        render();
 
-    keypress();
-    updateBullet(tank01);
-    updateBullet(tank02)
-    advance();
-        
-    tank01Box.setFromObject(tank01);
-    tank02Box.setFromObject(tank02);
+        keypress();
+        updateBullet(tank01, tank02Box);
+        updateBullet(tank02, tank01Box);
+        advance();
 
-    //Update just the display box    
-    tank01BoxDisplay.update();
+        tank01Box.setFromObject(tank01);
+        tank02Box.setFromObject(tank02);
+
+        //Update just the display box    
+        tank01BoxDisplay.update();
     }      
       
 /*******************************************************************************************************************************
@@ -126,12 +117,12 @@
 *
 *******************************************************************************************************************************/
     function render() {   
-    renderer.clear();    
-    renderer.setViewport( 0, 0, WIDTH / 2, HEIGHT);   
-    renderer.render( scene, camera);   
-        
-    renderer.setViewport( WIDTH / 2, 0, WIDTH / 2, HEIGHT);
-	renderer.render( scene, camera2 );
+        renderer.clear();    
+        renderer.setViewport( 0, 0, WIDTH / 2, HEIGHT);   
+        renderer.render( scene, camera);   
+
+        renderer.setViewport( WIDTH / 2, 0, WIDTH / 2, HEIGHT);
+        renderer.render( scene, camera2 );
     }
 
 /*******************************************************************************************************************************
@@ -154,9 +145,7 @@
         if(keyboard.pressed("d")) { keyboardRight(tank02, tank02Box, tank02Movement); } 
         if(keyboard.pressed("w")) { keyboardUp(tank02, tank02Box, tank02Movement); }
         if(keyboard.pressed("s")) { keyboardDown(tank02, tank02Box, tank02Movement); } 
-        if(keyboard.pressed("f")) { keyboardShoot(tank02, tank02Movement); }
-        //if(keyboard.pressed("a")) { keyboardA(); }
-        //if(keyboard.pressed("d")) { keyboardD(); }         
+        if(keyboard.pressed("f")) { keyboardShoot(tank02, tank02Movement); }      
       }
       
 /*******************************************************************************************************************************
@@ -169,31 +158,6 @@
         light.position.set(-100,200,100);
         scene.add(light);   
     }
-
-      
-
-      
-      
-
-      
-      
-//        var g = new THREE.CubeGeometry( .0001, .0001, .0001, 1, 1, 1 );
-//        var m = new THREE.MeshBasicMaterial( {color: 0xffffff} );
-//        theVoid = new THREE.Mesh(g, m);
-//        theVoid.position.set(-10000, -10000, -10000);
-//        scene.add(theVoid);
-//
-//        //Test wall
-//        var wallGeometry = new THREE.CubeGeometry( 100, 100, 20, 1, 1, 1 );
-//        var wallMaterial = new THREE.MeshBasicMaterial( {color: 0x8888ff} );
-//
-//        //make an array of these up top so i can set up boxes and such
-//        wall = new THREE.Mesh(wallGeometry, wallMaterial);
-//        wall.position.set(100, 50, -50);
-//        scene.add(wall);
-//        
-//        wallBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
-//        wallBox.setFromObject(wall); 
 
   </script>
 
