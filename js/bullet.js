@@ -62,8 +62,7 @@ function updateBullet(tank, otherTankBox, otherTank) {
                     tank01.tank01Box.setFromObject(theVoid);
                     explosion.position.set(otherTank.position.x,otherTank.position.y,otherTank.position.z);
                     scene.add(explosion);
-
-                }
+                } else { otherTank.position.set(-20,0,-20); }
                 
                 var tmp = tank.bullets[i];
                 //increment my bulletsRemoved to know where to start next time in the array.

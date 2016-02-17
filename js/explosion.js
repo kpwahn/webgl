@@ -34,7 +34,6 @@ function explosion() {
         new THREE.IcosahedronGeometry(20, 4),
         material
     );
-    //scene.add( mesh );
 
     return mesh;
 }
