@@ -86,7 +86,27 @@
         loadObjects();      
         
         scene.add(brickWall);
-        //scene.add(parkingGarage);
+        scene.add(parkingGarage);
+        
+        
+        
+        ///////
+        //add ground 
+var grassTex = THREE.ImageUtils.loadTexture('images/grass.jpg'); 
+grassTex.wrapS = THREE.RepeatWrapping; 
+grassTex.wrapT = THREE.RepeatWrapping; 
+grassTex.repeat.x = 256; 
+grassTex.repeat.y = 256; 
+var groundMat = new THREE.MeshBasicMaterial({map:grassTex}); 
+        
+        var groundGeo = new THREE.PlaneGeometry(1000,1000); 
+        
+        var ground = new THREE.Mesh(groundGeo,groundMat); 
+ground.position.y = -1.9; //lower it 
+ground.rotation.x = -Math.PI/2; //-90 degrees around the xaxis 
+//IMPORTANT, draw on both sides 
+ground.doubleSided = true; 
+scene.add(ground); 
     }
 
 /****************************************************************************************************************************
@@ -138,8 +158,8 @@
         if(keyboard.pressed("up")) { keyboardUp(tank02, tank02Box, tank02Movement); }
         if(keyboard.pressed("down")) { keyboardDown(tank02, tank02Box, tank02Movement); } 
         if(keyboard.pressed("shift")) { keyboardShoot(tank02, tank02Movement); }
-        //if(keyboard.pressed("a")) { keyboardA(); }
-        //if(keyboard.pressed("d")) { keyboardD(); }   
+        if(keyboard.pressed("j")) { keyboardA(); }
+        if(keyboard.pressed("k")) { keyboardD(); }   
        
     //Tank02      
     if(keyboard.pressed("a")) { keyboardLeft(tank01, tank01Box, tank01Movement); } 
