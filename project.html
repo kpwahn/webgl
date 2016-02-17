@@ -94,7 +94,27 @@
         scene.add(theVoid);
         
         scene.add(brickWall);
-        //scene.add(parkingGarage);
+        scene.add(parkingGarage);
+        
+        
+        
+        ///////
+        //add ground 
+var grassTex = THREE.ImageUtils.loadTexture('images/grass.jpg'); 
+grassTex.wrapS = THREE.RepeatWrapping; 
+grassTex.wrapT = THREE.RepeatWrapping; 
+grassTex.repeat.x = 256; 
+grassTex.repeat.y = 256; 
+var groundMat = new THREE.MeshBasicMaterial({map:grassTex}); 
+        
+        var groundGeo = new THREE.PlaneGeometry(1000,1000); 
+        
+        var ground = new THREE.Mesh(groundGeo,groundMat); 
+ground.position.y = -1.9; //lower it 
+ground.rotation.x = -Math.PI/2; //-90 degrees around the xaxis 
+//IMPORTANT, draw on both sides 
+ground.doubleSided = true; 
+scene.add(ground); 
     }
 
 /****************************************************************************************************************************
@@ -140,7 +160,6 @@
 *
 *******************************************************************************************************************************/
       function keypress() {
-
     if (scene.getObjectByName("Tank2")) {
         //Tank02
         if (keyboard.pressed("left")) {
