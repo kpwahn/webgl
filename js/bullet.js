@@ -21,7 +21,7 @@ class Bullet {
     }
 }
 
-function updateBullet(tank, otherTank) {
+function updateBullet(tank, otherTankBox, otherTank) {
     //pass in bullet object
     
     if (tank.bullets[0] != undefined) {
@@ -50,8 +50,14 @@ function updateBullet(tank, otherTank) {
                 }
             }
             
-            if(tank.bullets[i].bulletBox.intersectsBox(otherTank)){
+            if(tank.bullets[i].bulletBox.intersectsBox(otherTankBox)){
                 console.log("You hit the other guy!");
+                otherTank.health--;
+                if (otherTank.health == 0) {
+                    console.log(otherTank.name + "Died");
+                    scene.remove(otherTank);
+                    scene.remove(otherTankBox);
+                }
                 
                 var tmp = tank.bullets[i];
                 //increment my bulletsRemoved to know where to start next time in the array.
