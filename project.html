@@ -40,6 +40,9 @@
     var bullet = null;
     var bulletBox = null;
     var bulletAngle = 0;
+      
+    var cube;
+    var cubeAngle = (Math.random() * 360) * Math.PI/180; 
 
     init();
     animate();
@@ -93,24 +96,30 @@
         theVoid.position.set(-100000,-1000000,-100000);
         scene.add(theVoid);
         
+        var g = new THREE.CubeGeometry(20, 10, 20, 1,1,1);
+        var m = new THREE.MeshBasicMaterial({color:0xfa03ff});
+        cube = new THREE.Mesh(g, m);
+        cube.position.y = 5;
+        scene.add(cube);
+        
         scene.add(brickWall);
         scene.add(parkingGarage);
         
         
-    //add ground 
-    var grassTex = THREE.ImageUtils.loadTexture('images/grass.jpg'); 
-    grassTex.wrapS = THREE.RepeatWrapping; 
-    grassTex.wrapT = THREE.RepeatWrapping; 
-    grassTex.repeat.x = 256; 
-    grassTex.repeat.y = 256; 
-    var groundMat = new THREE.MeshBasicMaterial({map:grassTex}); 
-    var groundGeo = new THREE.PlaneGeometry(1000,1000); 
-    var ground = new THREE.Mesh(groundGeo,groundMat); 
-    ground.position.y = -1.9; //lower it 
-    ground.rotation.x = -Math.PI/2; //-90 degrees around the xaxis 
-    //IMPORTANT, draw on both sides 
-    ground.doubleSided = true; 
-    scene.add(ground); 
+        //add ground 
+        var grassTex = THREE.ImageUtils.loadTexture('images/grass.jpg'); 
+        grassTex.wrapS = THREE.RepeatWrapping; 
+        grassTex.wrapT = THREE.RepeatWrapping; 
+        grassTex.repeat.x = 256; 
+        grassTex.repeat.y = 256; 
+        var groundMat = new THREE.MeshBasicMaterial({map:grassTex}); 
+        var groundGeo = new THREE.PlaneGeometry(1000,1000); 
+        var ground = new THREE.Mesh(groundGeo,groundMat); 
+        ground.position.y = -1.9; //lower it 
+        ground.rotation.x = -Math.PI/2; //-90 degrees around the xaxis 
+        //IMPORTANT, draw on both sides 
+        ground.doubleSided = true; 
+        scene.add(ground); 
 }
 
 /****************************************************************************************************************************
@@ -122,7 +131,13 @@
 
         requestAnimationFrame(animate);
         render();
-
+        
+         setTimeout(function(){
+                cubeAngle = (Math.random() * 360) * Math.PI/180;    
+            }, 10500);
+        cube.position.set(cube.position.x -= Math.sin(cubeAngle) * 5, cube.position.y, cube.position.z -= Math.sin(cubeAngle) * 5);
+        console.log(Math.sin(cubeAngle));
+        
         keypress();
         updateBullet(tank01, tank02Box, tank02);
         updateBullet(tank02, tank01.tank01Box, tank01);
@@ -155,21 +170,11 @@
       function keypress() {
     if (scene.getObjectByName("Tank2")) {
         //Tank02
-        if (keyboard.pressed("left")) {
-            keyboardLeft(tank02, tank02Box, tank02Movement);
-        }
-        if (keyboard.pressed("right")) {
-            keyboardRight(tank02, tank02Box, tank02Movement);
-        }
-        if (keyboard.pressed("up")) {
-            keyboardUp(tank02, tank02Box, tank02Movement);
-        }
-        if (keyboard.pressed("down")) {
-            keyboardDown(tank02, tank02Box, tank02Movement);
-        }
-        if (keyboard.pressed("shift")) {
-            keyboardShoot(tank02, tank02Movement);
-        }
+        if (keyboard.pressed("left")) {keyboardLeft(tank02, tank02Box, tank02Movement);}
+        if (keyboard.pressed("right")) {keyboardRight(tank02, tank02Box, tank02Movement);}
+        if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Box, tank02Movement);}
+        if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Box, tank02Movement);}
+        if (keyboard.pressed("shift")) {keyboardShoot(tank02, tank02Movement);}
         //if(keyboard.pressed("a")) { keyboardA(); }
         //if(keyboard.pressed("d")) { keyboardD(); }
     }
@@ -177,21 +182,13 @@
 
        if (scene.getObjectByName("Tank1")) {
            //Tank01
-           if (keyboard.pressed("a")) {
-               keyboardLeft(tank01, tank01.tank01Box, tank01Movement);
-           }
-           if (keyboard.pressed("d")) {
-               keyboardRight(tank01, tank01.tank01Box, tank01Movement);
-           }
-           if (keyboard.pressed("w")) {
-               keyboardUp(tank01, tank01.tank01Box, tank01Movement);
-           }
-           if (keyboard.pressed("s")) {
-               keyboardDown(tank01, tank01.tank01Box, tank01Movement);
-           }
-           if (keyboard.pressed("f")) {
-               keyboardShoot(tank01, tank01Movement);
-           }
+           if (keyboard.pressed("a")) {keyboardLeft(tank01, tank01.tank01Box, tank01Movement);}
+           if (keyboard.pressed("d")) {keyboardRight(tank01, tank01.tank01Box, tank01Movement);}
+           if (keyboard.pressed("w")) {keyboardUp(tank01, tank01.tank01Box, tank01Movement);}
+           if (keyboard.pressed("s")) {keyboardDown(tank01, tank01.tank01Box, tank01Movement);}
+           if (keyboard.pressed("f")) {keyboardShoot(tank01, tank01Movement);}
+           //if(keyboard.pressed("a")) { keyboardA(); }
+           //if(keyboard.pressed("d")) { keyboardD(); }
        }
       }
       
