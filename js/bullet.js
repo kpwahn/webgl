@@ -60,6 +60,8 @@ function updateBullet(tank, otherTankBox, otherTank) {
                     //scene.remove(otherTankBox);
                     //otherTankBox.set(0, 100000, 0);
                     tank01.tank01Box.setFromObject(theVoid);
+                    explosion.position.set(otherTank.position.x,otherTank.position.y,otherTank.position.z);
+                    scene.add(explosion);
 
                 }
                 
