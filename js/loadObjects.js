@@ -8,6 +8,8 @@ function loadObjects() {
         
         tank01.bullets = [];
         tank01.bulletsRemoved = 0;
+        tank01.health = 3;
+        tank01.name = "Tank1";
 
         //Set the camera relative to this object
         tank01.add( camera );
@@ -32,6 +34,8 @@ function loadObjects() {
         
         tank02.bullets = [];
         tank02.bulletsRemoved = 0;
+        tank02.health = 3;
+        tank02.name = "Tank2";
         
         tank02.add(camera2);
         camera2.position.set( 0, 100, -5 );    
