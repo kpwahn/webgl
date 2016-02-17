@@ -58,6 +58,7 @@
 *
 *******************************************************************************************************************************/  
     function keyboardDown(tank, tankBox, tankMovement) {
+        
         tank.position.x -= Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 
         tank.position.z -= Math.cos(-tankMovement.driveAngle) * tankMovement.speed; 
     }
