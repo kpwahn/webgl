@@ -32,6 +32,8 @@
     //Important stuff  
     var scene, camera, camera2, renderer, keyboard;
     var WIDTH, HEIGHT;
+    var theVoid;
+
 
     var reload = false; //Should be in the object
     var mainBullet = new loadBullet(); // As well
@@ -83,7 +85,13 @@
         keyboard = new THREEx.KeyboardState();
         
         setUpLight();
-        loadObjects();      
+        loadObjects();
+
+        var g = new THREE.CubeGeometry(.0001,.0001,.0001, 1,1,1);
+        var m = new THREE.MeshBasicMaterial({color:0xffffff});
+        theVoid = new THREE.Mesh(g, m);
+        theVoid.position.set(-100000,-1000000,-100000);
+        scene.add(theVoid);
         
         scene.add(brickWall);
         //scene.add(parkingGarage);
@@ -101,15 +109,15 @@
 
         keypress();
         updateBullet(tank01, tank02Box, tank02);
-        updateBullet(tank02, tank01Box, tank01);
+        updateBullet(tank02, tank01.tank01Box, tank01);
         advance(tank01);
         advance(tank02);
 
-        tank01Box.setFromObject(tank01);
+        tank01.tank01Box.setFromObject(tank01);
         tank02Box.setFromObject(tank02);
 
         //Update just the display box    
-        tank01BoxDisplay.update();
+//        tank01.tank01BoxDisplay.update();
     }      
       
 /*******************************************************************************************************************************
@@ -132,21 +140,48 @@
 *
 *******************************************************************************************************************************/
       function keypress() {
-        //Tank01
-        if(keyboard.pressed("left")) { keyboardLeft(tank02, tank02Box, tank02Movement); } 
-        if(keyboard.pressed("right")) { keyboardRight(tank02, tank02Box, tank02Movement); } 
-        if(keyboard.pressed("up")) { keyboardUp(tank02, tank02Box, tank02Movement); }
-        if(keyboard.pressed("down")) { keyboardDown(tank02, tank02Box, tank02Movement); } 
-        if(keyboard.pressed("shift")) { keyboardShoot(tank02, tank02Movement); }
+
+    if (scene.getObjectByName("Tank2")) {
+        //Tank02
+        if (keyboard.pressed("left")) {
+            keyboardLeft(tank02, tank02Box, tank02Movement);
+        }
+        if (keyboard.pressed("right")) {
+            keyboardRight(tank02, tank02Box, tank02Movement);
+        }
+        if (keyboard.pressed("up")) {
+            keyboardUp(tank02, tank02Box, tank02Movement);
+        }
+        if (keyboard.pressed("down")) {
+            keyboardDown(tank02, tank02Box, tank02Movement);
+        }
+        if (keyboard.pressed("shift")) {
+            keyboardShoot(tank02, tank02Movement);
+        }
         //if(keyboard.pressed("a")) { keyboardA(); }
-        //if(keyboard.pressed("d")) { keyboardD(); }   
-       
-    //Tank02      
-    if(keyboard.pressed("a")) { keyboardLeft(tank01, tank01Box, tank01Movement); } 
-        if(keyboard.pressed("d")) { keyboardRight(tank01, tank01Box, tank01Movement); } 
-        if(keyboard.pressed("w")) { keyboardUp(tank01, tank01Box, tank01Movement); }
-        if(keyboard.pressed("s")) { keyboardDown(tank01, tank01Box, tank01Movement); } 
-        if(keyboard.pressed("f")) { keyboardShoot(tank01, tank01Movement); }      
+        //if(keyboard.pressed("d")) { keyboardD(); }
+    }
+
+
+       if (scene.getObjectByName("Tank1")) {
+           console.log("Found it!!")
+           //Tank01
+           if (keyboard.pressed("a")) {
+               keyboardLeft(tank01, tank01.tank01Box, tank01Movement);
+           }
+           if (keyboard.pressed("d")) {
+               keyboardRight(tank01, tank01.tank01Box, tank01Movement);
+           }
+           if (keyboard.pressed("w")) {
+               keyboardUp(tank01, tank01.tank01Box, tank01Movement);
+           }
+           if (keyboard.pressed("s")) {
+               keyboardDown(tank01, tank01.tank01Box, tank01Movement);
+           }
+           if (keyboard.pressed("f")) {
+               keyboardShoot(tank01, tank01Movement);
+           }
+       }
       }
       
 /*******************************************************************************************************************************

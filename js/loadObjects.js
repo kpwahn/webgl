@@ -17,11 +17,11 @@ function loadObjects() {
         camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
 
         //Just for visual box
-        tank01BoxDisplay = new THREE.BoundingBoxHelper( tank01 );            
-        scene.add(tank01BoxDisplay);
+        //tank01.tank01BoxDisplay = new THREE.BoundingBoxHelper( tank01 );
+        //scene.add(tank01.tank01BoxDisplay);
 
-        tank01Box = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
-        tank01Box.setFromObject(tank01);
+        tank01.tank01Box = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+        tank01.tank01Box.setFromObject(tank01);
         
     });   
     

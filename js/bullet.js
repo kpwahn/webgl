@@ -24,7 +24,7 @@ class Bullet {
 function updateBullet(tank, otherTankBox, otherTank) {
     //pass in bullet object
     
-    if (tank.bullets[0] != undefined) {
+    if (tank.bullets[tank.bulletsRemoved] != undefined) {
         //goes through the entire array of bullets
         for (var i = tank.bulletsRemoved; i < tank.bullets.length; i++) {
 
@@ -51,12 +51,16 @@ function updateBullet(tank, otherTankBox, otherTank) {
             }
             
             if(tank.bullets[i].bulletBox.intersectsBox(otherTankBox)){
-                console.log("You hit the other guy!");
+
+                console.log("You hit " + otherTank.name + "!");
                 otherTank.health--;
                 if (otherTank.health == 0) {
                     console.log(otherTank.name + "Died");
                     scene.remove(otherTank);
-                    scene.remove(otherTankBox);
+                    //scene.remove(otherTankBox);
+                    //otherTankBox.set(0, 100000, 0);
+                    tank01.tank01Box.setFromObject(theVoid);
+
                 }
                 
                 var tmp = tank.bullets[i];
@@ -64,16 +68,6 @@ function updateBullet(tank, otherTankBox, otherTank) {
                 tank.bulletsRemoved++;
                 scene.remove(tmp.model);       
             }
-            
-
-            //Removes the bullet if there is a collision with a wall.
-//            if(tank01.bullets[i].bulletBox.intersectsBox(wallBox)){
-//                console.log("I HIT IT! I HIT IT!!");
-//                var tmp = tank01.bullets[i];
-//                //increment my bulletsRemoved to know where to start next time in the array.
-//                tank01.bulletsRemoved++;
-//                scene.remove(tmp.model);
-//            }
 
             //If bullet distance is farther than 1000, remove it from the scene
             if (tank.bullets[i].distance > 1000) {
