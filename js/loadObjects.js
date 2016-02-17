@@ -10,6 +10,7 @@ function loadObjects() {
         tank01.bulletsRemoved = 0;
         tank01.health = 3;
         tank01.name = "Tank1";
+        tank01.reload = false;
 
         //Set the camera relative to this object
         tank01.add( camera );
@@ -36,6 +37,7 @@ function loadObjects() {
         tank02.bulletsRemoved = 0;
         tank02.health = 3;
         tank02.name = "Tank2";
+        tank02.reload = false;
         
         tank02.add(camera2);
         camera2.position.set( 0, 25, -50 );    

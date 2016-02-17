@@ -4,7 +4,7 @@
 *
 *******************************************************************************************************************************/  
     function keyboardShoot(tank, tankMovement) {
-        if (!reload) {
+        if (!tank.reload) {
             var bullet = new Bullet(mainBullet.model);
 
             //Sets the bullet Angle
@@ -25,12 +25,14 @@
             tank.bullets.push(bullet);
 
             //Sets reload to true to make the shooting slower
-            reload = true;
+            tank.reload = true;
+
+            scene.add(bullet.model);
 
             setTimeout(function(){
-                reload = false;
+                tank.reload = false;
             }, 500);
-            scene.add(bullet.model); 
+            //scene.add(bullet.model);
         }
     }
 
