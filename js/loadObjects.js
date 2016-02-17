@@ -13,7 +13,7 @@ function loadObjects() {
 
         //Set the camera relative to this object
         tank01.add( camera );
-        camera.position.set( 0, 100, -5 );    
+        camera.position.set( 0, 25, -50 );  
         camera.lookAt( new THREE.Vector3( 0, 0, 0 ) );
 
         //Just for visual box
@@ -38,7 +38,7 @@ function loadObjects() {
         tank02.name = "Tank2";
         
         tank02.add(camera2);
-        camera2.position.set( 0, 100, -5 );    
+        camera2.position.set( 0, 25, -50 );    
         camera2.lookAt( new THREE.Vector3( 0, 0, 0 ) );
         
         tank02Box = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());

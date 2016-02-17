@@ -97,25 +97,21 @@
         scene.add(parkingGarage);
         
         
-        
-        ///////
-        //add ground 
-var grassTex = THREE.ImageUtils.loadTexture('images/grass.jpg'); 
-grassTex.wrapS = THREE.RepeatWrapping; 
-grassTex.wrapT = THREE.RepeatWrapping; 
-grassTex.repeat.x = 256; 
-grassTex.repeat.y = 256; 
-var groundMat = new THREE.MeshBasicMaterial({map:grassTex}); 
-        
-        var groundGeo = new THREE.PlaneGeometry(1000,1000); 
-        
-        var ground = new THREE.Mesh(groundGeo,groundMat); 
-ground.position.y = -1.9; //lower it 
-ground.rotation.x = -Math.PI/2; //-90 degrees around the xaxis 
-//IMPORTANT, draw on both sides 
-ground.doubleSided = true; 
-scene.add(ground); 
-    }
+    //add ground 
+    var grassTex = THREE.ImageUtils.loadTexture('images/grass.jpg'); 
+    grassTex.wrapS = THREE.RepeatWrapping; 
+    grassTex.wrapT = THREE.RepeatWrapping; 
+    grassTex.repeat.x = 256; 
+    grassTex.repeat.y = 256; 
+    var groundMat = new THREE.MeshBasicMaterial({map:grassTex}); 
+    var groundGeo = new THREE.PlaneGeometry(1000,1000); 
+    var ground = new THREE.Mesh(groundGeo,groundMat); 
+    ground.position.y = -1.9; //lower it 
+    ground.rotation.x = -Math.PI/2; //-90 degrees around the xaxis 
+    //IMPORTANT, draw on both sides 
+    ground.doubleSided = true; 
+    scene.add(ground); 
+}
 
 /****************************************************************************************************************************
 *ANITMATE  
@@ -135,9 +131,6 @@ scene.add(ground);
 
         tank01.tank01Box.setFromObject(tank01);
         tank02Box.setFromObject(tank02);
-
-        //Update just the display box    
-//        tank01.tank01BoxDisplay.update();
     }      
       
 /*******************************************************************************************************************************
