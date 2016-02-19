@@ -54,6 +54,7 @@ function updateBullet(tank, otherTankBox, otherTank) {
 
                 console.log("You hit " + otherTank.name + "!");
                 otherTank.health--;
+                console.log(otherTank.health);
                 if (otherTank.health == 0) {
                     console.log(otherTank.name + "Died");
                     scene.remove(otherTank);
