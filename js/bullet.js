@@ -54,6 +54,10 @@ function updateBullet(tank, otherTankBox, otherTank) {
 
                 console.log("You hit " + otherTank.name + "!");
                 otherTank.health--;
+                
+                document.getElementById("tank02Health").innerHTML = tank02.health;
+                document.getElementById("tank01Health").innerHTML = tank01.health;
+                
                 console.log(otherTank.health);
                 if (otherTank.health == 0) {
                     console.log(otherTank.name + "Died");
