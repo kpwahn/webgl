@@ -413,8 +413,13 @@
         advance(tank01);
         advance(tank02);
 
+    //only updates the boxes IF the tanks are still in the scene
+    if (scene.getObjectByName("Tank1")) {
         tank01.tankBox.setFromObject(tank01);
+    }
+    if (scene.getObjectByName("Tank2")) {
         tank02.tankBox.setFromObject(tank02);
+    }
     }      
       
 /*******************************************************************************************************************************
