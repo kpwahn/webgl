@@ -420,6 +420,10 @@
     if (scene.getObjectByName("Tank2")) {
         tank02.tankBox.setFromObject(tank02);
     }
+    console.log(scene.getObjectByName("explosion"));
+    if (scene.getObjectByName("explosion")) {
+        updateExplosion();
+    }
     }      
       
 /*******************************************************************************************************************************
@@ -437,6 +441,16 @@
 
         renderer.setViewport( WIDTH / 2, 0, WIDTH / 2, HEIGHT);
         renderer.render( scene, camera2 );
+//    explosion.scale.set(.25,.25,.25);
+//
+//    if (scene.getObjectByName("explosion")) {
+//        for (var i = 0; i < 10; i++) {
+//            explosion.scale.set(0,0,0);
+//        }
+//        for (var i = 10; i > 0; i--) {
+//            explosion.scale.set(i,i,i);
+//        }
+//    }
     }
 
 /*******************************************************************************************************************************

@@ -34,6 +34,22 @@ function explosion() {
         new THREE.IcosahedronGeometry(20, 4),
         material
     );
-
+    mesh.name = 'explosion';
     return mesh;
+}
+var explosionScale = 0, explosionDying = false;
+function updateExplosion() {
+    if (explosionDying) {
+        explosion.scale.set(explosionScale,explosionScale,explosionScale);
+        explosionScale-=.1;
+        if (explosionScale <= 0) {
+            scene.remove(explosion);
+        }
+    } else {
+        explosion.scale.set(explosionScale, explosionScale, explosionScale);
+        explosionScale += .1;
+    }
+    if (explosionScale >= 1) {
+        explosionDying = true;
+    }
 }
