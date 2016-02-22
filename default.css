@@ -3,6 +3,25 @@ body {
     overflow: hidden;
 }
 
+.tank1Health {
+    position: absolute;
+    top: 10px;
+    left: 400px;
+    background-color: white;
+    color: black;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.tank2Health {
+    position: absolute;
+    top: 10px;
+    left: 1200px;
+    background-color: white;
+    color: black;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 #info {
     position: absolute;
     top: 10px; width: 100%;
