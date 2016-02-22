@@ -22,6 +22,7 @@ function loadObjects() {
         //tank01.tank01BoxDisplay = new THREE.BoundingBoxHelper( tank01 );
         //scene.add(tank01.tank01BoxDisplay);
 
+        //TODO why is this box different?
         tank01.tank01Box = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
         tank01.tank01Box.setFromObject(tank01);
         

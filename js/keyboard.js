@@ -50,7 +50,7 @@
             if(tankBox.intersectsBox(brickWalls[b])){return;}
         }
           
-        //Health Pack  
+        //Health Pack   TODO - The box doesn't actually leave  
         if(tankBox.intersectsBox(cubeBox)){ 
             
             if(tank.health < 3){
@@ -61,6 +61,7 @@
                 //Remove from scene
                 scene.remove(cube);
                 scene.remove(cubeBox);
+                cubeBox.setFromObject(theVoid);
             }
         
         }  
