@@ -64,10 +64,11 @@ function updateBullet(tank, otherTank) {
                     scene.remove(otherTank);
                     otherTank.tankBox.setFromObject(theVoid);
                     explosion.position.set(otherTank.position.x,otherTank.position.y,otherTank.position.z);
+                    explosion.scale.set(.25,.25,.25);
                     scene.add(explosion);
                 } else { 
                     //Random respawn
-                    otherTank.position.set(Math.random() * 400 ,0, Math.random() * 400); 
+                    //otherTank.position.set(Math.random() * 400 ,0, Math.random() * 400);
                 }
                 
                 var tmp = tank.bullets[i];

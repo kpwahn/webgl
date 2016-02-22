@@ -35,7 +35,7 @@ function loadObjects() {
         scene.add( obj );
         tank02 = obj;
         
-        tank02.position.set(400, 0, 400);
+        //tank02.position.set(400, 0, 400);
         tank02.bullets = [];
         tank02.bulletsRemoved = 0;
         tank02.health = 3;
