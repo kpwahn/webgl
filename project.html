@@ -27,7 +27,6 @@
     <script src="js/brickWalls.js"></script>
 
     <link rel="stylesheet" type="text/css" href="default.css">
-    
     <script type="x-shader/x-vertex" id="vertexShader">
         // GLSL textureless classic 3D noise "cnoise",
         // with an RSL-style periodic variant "pnoise".
@@ -261,8 +260,9 @@
 
         }
     </script>
-
     <script>
+        
+        
     
     //Tank01
     var tank01, tank01BoxDisplay;    
@@ -349,7 +349,7 @@
         // load a resource
         loader.load(
             // resource URL
-            'images/health.jpg',
+            'images/health.png',
             // Function when resource is loaded
             function ( texture ) {
                 // do something with the texture
@@ -386,8 +386,8 @@
         var grassTex = THREE.ImageUtils.loadTexture('images/grass.jpg'); 
         grassTex.wrapS = THREE.RepeatWrapping; 
         grassTex.wrapT = THREE.RepeatWrapping; 
-        grassTex.repeat.x = 256; 
-        grassTex.repeat.y = 256; 
+        grassTex.repeat.x = 100; 
+        grassTex.repeat.y = 100; 
         var groundMat = new THREE.MeshBasicMaterial({map:grassTex}); 
         var groundGeo = new THREE.PlaneGeometry(1000,1000); 
         var ground = new THREE.Mesh(groundGeo,groundMat);  
@@ -452,7 +452,7 @@
             if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Movement);}
             if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Movement);}
             if (keyboard.pressed("shift")) {keyboardShoot(tank02, tank02Movement);}
-            if(keyboard.pressed("p")) {/* Do something with the camera */ }
+            if(keyboard.pressed("p")) {  }
         }
 
            if (scene.getObjectByName("Tank1")) {
