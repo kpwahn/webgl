@@ -68,7 +68,7 @@ function updateBullet(tank, otherTank) {
                     scene.add(explosion);
                 } else { 
                     //Random respawn
-                    //otherTank.position.set(Math.random() * 400 ,0, Math.random() * 400);
+                    otherTank.position.set(Math.random() * 400 ,0, Math.random() * 400);
                 }
                 
                 var tmp = tank.bullets[i];
