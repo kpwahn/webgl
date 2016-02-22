@@ -62,7 +62,7 @@ function updateBullet(tank, otherTank) {
                 if (otherTank.health == 0) {
                     console.log(otherTank.name + "Died");
                     scene.remove(otherTank);
-                    tank.tankBox.setFromObject(theVoid);
+                    otherTank.tankBox.setFromObject(theVoid);
                     explosion.position.set(otherTank.position.x,otherTank.position.y,otherTank.position.z);
                     scene.add(explosion);
                 } else { 
