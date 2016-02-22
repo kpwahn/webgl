@@ -41,17 +41,17 @@
 *
 *
 *******************************************************************************************************************************/  
-      function keyboardUp(tank, tankBox, tankMovement) {
+      function keyboardUp(tank, tankMovement) {
           
         for (var a = 0; a < parkingGarages.length; a++){  
-            if(tankBox.intersectsBox(parkingGarages[a])){return;}
+            if(tank.tankBox.intersectsBox(parkingGarages[a])){return;}
         }
         for ( var b = 0; b < brickWalls.length; b++){
-            if(tankBox.intersectsBox(brickWalls[b])){return;}
+            if(tank.tankBox.intersectsBox(brickWalls[b])){return;}
         }
           
         //Health Pack   TODO - The box doesn't actually leave  
-        if(tankBox.intersectsBox(cubeBox)){ 
+        if(tank.tankBox.intersectsBox(cubeBox)){ 
             
             if(tank.health < 3){
                 tank.health += 1;
@@ -75,7 +75,7 @@
 *
 *
 *******************************************************************************************************************************/  
-    function keyboardDown(tank, tankBox, tankMovement) {
+    function keyboardDown(tank, tankMovement) {
         
         tank.position.x -= Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 
         tank.position.z -= Math.cos(-tankMovement.driveAngle) * tankMovement.speed; 
@@ -86,7 +86,7 @@
 *
 *
 *******************************************************************************************************************************/  
-      function keyboardLeft(tank, tankBox, tankMovement) {
+      function keyboardLeft(tank, tankMovement) {
         tank.rotation.y += tankMovement.turnSpeed; 
         tankMovement.driveAngle -= tankMovement.turnSpeed;
         tankMovement.shootAngle -= tankMovement.turnSpeed;  
@@ -97,7 +97,7 @@
 *
 *
 *******************************************************************************************************************************/    
-    function keyboardRight(tank, tankBox, tankMovement) {
+    function keyboardRight(tank, tankMovement) {
         tank.rotation.y -= tankMovement.turnSpeed; 
         tankMovement.driveAngle += tankMovement.turnSpeed; 
         tankMovement.shootAngle += tankMovement.turnSpeed;
@@ -107,6 +107,7 @@
 * a
 *   Rotates the tanks barrel
 *   Adjusts the shoot angle
+*   TODO make it tank independant
 *
 *******************************************************************************************************************************/  
     function keyboardA() {
@@ -122,6 +123,7 @@
 * d
 *   Rotates the tanks barrel
 *   Adjusts the shoot angle
+*   TODO make it tank independant
 *
 *******************************************************************************************************************************/  
     function keyboardD() {

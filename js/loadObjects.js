@@ -23,8 +23,8 @@ function loadObjects() {
         //scene.add(tank01.tank01BoxDisplay);
 
         //TODO why is this box different?
-        tank01.tank01Box = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
-        tank01.tank01Box.setFromObject(tank01);
+        tank01.tankBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+        tank01.tankBox.setFromObject(tank01);
         
     });   
     
@@ -47,8 +47,8 @@ function loadObjects() {
         camera2.position.set( 0, 25, -50 );    
         camera2.lookAt( new THREE.Vector3( 0, 0, 0 ) );
         
-        tank02Box = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
-        tank02Box.setFromObject(tank02);
+        tank02.tankBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+        tank02.tankBox.setFromObject(tank02);
     });   
       
 }

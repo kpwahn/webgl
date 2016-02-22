@@ -21,7 +21,7 @@ class Bullet {
     }
 }
 
-function updateBullet(tank, otherTankBox, otherTank) {
+function updateBullet(tank, otherTank) {
     //pass in bullet object
     
     if (tank.bullets[tank.bulletsRemoved] != undefined) {
@@ -50,7 +50,7 @@ function updateBullet(tank, otherTankBox, otherTank) {
                 }
             }
             
-            if(tank.bullets[i].bulletBox.intersectsBox(otherTankBox)){
+            if(tank.bullets[i].bulletBox.intersectsBox(otherTank.tankBox)){
 
                 console.log("You hit " + otherTank.name + "!");
                 otherTank.health--;
@@ -62,9 +62,7 @@ function updateBullet(tank, otherTankBox, otherTank) {
                 if (otherTank.health == 0) {
                     console.log(otherTank.name + "Died");
                     scene.remove(otherTank);
-                    //scene.remove(otherTankBox);
-                    //otherTankBox.set(0, 100000, 0);
-                    tank01.tank01Box.setFromObject(theVoid);
+                    tank.tankBox.setFromObject(theVoid);
                     explosion.position.set(otherTank.position.x,otherTank.position.y,otherTank.position.z);
                     scene.add(explosion);
                 } else { 

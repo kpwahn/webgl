@@ -264,11 +264,11 @@
     <script>
     
     //Tank01
-    var tank01, tank01Box, tank01BoxDisplay;    
+    var tank01, tank01BoxDisplay;    
     var tank01Movement = {speed: 1, turnSpeed: .02, driveAngle: 0, shootAngle: 0};
     
     //Tank02  
-    var tank02, tank02Box, tank02BoxDisplay;    
+    var tank02, tank02BoxDisplay;    
     var tank02Movement = {speed: 1, turnSpeed: .02, driveAngle: 0, shootAngle: 0};  
 
     //Important stuff  
@@ -378,8 +378,6 @@
         );
         
         
-        
-        
         scene.add(brickWall);
         scene.add(parkingGarage);
         explosion = explosion();
@@ -411,13 +409,13 @@
         render();
         
         keypress();
-        updateBullet(tank01, tank02Box, tank02);
-        updateBullet(tank02, tank01.tank01Box, tank01);
+        updateBullet(tank01, tank02);
+        updateBullet(tank02, tank01);
         advance(tank01);
         advance(tank02);
 
-        tank01.tank01Box.setFromObject(tank01);
-        tank02Box.setFromObject(tank02);
+        tank01.tankBox.setFromObject(tank01);
+        tank02.tankBox.setFromObject(tank02);
     }      
       
 /*******************************************************************************************************************************
@@ -445,20 +443,20 @@
       function keypress() {
         if (scene.getObjectByName("Tank2")) {
             //Tank02
-            if (keyboard.pressed("left")) {keyboardLeft(tank02, tank02Box, tank02Movement);}
-            if (keyboard.pressed("right")) {keyboardRight(tank02, tank02Box, tank02Movement);}
-            if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Box, tank02Movement);}
-            if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Box, tank02Movement);}
+            if (keyboard.pressed("left")) {keyboardLeft(tank02, tank02Movement);}
+            if (keyboard.pressed("right")) {keyboardRight(tank02, tank02Movement);}
+            if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Movement);}
+            if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Movement);}
             if (keyboard.pressed("shift")) {keyboardShoot(tank02, tank02Movement);}
             if(keyboard.pressed("p")) {/* Do something with the camera */ }
         }
 
            if (scene.getObjectByName("Tank1")) {
                //Tank01
-               if (keyboard.pressed("a")) {keyboardLeft(tank01, tank01.tank01Box, tank01Movement);}
-               if (keyboard.pressed("d")) {keyboardRight(tank01, tank01.tank01Box, tank01Movement);}
-               if (keyboard.pressed("w")) {keyboardUp(tank01, tank01.tank01Box, tank01Movement);}
-               if (keyboard.pressed("s")) {keyboardDown(tank01, tank01.tank01Box, tank01Movement);}
+               if (keyboard.pressed("a")) {keyboardLeft(tank01, tank01Movement);}
+               if (keyboard.pressed("d")) {keyboardRight(tank01, tank01Movement);}
+               if (keyboard.pressed("w")) {keyboardUp(tank01, tank01Movement);}
+               if (keyboard.pressed("s")) {keyboardDown(tank01, tank01Movement);}
                if (keyboard.pressed("ctrl")) {keyboardShoot(tank01, tank01Movement);}
                //if(keyboard.pressed("a")) { keyboardA(); }
                //if(keyboard.pressed("d")) { keyboardD(); }
