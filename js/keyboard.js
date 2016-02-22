@@ -50,6 +50,21 @@
             if(tankBox.intersectsBox(brickWalls[b])){return;}
         }
           
+        //Health Pack  
+        if(tankBox.intersectsBox(cubeBox)){ 
+            
+            if(tank.health < 3){
+                tank.health += 1;
+                document.getElementById("tank01Health").innerHTML = tank01.health;
+                document.getElementById("tank02Health").innerHTML = tank02.health;
+                
+                //Remove from scene
+                scene.remove(cube);
+                scene.remove(cubeBox);
+            }
+        
+        }  
+          
         tank.position.x += Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 
         tank.position.z += Math.cos(-tankMovement.driveAngle) * tankMovement.speed;  
       }
