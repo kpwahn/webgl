@@ -452,7 +452,7 @@
             if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Movement);}
             if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Movement);}
             if (keyboard.pressed("shift")) {keyboardShoot(tank02, tank02Movement);}
-            if(keyboard.pressed("p")) {  }
+            if(keyboard.pressed("l")) { keyboardChangeCamera(tank02);}
         }
 
            if (scene.getObjectByName("Tank1")) {
@@ -461,7 +461,8 @@
                if (keyboard.pressed("d")) {keyboardRight(tank01, tank01Movement);}
                if (keyboard.pressed("w")) {keyboardUp(tank01, tank01Movement);}
                if (keyboard.pressed("s")) {keyboardDown(tank01, tank01Movement);}
-               if (keyboard.pressed("ctrl")) {keyboardShoot(tank01, tank01Movement);}
+               if (keyboard.pressed("f")) {keyboardShoot(tank01, tank01Movement);}
+               if(keyboard.pressed("q")) { keyboardChangeCamera(tank01);}
                //if(keyboard.pressed("a")) { keyboardA(); }
                //if(keyboard.pressed("d")) { keyboardD(); }
            }

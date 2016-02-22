@@ -104,6 +104,30 @@
     }
 
 /*******************************************************************************************************************************
+* Change Camera
+*
+*
+*******************************************************************************************************************************/ 
+    function keyboardChangeCamera(tank) {
+        var cam;
+        if(tank.canChangeCamera){
+            if(tank.name == "Tank1"){cam = camera;}else{cam = camera2;}
+            if(tank.isThirdPerson){
+                cam.position.set(0, 5, 0); 
+                cam.rotation.x -= 5 * Math.PI/180;
+                tank.isThirdPerson = false;
+           }else{
+                cam.position.set( 0, 25, -50 );    
+                cam.lookAt( new THREE.Vector3( 0, 0, 0 ) );
+                tank.isThirdPerson = true;
+           }
+            tank.canChangeCamera = false;   
+            setTimeout(function(){
+                tank.canChangeCamera = true;
+            }, 500);
+        }
+    }
+/*******************************************************************************************************************************
 * a
 *   Rotates the tanks barrel
 *   Adjusts the shoot angle
@@ -146,9 +170,3 @@
 //                scene.add(bullet);
 //                
 //            });
-
-//Keyboard up
-//         if(tank01Box.isIntersectionBox(wallBox)){
-//             // Dont drive forward if you hit the wall
-//            console.log("INTERSECTION!"); return;
-//        };

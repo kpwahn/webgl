@@ -12,6 +12,8 @@ function loadObjects() {
         document.getElementById("tank01Health").innerHTML = tank01.health;
         tank01.name = "Tank1";
         tank01.reload = false;
+        tank01.isThirdPerson = true;
+        tank01.canChangeCamera = true;
 
         //Set the camera relative to this object
         tank01.add( camera );
@@ -42,6 +44,8 @@ function loadObjects() {
         document.getElementById("tank02Health").innerHTML = tank02.health;
         tank02.name = "Tank2";
         tank02.reload = false;
+        tank02.isThirdPerson = true;
+        tank02.canChangeCamera = true;
         
         tank02.add(camera2);
         camera2.position.set( 0, 25, -50 );    
