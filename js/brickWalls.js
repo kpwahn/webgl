@@ -19,7 +19,7 @@ loader.load(
             geometry = new THREE.BoxGeometry( Math.random() * 20, 60, Math.random() * 120 );
             var brick = new THREE.Mesh( geometry, material );
 
-            brick.position.set(Math.random() * 400, 30, Math.random() * 400);
+            brick.position.set(Math.random() * X_SIZE, 30, Math.random() * Z_SIZE);
             brick.rotation.y = (Math.floor(Math.random() * 4)) * 90 * Math.PI/180;
 
             var brickWallBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());

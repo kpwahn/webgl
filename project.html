@@ -4,10 +4,10 @@
   <title>Battle Tanks</title>
 </head>
 <body>
-    
+    <!-- TODO tank driving backwards, camera changing around, find new object? etc. etc -->
     <div id="info">
         <div class="tank2Health"><p>Health: <span id="tank02Health"></span></p></div>
-        <span class="tank1Health"><p>Health: <span id="tank01Health"></span></p></div>
+        <div class="tank1Health"><p>Health: <span id="tank01Health"></span></p></div>
     </div>
     
     <script src="bower_components/three.js/build/three.js"></script>
@@ -21,6 +21,7 @@
     <script src="js/advance.js"></script>
     <script src="js/bullet.js"></script>
     <script src="js/loadBullet.js"></script>
+    <script src="js/powerUp.js"></script>
 
     <script src="js/explosion.js"></script>
     <script src="js/parkingGarage.js"></script>
@@ -265,25 +266,26 @@
         
     
     //Tank01
-    var tank01, tank01BoxDisplay;    
+    var tank01;    
     var tank01Movement = {speed: 1, turnSpeed: .02, driveAngle: 0, shootAngle: 0};
     
     //Tank02  
-    var tank02, tank02BoxDisplay;    
+    var tank02;    
     var tank02Movement = {speed: 1, turnSpeed: .02, driveAngle: 0, shootAngle: 0};  
 
     //Important stuff  
     var scene, camera, camera2, renderer, keyboard;
     var WIDTH, HEIGHT;
     var theVoid;
+        
+    //Map variable
+    var X_SIZE = 400;
+    var Z_SIZE = 400;
 
     var mainBullet = new loadBullet();
     var bullet = null;
     var bulletBox = null;
     var bulletAngle = 0;
-      
-    var cube;
-    var cubeBox;
         
     var explosion;
 
@@ -345,37 +347,6 @@
                 
         //Powerup  Put this code in another file with the other powerups?
         var loader = new THREE.TextureLoader();
-
-        // load a resource
-        loader.load(
-            // resource URL
-            'images/health.png',
-            // Function when resource is loaded
-            function ( texture ) {
-                // do something with the texture
-                var material = new THREE.MeshBasicMaterial( {
-                    map: texture
-                 } );
-                
-                var g = new THREE.CubeGeometry(10, 5, 10, 1,1,1);
-                cube = new THREE.Mesh(g, material);
-                cube.position.y = 5;
-                cube.position.set(Math.random() * 400, 2.5, Math.random() * 400);
-                scene.add(cube);
-
-                cubeBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
-                cubeBox.setFromObject(cube);
-            },
-            // Function called when download progresses
-            function ( xhr ) {
-                console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-            },
-            // Function called when download errors
-            function ( xhr ) {
-                console.log( 'An error happened' );
-            }
-        );
-        
         
         scene.add(brickWall);
         scene.add(parkingGarage);
@@ -389,8 +360,9 @@
         grassTex.repeat.x = 100; 
         grassTex.repeat.y = 100; 
         var groundMat = new THREE.MeshBasicMaterial({map:grassTex}); 
-        var groundGeo = new THREE.PlaneGeometry(1000,1000); 
-        var ground = new THREE.Mesh(groundGeo,groundMat);  
+        var groundGeo = new THREE.PlaneGeometry(550,550); 
+        var ground = new THREE.Mesh(groundGeo,groundMat); 
+        ground.position.set(200, 0, 200);
         ground.rotation.x = -Math.PI/2; //-90 degrees around the xaxis 
         //IMPORTANT, draw on both sides 
         ground.doubleSided = true; 
@@ -413,6 +385,16 @@
         advance(tank01);
         advance(tank02);
 
+        if(healthPackReload){
+            console.log("HEREE");
+            healthPackReload = false;
+            healthPack.position.set(Math.random() * X_SIZE, 2.5, Math.random() * Z_SIZE);
+            healthPackBox.setFromObject(healthPack);
+            setTimeout(function(){
+                healthPackReload = true;
+            }, 10000);
+        }
+        
     //only updates the boxes IF the tanks are still in the scene
     if (scene.getObjectByName("Tank1")) {
         tank01.tankBox.setFromObject(tank01);
@@ -420,7 +402,7 @@
     if (scene.getObjectByName("Tank2")) {
         tank02.tankBox.setFromObject(tank02);
     }
-    console.log(scene.getObjectByName("explosion"));
+    
     if (scene.getObjectByName("explosion")) {
         updateExplosion();
     }
@@ -441,16 +423,6 @@
 
         renderer.setViewport( WIDTH / 2, 0, WIDTH / 2, HEIGHT);
         renderer.render( scene, camera2 );
-//    explosion.scale.set(.25,.25,.25);
-//
-//    if (scene.getObjectByName("explosion")) {
-//        for (var i = 0; i < 10; i++) {
-//            explosion.scale.set(0,0,0);
-//        }
-//        for (var i = 10; i > 0; i--) {
-//            explosion.scale.set(i,i,i);
-//        }
-//    }
     }
 
 /*******************************************************************************************************************************
@@ -458,7 +430,18 @@
 *
 *
 *******************************************************************************************************************************/
-      function keypress() {
+    function keypress() {
+        if (scene.getObjectByName("Tank1")) {
+            //Tank01
+            if (keyboard.pressed("a")) {keyboardLeft(tank01, tank01Movement);}
+            if (keyboard.pressed("d")) {keyboardRight(tank01, tank01Movement);}
+            if (keyboard.pressed("w")) {keyboardUp(tank01, tank01Movement);}
+            if (keyboard.pressed("s")) {keyboardDown(tank01, tank01Movement);}
+            if (keyboard.pressed("f")) {keyboardShoot(tank01, tank01Movement);}
+            if(keyboard.pressed("q")) { keyboardChangeCamera(tank01);}
+            //if(keyboard.pressed("a")) { keyboardA(); }
+            //if(keyboard.pressed("d")) { keyboardD(); }
+        }
         if (scene.getObjectByName("Tank2")) {
             //Tank02
             if (keyboard.pressed("left")) {keyboardLeft(tank02, tank02Movement);}
@@ -466,23 +449,10 @@
             if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Movement);}
             if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Movement);}
             if (keyboard.pressed("shift")) {keyboardShoot(tank02, tank02Movement);}
-            if(keyboard.pressed("l")) { keyboardChangeCamera(tank02);}
+            if(keyboard.pressed("space")) { keyboardChangeCamera(tank02);}
         }
+    }
 
-           if (scene.getObjectByName("Tank1")) {
-               //Tank01
-               if (keyboard.pressed("a")) {keyboardLeft(tank01, tank01Movement);}
-               if (keyboard.pressed("d")) {keyboardRight(tank01, tank01Movement);}
-               if (keyboard.pressed("w")) {keyboardUp(tank01, tank01Movement);}
-               if (keyboard.pressed("s")) {keyboardDown(tank01, tank01Movement);}
-               if (keyboard.pressed("f")) {keyboardShoot(tank01, tank01Movement);}
-               if(keyboard.pressed("q")) { keyboardChangeCamera(tank01);}
-               //if(keyboard.pressed("a")) { keyboardA(); }
-               //if(keyboard.pressed("d")) { keyboardD(); }
-           }
-        
-      }
-      
 /*******************************************************************************************************************************
 * setUpLight
 *

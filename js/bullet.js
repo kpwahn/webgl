@@ -32,7 +32,6 @@ function updateBullet(tank, otherTank) {
 
             for (var a = 0; a < parkingGarages.length; a++){
                 if(tank.bullets[i].bulletBox.intersectsBox(parkingGarages[a])){
-                    console.log("I HIT IT!!!");
                     var tmp = tank.bullets[i];
                     //increment my bulletsRemoved to know where to start next time in the array.
                     tank.bulletsRemoved++;
@@ -42,7 +41,6 @@ function updateBullet(tank, otherTank) {
             //MODIFICATION
             for ( var b = 0; b < brickWalls.length; b++){
                 if(tank.bullets[i].bulletBox.intersectsBox(brickWalls[b])){
-                    console.log("I HIT IT!!!");
                     var tmp = tank.bullets[i];
                     //increment my bulletsRemoved to know where to start next time in the array.
                     tank.bulletsRemoved++;

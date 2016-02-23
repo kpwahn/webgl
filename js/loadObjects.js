@@ -14,6 +14,8 @@ function loadObjects() {
         tank01.reload = false;
         tank01.isThirdPerson = true;
         tank01.canChangeCamera = true;
+        tank01.shootSpeed = 8;
+        tank01.reloadSpeed = 500;
 
         //Set the camera relative to this object
         tank01.add( camera );
@@ -32,12 +34,13 @@ function loadObjects() {
     
     var loader = new THREE.ObjectLoader();
     loader.load("/webgl/objects/tank02/tank02.json",function ( obj ) {
-        obj.scale.set(1.3, 1.3, 1.3);
+        obj.scale.set(1.4, 1.4, 1.4);
         obj.position.z = -50;
         scene.add( obj );
         tank02 = obj;
+        tank02.rotation.y = 180 * Math.PI/180;
         
-        tank02.position.set(400, 0, 400);
+        tank02.position.set(X_SIZE, 0, Z_SIZE);
         tank02.bullets = [];
         tank02.bulletsRemoved = 0;
         tank02.health = 3;
@@ -46,9 +49,11 @@ function loadObjects() {
         tank02.reload = false;
         tank02.isThirdPerson = true;
         tank02.canChangeCamera = true;
+        tank02.shootSpeed = 8;
+        tank02.reloadSpeed = 500;
         
         tank02.add(camera2);
-        camera2.position.set( 0, 25, -50 );    
+        camera2.position.set( 0, 25, 50 );    
         camera2.lookAt( new THREE.Vector3( 0, 0, 0 ) );
         
         tank02.tankBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());

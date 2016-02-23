@@ -46,7 +46,8 @@ loader.load(
             parkingGarage.add(floor);
         }
 
-        parkingGarage.position.y = 10;
+        
+        parkingGarage.position.set(0, 10, 0);
     },
     // Function called when download progresses
     function ( xhr ) {

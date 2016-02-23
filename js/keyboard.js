@@ -7,6 +7,7 @@
         if (!tank.reload) {
             var bullet = new Bullet(mainBullet.model);
 
+            bullet.speed = tank.shootSpeed;
             //Sets the bullet Angle
             bulletAngle = tankMovement.shootAngle;
 
@@ -31,7 +32,7 @@
 
             setTimeout(function(){
                 tank.reload = false;
-            }, 500);
+            }, tank.reloadSpeed);
             //scene.add(bullet.model);
         }
     }
@@ -50,8 +51,8 @@
             if(tank.tankBox.intersectsBox(brickWalls[b])){return;}
         }
           
-        //Health Pack   TODO - The box doesn't actually leave  
-        if(tank.tankBox.intersectsBox(cubeBox)){ 
+        //Health Pack  
+        if(tank.tankBox.intersectsBox(healthPackBox)){ 
             
             if(tank.health < 3){
                 tank.health += 1;
@@ -59,12 +60,61 @@
                 document.getElementById("tank02Health").innerHTML = tank02.health;
                 
                 //Remove from scene
-                scene.remove(cube);
-                scene.remove(cubeBox);
-                cubeBox.setFromObject(theVoid);
+                scene.remove(healthPack);
+                scene.remove(healthPackBox);
+                healthPackBox.setFromObject(theVoid);
             }
         
         }  
+        
+          
+        //bullet speed boost
+          if (tank.tankBox.intersectsBox(bulletSpeedBoostBox)) {
+              tank.shootSpeed = 12;
+              tank.reloadSpeed = 250;
+              
+              setTimeout(function(){
+                //Return speed to normal
+                tank.shootSpeed = 8;
+              tank.reloadSpeed = 500;
+            }, 10000);
+          
+          //Remove from scene
+            scene.remove(bulletSpeedBoost);
+            scene.remove(bulletSpeedBoostBox);
+            bulletSpeedBoostBox.setFromObject(theVoid);
+            
+            setTimeout(function(){
+                speedBoost.position.set(Math.random() * X_SIZE, 2.5, Math.random() * Z_SIZE);
+                scene.add(bulletSpeedBoost);
+                scene.add(bulletSpeedBoostBox);
+                bulletSpeedBoostBox.setFromObject(bulletSpeedBoost);
+            }, 25000);
+            }
+        //Speed Boost
+        if(tank.tankBox.intersectsBox(speedBoostBox)){
+            //Boost their speed
+            tankMovement.speed = 3;
+            tankMovement.turnSpeed = .04;
+            
+            setTimeout(function(){
+                //Return speed to normal
+                tankMovement.speed = 1;
+                tankMovement.turnSpeed = .02;
+            }, 10000);
+            
+            //Remove from scene
+            scene.remove(speedBoost);
+            scene.remove(speedBoostBox);
+            speedBoostBox.setFromObject(theVoid);
+            
+            setTimeout(function(){
+                speedBoost.position.set(Math.random() * X_SIZE, 2.5, Math.random() * Z_SIZE);
+                scene.add(speedBoost);
+                scene.add(speedBoostBox);
+                speedBoostBox.setFromObject(speedBoost);
+            }, 25000);
+        }
           
         tank.position.x += Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 
         tank.position.z += Math.cos(-tankMovement.driveAngle) * tankMovement.speed;  
@@ -111,13 +161,20 @@
     function keyboardChangeCamera(tank) {
         var cam;
         if(tank.canChangeCamera){
-            if(tank.name == "Tank1"){cam = camera;}else{cam = camera2;}
+            if(tank.name == "Tank1"){cam = camera; cam.name = "Tank1";}else{cam = camera2; cam.name = "tank2"}
             if(tank.isThirdPerson){
-                cam.position.set(0, 5, 0); 
-                cam.rotation.x -= 5 * Math.PI/180;
-                tank.isThirdPerson = false;
+                if(cam.name == "Tank1"){
+                    cam.position.set(0, 3, 1);
+                    cam.rotation.x -= 15 * Math.PI/180;
+                }else { 
+                    cam.position.set(0, 4, 0);
+                    cam.rotation.x += 15 * Math.PI/180; 
+                }
+                    tank.isThirdPerson = false;
            }else{
-                cam.position.set( 0, 25, -50 );    
+                if(cam.name == "Tank1"){
+                    cam.position.set( 0, 25, -50 ); 
+                }else {cam.position.set( 0, 25, 50 );}
                 cam.lookAt( new THREE.Vector3( 0, 0, 0 ) );
                 tank.isThirdPerson = true;
            }
