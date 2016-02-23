@@ -15,7 +15,7 @@ loader.load(
             map: texture
          } );
 
-        for (var i = 0; i < 35; i++) {
+        for (var i = 0; i < 45; i++) {
             geometry = new THREE.BoxGeometry( Math.random() * 20, 60, Math.random() * 120 );
             var brick = new THREE.Mesh( geometry, material );
 

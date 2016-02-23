@@ -279,8 +279,8 @@
     var theVoid;
         
     //Map variable
-    var X_SIZE = 400;
-    var Z_SIZE = 400;
+    var X_SIZE = 600;
+    var Z_SIZE = 600;
 
     var mainBullet = new loadBullet();
     var bullet = null;
@@ -360,9 +360,9 @@
         grassTex.repeat.x = 100; 
         grassTex.repeat.y = 100; 
         var groundMat = new THREE.MeshBasicMaterial({map:grassTex}); 
-        var groundGeo = new THREE.PlaneGeometry(550,550); 
+        var groundGeo = new THREE.PlaneGeometry(X_SIZE + 100, Z_SIZE + 100); 
         var ground = new THREE.Mesh(groundGeo,groundMat); 
-        ground.position.set(200, 0, 200);
+        ground.position.set(X_SIZE / 2, 0, Z_SIZE / 2);
         ground.rotation.x = -Math.PI/2; //-90 degrees around the xaxis 
         //IMPORTANT, draw on both sides 
         ground.doubleSided = true; 

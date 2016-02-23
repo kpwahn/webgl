@@ -85,7 +85,7 @@
             bulletSpeedBoostBox.setFromObject(theVoid);
             
             setTimeout(function(){
-                speedBoost.position.set(Math.random() * X_SIZE, 2.5, Math.random() * Z_SIZE);
+                bulletSpeedBoost.position.set(Math.random() * X_SIZE, 2.5, Math.random() * Z_SIZE);
                 scene.add(bulletSpeedBoost);
                 scene.add(bulletSpeedBoostBox);
                 bulletSpeedBoostBox.setFromObject(bulletSpeedBoost);
