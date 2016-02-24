@@ -53,17 +53,49 @@ function updateBullet(tank, otherTank) {
                 console.log("You hit " + otherTank.name + "!");
                 otherTank.health--;
                 
-                document.getElementById("tank02Health").innerHTML = tank02.health;
-                document.getElementById("tank01Health").innerHTML = tank01.health;
+                if(otherTank.name == "Tank1"){
+                    switch(otherTank.health) {
+                        case 2: 
+                            document.getElementById("tank01Health").style.width = "66.66%";
+                            break;
+                        case 1:
+                            document.getElementById("tank01Health").style.width = "33.33%";
+                            break;
+                        case 0:
+                            document.getElementById("tank01Health").style.width = "0%";
+                            break;
+                    }
+                }else{
+                    switch(otherTank.health) {
+                        case 2: 
+                            document.getElementById("tank02Health").style.width = "66.66%";
+                            break;
+                        case 1:
+                            document.getElementById("tank02Health").style.width = "33.33%";
+                            break;
+                        case 0:
+                            document.getElementById("tank02Health").style.width = "0%";
+                            break;
+                    }
+                }
+                
+                //document.getElementById("tank02Health").innerHTML = tank02.health;
+                //document.getElementById("tank01Health").innerHTML = tank01.health;
                 
                 console.log(otherTank.health);
-                if (otherTank.health == 0) {
-                    console.log(otherTank.name + "Died");
-                    scene.remove(otherTank);
-                    otherTank.tankBox.setFromObject(theVoid);
-                    explosion.position.set(otherTank.position.x,otherTank.position.y,otherTank.position.z);
-                    explosion.scale.set(.25,.25,.25);
-                    scene.add(explosion);
+                if (otherTank.health <= 0) {
+                    if(!otherTank.isThirdPerson){console.log("Changing camera"); keyboardChangeCamera(otherTank);}
+                    
+                    setTimeout(function(){
+                        console.log(otherTank.name + "Died");
+                        scene.remove(otherTank);
+                        otherTank.tankBox.setFromObject(theVoid);
+
+                        explosion.position.set(otherTank.position.x,otherTank.position.y,otherTank.position.z);
+                        explosion.scale.set(.25,.25,.25);
+                        scene.add(explosion); 
+                    }, 50);
+                    
                 } else { 
                     //Random respawn
                     otherTank.position.set(Math.random() * 400 ,0, Math.random() * 400);

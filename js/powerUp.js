@@ -21,7 +21,7 @@ loader.load(
             map: texture
          } );
 
-        var g = new THREE.CubeGeometry(10, 5, 10, 1,1,1);
+        var g = new THREE.CubeGeometry(5, 2.5, 5, 1,1,1);
         healthPack = new THREE.Mesh(g, material);
         healthPack.position.y = 5;
         healthPack.position.set(Math.random() * X_SIZE, 2.5, Math.random() * Z_SIZE);
@@ -53,7 +53,7 @@ loader.load(
             map: texture
          } );
 
-        var g = new THREE.CubeGeometry(10, 5, 10, 1,1,1);
+        var g = new THREE.CubeGeometry(5, 2.5, 5, 1,1,1);
         speedBoost = new THREE.Mesh(g, material);
         speedBoost.position.y = 5;
         speedBoost.position.set(Math.random() * X_SIZE, 2.5, Math.random() * Z_SIZE);
@@ -85,7 +85,7 @@ loader.load(
             map: texture
          } );
 
-        var g = new THREE.CubeGeometry(10, 5, 10, 1,1,1);
+        var g = new THREE.CubeGeometry(5, 2.5, 5, 1,1,1);
         bulletSpeedBoost = new THREE.Mesh(g, material);
         bulletSpeedBoost.position.y = 5;
         bulletSpeedBoost.position.set(Math.random() * X_SIZE, 2.5, Math.random() * Z_SIZE);
