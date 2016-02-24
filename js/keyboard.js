@@ -53,19 +53,49 @@
           
         //Health Pack  
         if(tank.tankBox.intersectsBox(healthPackBox)){ 
-            
             if(tank.health < 3){
-                tank.health += 1;
-                document.getElementById("tank01Health").innerHTML = tank01.health;
-                document.getElementById("tank02Health").innerHTML = tank02.health;
+                
+            tank.health += 1;
+                
+            if(tank.name == "Tank1"){
+                    switch(tank.health) {
+                        case 3:
+                            document.getElementById("tank01Health").style.width = "100%";
+                            break;
+                        case 2: 
+                            document.getElementById("tank01Health").style.width = "66.66%";
+                            break;
+                        case 1:
+                            document.getElementById("tank01Health").style.width = "33.33%";
+                            break;
+                        case 0:
+                            document.getElementById("tank01Health").style.width = "0%";
+                            break;
+                    }
+                }else{
+                    switch(tank.health) {
+                        case 3:
+                            document.getElementById("tank02Health").style.width = "100%";
+                            break;
+                        case 2: 
+                            document.getElementById("tank02Health").style.width = "66.66%";
+                            break;
+                        case 1:
+                            document.getElementById("tank02Health").style.width = "33.33%";
+                            break;
+                        case 0:
+                            document.getElementById("tank02Health").style.width = "0%";
+                            break;
+                    }
+                }
                 
                 //Remove from scene
                 scene.remove(healthPack);
                 scene.remove(healthPackBox);
-                healthPackBox.setFromObject(theVoid);
+                healthPackBox.setFromObject(theVoid); 
             }
-        
-        }  
+                
+            }
         
           
         //bullet speed boost
@@ -160,8 +190,9 @@
 *******************************************************************************************************************************/ 
     function keyboardChangeCamera(tank) {
         var cam;
+        
         if(tank.canChangeCamera){
-            if(tank.name == "Tank1"){cam = camera; cam.name = "Tank1";}else{cam = camera2; cam.name = "tank2"}
+            if(tank.name == "Tank1"){cam = camera; cam.name = "Tank1";}else{cam = camera2; cam.name = "tank2";}
             if(tank.isThirdPerson){
                 if(cam.name == "Tank1"){
                     cam.position.set(0, 3, 1);
@@ -173,8 +204,12 @@
                     tank.isThirdPerson = false;
            }else{
                 if(cam.name == "Tank1"){
+                    console.log("passed test");
                     cam.position.set( 0, 25, -50 ); 
-                }else {cam.position.set( 0, 25, 50 );}
+                }else {
+                    cam.position.set( 0, 25, 50 );
+                }
+               
                 cam.lookAt( new THREE.Vector3( 0, 0, 0 ) );
                 tank.isThirdPerson = true;
            }

@@ -9,7 +9,6 @@ function loadObjects() {
         tank01.bullets = [];
         tank01.bulletsRemoved = 0;
         tank01.health = 3;
-        document.getElementById("tank01Health").innerHTML = tank01.health;
         tank01.name = "Tank1";
         tank01.reload = false;
         tank01.isThirdPerson = true;
@@ -44,7 +43,6 @@ function loadObjects() {
         tank02.bullets = [];
         tank02.bulletsRemoved = 0;
         tank02.health = 3;
-        document.getElementById("tank02Health").innerHTML = tank02.health;
         tank02.name = "Tank2";
         tank02.reload = false;
         tank02.isThirdPerson = true;

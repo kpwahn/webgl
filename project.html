@@ -6,8 +6,12 @@
 <body>
     <!-- TODO tank driving backwards, camera changing around, find new object? etc. etc -->
     <div id="info">
-        <div class="tank2Health"><p>Health: <span id="tank02Health"></span></p></div>
-        <div class="tank1Health"><p>Health: <span id="tank01Health"></span></p></div>
+        <div class="progress" style="position: absolute; width:10%; left: 275px">
+              <div id="tank01Health" class="progress-bar progress-bar-danger" style="width:100%"></div>
+        </div>
+        <div class="progress" style="position: absolute; width:10%; right: 275px;">
+              <div id="tank02Health" class="progress-bar progress-bar-danger" style="width:100%"></div>
+        </div>
     </div>
     
     <script src="bower_components/three.js/build/three.js"></script>
@@ -27,6 +31,7 @@
     <script src="js/parkingGarage.js"></script>
     <script src="js/brickWalls.js"></script>
 
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="default.css">
     <script type="x-shader/x-vertex" id="vertexShader">
         // GLSL textureless classic 3D noise "cnoise",
