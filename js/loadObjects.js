@@ -3,6 +3,7 @@ function loadObjects() {
     var loader = new THREE.ObjectLoader();
     loader.load("/webgl/objects/tank/tank.json",function ( obj ) {
         obj.position.z = -20;
+        obj.scale.set(1.4,1.4,1.4);
         scene.add( obj );
         tank01 = obj;
         
