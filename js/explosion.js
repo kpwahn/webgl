@@ -40,16 +40,13 @@ function explosion() {
 var explosionScale = 0, explosionDying = false;
 function updateExplosion() {
     if (explosionDying) {
-        explosion.scale.set(explosionScale,explosionScale,explosionScale);
-        explosionScale-=.01;
-        if (explosionScale <= 0) {
-            scene.remove(explosion);
-        }
+
     } else {
         explosion.scale.set(explosionScale, explosionScale, explosionScale);
         explosionScale += .01;
     }
     if (explosionScale >= 1) {
+        scene.remove(explosion);
         explosionDying = true;
     }
 }

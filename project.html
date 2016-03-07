@@ -18,6 +18,31 @@
 
     <div class="howToPlayHolder">
         <div class="howToPlay">
+
+            <div id="player1">
+                <div class="controlDiv">
+                    <p>Controls</p>
+                    <p>Forward: W</p>
+                    <p>Left: A</p>
+                    <p>Right: D</p>
+                    <p>Backwards: S</p>
+                    <img id="awsd" src="images/awsd.jpg" />
+                    <p>Shoot: F</p>
+                    <p>first Person: Q</p>
+                </div>
+            </div>
+            <div id="player2">
+                <div class="controlDiv">
+                    <p>Controls</p>
+                    <p>Forward: Up Arrow</p>
+                    <p>Left: Left Arrow</p>
+                    <p>Right: Right Arrow</p>
+                    <p>Backwards: Down Arrow</p>
+                    <img id="arrows" src="images/arrows.jpg" />
+                    <p>Shoot: Shift</p>
+                    <p>first Person: Space Bar</p>
+                </div>
+            </div>
             <button id="close">Ready!</button>
         </div>
     </div>
@@ -327,8 +352,8 @@
         scene.add(camera2);
         
         // Add OrbitControls so that we can pan around with the mouse.
-        controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls = new THREE.OrbitControls(camera2, renderer.domElement);
+//        controls = new THREE.OrbitControls(camera, renderer.domElement);
+//        controls = new THREE.OrbitControls(camera2, renderer.domElement);
 
         // Create an event listener that resizes the renderer with the browser window.
         window.addEventListener('resize', function() {
@@ -481,5 +506,10 @@
 
         });
     </script>
+
+<!--
+Sources for our project
+https://www.clicktorelease.com/blog/vertex-displacement-noise-3d-webgl-glsl-three-js
+-->
 </body>
 </html>
