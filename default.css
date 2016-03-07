@@ -12,12 +12,46 @@ body {
     height: 50%;
     z-index: 101;
     opacity: 1;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 900;
+}
+p {
+    margin:10px;
 }
 #close {
     height:10%;
-    position: absolute;
-    right: 1px;
-    top: 1px;
+    width:80px;
+    margin-left:auto;
+    margin-right:auto;
+    position: relative;
+    top:50%;
+    /*right: 1px;*/
+    /*top: 1px;*/
+}
+#player1 {
+    height:100%;
+    width: 45%;
+    border-style: solid;
+    float:left;
+    margin-right:5px;
+}
+#player1 .controlDiv {
+    text-align: center;
+}
+#awsd {
+    margin-top: 15px;
+    width:270px;
+}
+#player2 {
+    border-style: solid;
+    height:100%;
+    width: 45%;
+    float:right;
+}
+#arrows {
+    margin-top: 15px;
+    width:270px;
 }
 .hide {
     visibility: hidden;
