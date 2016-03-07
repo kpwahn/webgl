@@ -7,9 +7,9 @@ body {
     background: darkgray;
     position:relative;
     margin:auto;
-    top:25%;
+    top:12.5%;
     width: 75%;
-    height: 50%;
+    height: 75%;
     z-index: 101;
     opacity: 1;
     text-align: center;
