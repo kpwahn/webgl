@@ -316,7 +316,7 @@
         // Create a renderer and add it to the DOM.
         renderer = new THREE.WebGLRenderer({antialias:true});
         renderer.setSize(WIDTH, HEIGHT);
-        renderer.setClearColor(0x333F47, 1);                                    // Set background color of scene
+        renderer.setClearColor(0x000000, 1);                                    // Set background color of scene
         renderer.autoClear = false;
         document.body.appendChild(renderer.domElement);
 
@@ -342,6 +342,7 @@
         // Set up controls for the keyboard
         keyboard = new THREEx.KeyboardState();
         
+        scene.fog=new THREE.Fog( 0x333333, 0.015, 175 );
         setUpLight();
         loadObjects();
 
@@ -368,14 +369,14 @@
         grassTex.wrapT = THREE.RepeatWrapping; 
         grassTex.repeat.x = 100; 
         grassTex.repeat.y = 100; 
-        var groundMat = new THREE.MeshBasicMaterial({map:grassTex}); 
+        var groundMat = new THREE.MeshLambertMaterial({map:grassTex}); 
         var groundGeo = new THREE.PlaneGeometry(X_SIZE + 150, Z_SIZE + 150); 
         var ground = new THREE.Mesh(groundGeo,groundMat); 
         ground.position.set(X_SIZE / 2, 0, Z_SIZE / 2);
         ground.rotation.x = -Math.PI/2; //-90 degrees around the xaxis 
         //IMPORTANT, draw on both sides 
         ground.doubleSided = true; 
-        scene.add(ground);         
+        scene.add(ground);
 }
 
 /****************************************************************************************************************************
@@ -465,9 +466,11 @@
 *
 *
 *******************************************************************************************************************************/
-    function setUpLight() {   
-    }
-
+        function setUpLight() {
+            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.01 );
+            hemiLight.position.set( X_SIZE / 2, 100, Z_SIZE / 2 );
+            //scene.add( hemiLight );
+        }
   </script>
 
     <script>

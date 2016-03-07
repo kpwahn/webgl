@@ -78,84 +78,23 @@
           
         if(isOutOfBounds(tank)){
             tank.health -= 1;
-            
-            if(tank.name == "Tank1"){
-                switch(tank.health) {
-                case 3:
-                            document.getElementById("tank01Health").style.width = "100%";
-                            break;
-                        case 2: 
-                            document.getElementById("tank01Health").style.width = "66.66%";
-                            break;
-                        case 1:
-                            document.getElementById("tank01Health").style.width = "33.33%";
-                            break;
-                        case 0:
-                            document.getElementById("tank01Health").style.width = "0%";
-                            break;
-                    }
-            }else{
-                    switch(tank.health) {
-                        case 3:
-                            document.getElementById("tank02Health").style.width = "100%";
-                            break;
-                        case 2: 
-                            document.getElementById("tank02Health").style.width = "66.66%";
-                            break;
-                        case 1:
-                            document.getElementById("tank02Health").style.width = "33.33%";
-                            break;
-                        case 0:
-                            document.getElementById("tank02Health").style.width = "0%";
-                            break;
-                    }
-            }
+            updateHealth(tank)
             tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
-      }
+        
+        }
 
           
         //Health Pack  
         if(tank.tankBox.intersectsBox(healthPackBox)){ 
             if(tank.health < 3){
                 
-            tank.health += 1;
+            tank.health += 1;     
+            updateHealth(tank);
                 
-            if(tank.name == "Tank1"){
-                    switch(tank.health) {
-                        case 3:
-                            document.getElementById("tank01Health").style.width = "100%";
-                            break;
-                        case 2: 
-                            document.getElementById("tank01Health").style.width = "66.66%";
-                            break;
-                        case 1:
-                            document.getElementById("tank01Health").style.width = "33.33%";
-                            break;
-                        case 0:
-                            document.getElementById("tank01Health").style.width = "0%";
-                            break;
-                    }
-                }else{
-                    switch(tank.health) {
-                        case 3:
-                            document.getElementById("tank02Health").style.width = "100%";
-                            break;
-                        case 2: 
-                            document.getElementById("tank02Health").style.width = "66.66%";
-                            break;
-                        case 1:
-                            document.getElementById("tank02Health").style.width = "33.33%";
-                            break;
-                        case 0:
-                            document.getElementById("tank02Health").style.width = "0%";
-                            break;
-                    }
-                }
-                
-                //Remove from scene
-                scene.remove(healthPack);
-                scene.remove(healthPackBox);
-                healthPackBox.setFromObject(theVoid); 
+            //Remove from scene
+            scene.remove(healthPack);
+            scene.remove(healthPackBox);
+            healthPackBox.setFromObject(theVoid); 
             }
                 
             }
@@ -222,40 +161,9 @@
         
         if(isOutOfBounds(tank)){
             tank.health -= 1;
-            
-            if(tank.name == "Tank1"){
-                switch(tank.health) {
-                case 3:
-                            document.getElementById("tank01Health").style.width = "100%";
-                            break;
-                        case 2: 
-                            document.getElementById("tank01Health").style.width = "66.66%";
-                            break;
-                        case 1:
-                            document.getElementById("tank01Health").style.width = "33.33%";
-                            break;
-                        case 0:
-                            document.getElementById("tank01Health").style.width = "0%";
-                            break;
-                    }
-            }else{
-                    switch(tank.health) {
-                        case 3:
-                            document.getElementById("tank02Health").style.width = "100%";
-                            break;
-                        case 2: 
-                            document.getElementById("tank02Health").style.width = "66.66%";
-                            break;
-                        case 1:
-                            document.getElementById("tank02Health").style.width = "33.33%";
-                            break;
-                        case 0:
-                            document.getElementById("tank02Health").style.width = "0%";
-                            break;
-                    }
-            }
+            updateHealth(tank);
             tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
-      }
+        }
         
         tank.position.x -= Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 
         tank.position.z -= Math.cos(-tankMovement.driveAngle) * tankMovement.speed; 
@@ -351,6 +259,43 @@
             });
     }
 
+/*******************************************************************************************************************************
+* updateHealth
+*
+******************************************************************************************************************************/
+    function updateHealth(tank) {
+            if(tank.name == "Tank1"){
+                switch(tank.health) {
+                case 3:
+                            document.getElementById("tank01Health").style.width = "100%";
+                            break;
+                        case 2: 
+                            document.getElementById("tank01Health").style.width = "66.66%";
+                            break;
+                        case 1:
+                            document.getElementById("tank01Health").style.width = "33.33%";
+                            break;
+                        case 0:
+                            document.getElementById("tank01Health").style.width = "0%";
+                            break;
+                    }
+            }else{
+                    switch(tank.health) {
+                        case 3:
+                            document.getElementById("tank02Health").style.width = "100%";
+                            break;
+                        case 2: 
+                            document.getElementById("tank02Health").style.width = "66.66%";
+                            break;
+                        case 1:
+                            document.getElementById("tank02Health").style.width = "33.33%";
+                            break;
+                        case 0:
+                            document.getElementById("tank02Health").style.width = "0%";
+                            break;
+                    }
+            }
+    }
 /*******************************************************************************************************************************
 * Extra Code Snippets
 *

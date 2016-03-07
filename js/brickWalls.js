@@ -11,7 +11,7 @@ loader.load(
     // Function when resource is loaded
     function ( texture ) {
         // do something with the texture
-        var material = new THREE.MeshBasicMaterial( {
+        var material = new THREE.MeshLambertMaterial( {
             map: texture
          } );
 
