@@ -4,6 +4,8 @@
   <title>Battle Tanks</title>
 </head>
 <body>
+    <script src="js/jquery-1.11.3.min.js"></script>
+
     <!-- TODO tank driving backwards, camera changing around, find new object? etc. etc -->
     <div id="info">
         <div class="progress" style="position: absolute; width:10%; left: 275px">
@@ -11,6 +13,12 @@
         </div>
         <div class="progress" style="position: absolute; width:10%; right: 275px;">
               <div id="tank02Health" class="progress-bar progress-bar-danger" style="width:100%"></div>
+        </div>
+    </div>
+
+    <div class="howToPlayHolder">
+        <div class="howToPlay">
+            <button id="close">Ready!</button>
         </div>
     </div>
     
@@ -296,8 +304,6 @@
 
 
     init();
-    animate();
-
 /***********************************************************************************************************************
 * INIT()
 *    Sets up the scene.
@@ -383,36 +389,35 @@
 
         requestAnimationFrame(animate);
         render();
-        
+
         keypress();
         updateBullet(tank01, tank02);
         updateBullet(tank02, tank01);
         advance(tank01);
         advance(tank02);
 
-        if(healthPackReload){
+        if (healthPackReload) {
             console.log("HEREE");
             healthPackReload = false;
             healthPack.position.set(Math.random() * X_SIZE, 2.5, Math.random() * Z_SIZE);
             healthPackBox.setFromObject(healthPack);
-            setTimeout(function(){
+            setTimeout(function () {
                 healthPackReload = true;
             }, 10000);
         }
-        
-    //only updates the boxes IF the tanks are still in the scene
-    if (scene.getObjectByName("Tank1")) {
-        tank01.tankBox.setFromObject(tank01);
+
+        //only updates the boxes IF the tanks are still in the scene
+        if (scene.getObjectByName("Tank1")) {
+            tank01.tankBox.setFromObject(tank01);
+        }
+        if (scene.getObjectByName("Tank2")) {
+            tank02.tankBox.setFromObject(tank02);
+        }
+
+        if (scene.getObjectByName("explosion")) {
+            updateExplosion();
+        }
     }
-    if (scene.getObjectByName("Tank2")) {
-        tank02.tankBox.setFromObject(tank02);
-    }
-    
-    if (scene.getObjectByName("explosion")) {
-        updateExplosion();
-    }
-    }      
-      
 /*******************************************************************************************************************************
 * Render
 *
@@ -471,5 +476,13 @@
 
   </script>
 
+    <script>
+        $('#close').click(function() {
+            console.log("HI");
+            $('.howToPlayHolder').addClass("hide");
+            animate();
+
+        });
+    </script>
 </body>
 </html>
