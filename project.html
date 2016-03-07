@@ -492,9 +492,9 @@
 *
 *******************************************************************************************************************************/
         function setUpLight() {
-            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.01 );
+            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.2 );
             hemiLight.position.set( X_SIZE / 2, 100, Z_SIZE / 2 );
-            //scene.add( hemiLight );
+            scene.add( hemiLight );
         }
   </script>
 
