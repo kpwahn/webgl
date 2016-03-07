@@ -1,3 +1,25 @@
+    function isOutOfBounds(tank){
+
+                if(tank.position.x > X_SIZE + 75){
+                    console.log("Here");
+                    return true;
+                }
+                if(tank.position.z > Z_SIZE + 75){
+                    console.log("Here");
+                    return true;
+                }
+                if(tank.position.x < -75){
+                    console.log("Here");
+                    return true;
+                }
+                if(tank.position.z < -75){
+                    console.log("Here");
+                    return true;
+                }
+
+                return false;
+            }
+
 /*******************************************************************************************************************************
 * Space
 *
@@ -42,7 +64,7 @@
 *
 *
 *******************************************************************************************************************************/  
-      function keyboardUp(tank, tankMovement) {
+      function keyboardUp(tank, tankMovement, otherTank) {
           
         for (var a = 0; a < parkingGarages.length; a++){  
             if(tank.tankBox.intersectsBox(parkingGarages[a])){return;}
@@ -50,6 +72,47 @@
         for ( var b = 0; b < brickWalls.length; b++){
             if(tank.tankBox.intersectsBox(brickWalls[b])){return;}
         }
+          
+        if(tank.tankBox.intersectsBox(otherTank.tankBox)){return;}
+          
+          
+        if(isOutOfBounds(tank)){
+            tank.health -= 1;
+            
+            if(tank.name == "Tank1"){
+                switch(tank.health) {
+                case 3:
+                            document.getElementById("tank01Health").style.width = "100%";
+                            break;
+                        case 2: 
+                            document.getElementById("tank01Health").style.width = "66.66%";
+                            break;
+                        case 1:
+                            document.getElementById("tank01Health").style.width = "33.33%";
+                            break;
+                        case 0:
+                            document.getElementById("tank01Health").style.width = "0%";
+                            break;
+                    }
+            }else{
+                    switch(tank.health) {
+                        case 3:
+                            document.getElementById("tank02Health").style.width = "100%";
+                            break;
+                        case 2: 
+                            document.getElementById("tank02Health").style.width = "66.66%";
+                            break;
+                        case 1:
+                            document.getElementById("tank02Health").style.width = "33.33%";
+                            break;
+                        case 0:
+                            document.getElementById("tank02Health").style.width = "0%";
+                            break;
+                    }
+            }
+            tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
+      }
+
           
         //Health Pack  
         if(tank.tankBox.intersectsBox(healthPackBox)){ 
@@ -156,6 +219,43 @@
 *
 *******************************************************************************************************************************/  
     function keyboardDown(tank, tankMovement) {
+        
+        if(isOutOfBounds(tank)){
+            tank.health -= 1;
+            
+            if(tank.name == "Tank1"){
+                switch(tank.health) {
+                case 3:
+                            document.getElementById("tank01Health").style.width = "100%";
+                            break;
+                        case 2: 
+                            document.getElementById("tank01Health").style.width = "66.66%";
+                            break;
+                        case 1:
+                            document.getElementById("tank01Health").style.width = "33.33%";
+                            break;
+                        case 0:
+                            document.getElementById("tank01Health").style.width = "0%";
+                            break;
+                    }
+            }else{
+                    switch(tank.health) {
+                        case 3:
+                            document.getElementById("tank02Health").style.width = "100%";
+                            break;
+                        case 2: 
+                            document.getElementById("tank02Health").style.width = "66.66%";
+                            break;
+                        case 1:
+                            document.getElementById("tank02Health").style.width = "33.33%";
+                            break;
+                        case 0:
+                            document.getElementById("tank02Health").style.width = "0%";
+                            break;
+                    }
+            }
+            tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
+      }
         
         tank.position.x -= Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 
         tank.position.z -= Math.cos(-tankMovement.driveAngle) * tankMovement.speed; 
