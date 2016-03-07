@@ -275,8 +275,6 @@
         }
     </script>
     <script>
-        
-        
     
     //Tank01
     var tank01;    
@@ -292,8 +290,8 @@
     var theVoid;
         
     //Map variable
-    var X_SIZE = 600;
-    var Z_SIZE = 600;
+    var X_SIZE = 600; //600
+    var Z_SIZE = 600; //600
 
     var mainBullet = new loadBullet();
     var bullet = null;
@@ -371,13 +369,13 @@
         grassTex.repeat.x = 100; 
         grassTex.repeat.y = 100; 
         var groundMat = new THREE.MeshBasicMaterial({map:grassTex}); 
-        var groundGeo = new THREE.PlaneGeometry(X_SIZE + 100, Z_SIZE + 100); 
+        var groundGeo = new THREE.PlaneGeometry(X_SIZE + 150, Z_SIZE + 150); 
         var ground = new THREE.Mesh(groundGeo,groundMat); 
         ground.position.set(X_SIZE / 2, 0, Z_SIZE / 2);
         ground.rotation.x = -Math.PI/2; //-90 degrees around the xaxis 
         //IMPORTANT, draw on both sides 
         ground.doubleSided = true; 
-        scene.add(ground); 
+        scene.add(ground);         
 }
 
 /****************************************************************************************************************************
@@ -396,8 +394,7 @@
         advance(tank01);
         advance(tank02);
 
-        if (healthPackReload) {
-            console.log("HEREE");
+        if(healthPackReload){
             healthPackReload = false;
             healthPack.position.set(Math.random() * X_SIZE, 2.5, Math.random() * Z_SIZE);
             healthPackBox.setFromObject(healthPack);
@@ -445,7 +442,7 @@
             //Tank01
             if (keyboard.pressed("a")) {keyboardLeft(tank01, tank01Movement);}
             if (keyboard.pressed("d")) {keyboardRight(tank01, tank01Movement);}
-            if (keyboard.pressed("w")) {keyboardUp(tank01, tank01Movement);}
+            if (keyboard.pressed("w")) {keyboardUp(tank01, tank01Movement, tank02);}
             if (keyboard.pressed("s")) {keyboardDown(tank01, tank01Movement);}
             if (keyboard.pressed("f")) {keyboardShoot(tank01, tank01Movement);}
             if(keyboard.pressed("q")) { keyboardChangeCamera(tank01);}
@@ -456,7 +453,7 @@
             //Tank02
             if (keyboard.pressed("left")) {keyboardLeft(tank02, tank02Movement);}
             if (keyboard.pressed("right")) {keyboardRight(tank02, tank02Movement);}
-            if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Movement);}
+            if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Movement, tank01);}
             if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Movement);}
             if (keyboard.pressed("shift")) {keyboardShoot(tank02, tank02Movement);}
             if(keyboard.pressed("space")) { keyboardChangeCamera(tank02);}
@@ -468,10 +465,7 @@
 *
 *
 *******************************************************************************************************************************/
-    function setUpLight() {
-        var light = new THREE.AmbientLight(0xffffff);
-        light.position.set(-100,200,100);
-        scene.add(light);   
+    function setUpLight() {   
     }
 
   </script>

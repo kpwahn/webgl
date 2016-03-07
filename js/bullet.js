@@ -98,7 +98,7 @@ function updateBullet(tank, otherTank) {
                     
                 } else { 
                     //Random respawn
-                    otherTank.position.set(Math.random() * 400 ,0, Math.random() * 400);
+                    otherTank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
                 }
                 
                 var tmp = tank.bullets[i];
@@ -109,7 +109,6 @@ function updateBullet(tank, otherTank) {
 
             //If bullet distance is farther than 1000, remove it from the scene
             if (tank.bullets[i].distance > 1000) {
-                console.log("TOO FAR AWAY");
                 var tmp = tank.bullets[i];
                 //increment my bulletsRemoved to know where to start next time in the array.
                 tank.bulletsRemoved++;
