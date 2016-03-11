@@ -51,7 +51,8 @@
             tank.reload = true;
 
             scene.add(bullet.model);
-
+            var audio = new Audio('sounds/shoot.mp3');
+            audio.play();
             setTimeout(function(){
                 tank.reload = false;
             }, tank.reloadSpeed);
