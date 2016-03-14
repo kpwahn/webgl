@@ -325,6 +325,8 @@
         
     var explosion;
 
+    var audio;
+
     init();
 /***********************************************************************************************************************
 * INIT()
@@ -402,7 +404,7 @@
         ground.doubleSided = true; 
         scene.add(ground);
         
-        var audio = new Audio('sounds/battle.mp3');
+        audio = new Audio('sounds/battle.mp3');
         audio.volume = .9;
         audio.play();
 }
@@ -463,6 +465,9 @@
 *******************************************************************************************************************************/
     function render() {
         renderer.clear();
+    if (audio.ended) {
+        audio.play();
+    }
 
         material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
         
