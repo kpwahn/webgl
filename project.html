@@ -2,8 +2,14 @@
 <html lang="en">
 <head>
   <title>Battle Tanks</title>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="default.css">
+
 </head>
 <body>
+    <script src="js/jquery-1.11.3.min.js"></script>
+
     <!-- TODO tank driving backwards, camera changing around, find new object? etc. etc -->
     <div id="info">
         <div class="progress" style="position: absolute; width:10%; left: 275px">
@@ -11,6 +17,35 @@
         </div>
         <div class="progress" style="position: absolute; width:10%; right: 275px;">
               <div id="tank02Health" class="progress-bar progress-bar-danger" style="width:100%"></div>
+        </div>
+    </div>
+
+    <div class="howToPlayHolder">
+        <div class="howToPlay">
+
+            <div id="player1">
+                <div class="controlDiv">
+                    <p>Controls</p>
+                    <p>Forward: W</p>
+                    <p>Left: A</p>
+                    <p>Right: D</p>
+                    <p>Backwards: S</p>
+                    <p>Shoot: F</p>
+                    <p>first Person: Q</p>
+                </div>
+            </div>
+            <div id="player2">
+                <div class="controlDiv">
+                    <p>Controls</p>
+                    <p>Forward: Up Arrow</p>
+                    <p>Left: Left Arrow</p>
+                    <p>Right: Right Arrow</p>
+                    <p>Backwards: Down Arrow</p>
+                    <p>Shoot: Shift</p>
+                    <p>first Person: Space Bar</p>
+                </div>
+            </div>
+            <button id="close">Ready!</button>
         </div>
     </div>
     
@@ -31,8 +66,6 @@
     <script src="js/parkingGarage.js"></script>
     <script src="js/brickWalls.js"></script>
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="default.css">
     <script type="x-shader/x-vertex" id="vertexShader">
         // GLSL textureless classic 3D noise "cnoise",
         // with an RSL-style periodic variant "pnoise".
@@ -267,8 +300,6 @@
         }
     </script>
     <script>
-        
-        
     
     //Tank01
     var tank01;    
@@ -284,8 +315,8 @@
     var theVoid;
         
     //Map variable
-    var X_SIZE = 600;
-    var Z_SIZE = 600;
+    var X_SIZE = 600; //600
+    var Z_SIZE = 600; //600
 
     var mainBullet = new loadBullet();
     var bullet = null;
@@ -294,10 +325,9 @@
         
     var explosion;
 
+    var audio;
 
     init();
-    animate();
-
 /***********************************************************************************************************************
 * INIT()
 *    Sets up the scene.
@@ -312,7 +342,7 @@
         // Create a renderer and add it to the DOM.
         renderer = new THREE.WebGLRenderer({antialias:true});
         renderer.setSize(WIDTH, HEIGHT);
-        renderer.setClearColor(0x333F47, 1);                                    // Set background color of scene
+        renderer.setClearColor(0x000000, 1);                                    // Set background color of scene
         renderer.autoClear = false;
         document.body.appendChild(renderer.domElement);
 
@@ -323,8 +353,8 @@
         scene.add(camera2);
         
         // Add OrbitControls so that we can pan around with the mouse.
-        controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls = new THREE.OrbitControls(camera2, renderer.domElement);
+//        controls = new THREE.OrbitControls(camera, renderer.domElement);
+//        controls = new THREE.OrbitControls(camera2, renderer.domElement);
 
         // Create an event listener that resizes the renderer with the browser window.
         window.addEventListener('resize', function() {
@@ -338,6 +368,7 @@
         // Set up controls for the keyboard
         keyboard = new THREEx.KeyboardState();
         
+        scene.fog=new THREE.Fog( 0x333333, 0.015, 175 );
         setUpLight();
         loadObjects();
 
@@ -364,14 +395,18 @@
         grassTex.wrapT = THREE.RepeatWrapping; 
         grassTex.repeat.x = 100; 
         grassTex.repeat.y = 100; 
-        var groundMat = new THREE.MeshBasicMaterial({map:grassTex}); 
-        var groundGeo = new THREE.PlaneGeometry(X_SIZE + 100, Z_SIZE + 100); 
+        var groundMat = new THREE.MeshLambertMaterial({map:grassTex}); 
+        var groundGeo = new THREE.PlaneGeometry(X_SIZE + 150, Z_SIZE + 150); 
         var ground = new THREE.Mesh(groundGeo,groundMat); 
         ground.position.set(X_SIZE / 2, 0, Z_SIZE / 2);
         ground.rotation.x = -Math.PI/2; //-90 degrees around the xaxis 
         //IMPORTANT, draw on both sides 
         ground.doubleSided = true; 
-        scene.add(ground); 
+        scene.add(ground);
+        
+        audio = new Audio('sounds/battle.mp3');
+        audio.volume = .9;
+        audio.play();
 }
 
 /****************************************************************************************************************************
@@ -383,7 +418,7 @@
 
         requestAnimationFrame(animate);
         render();
-        
+
         keypress();
         updateBullet(tank01, tank02);
         updateBullet(tank02, tank01);
@@ -391,28 +426,38 @@
         advance(tank02);
 
         if(healthPackReload){
-            console.log("HEREE");
             healthPackReload = false;
             healthPack.position.set(Math.random() * X_SIZE, 2.5, Math.random() * Z_SIZE);
             healthPackBox.setFromObject(healthPack);
-            setTimeout(function(){
+            setTimeout(function () {
                 healthPackReload = true;
             }, 10000);
         }
+
+        //only updates the boxes IF the tanks are still in the scene
+        if (scene.getObjectByName("Tank1")) {
+            tank01.tankBox.setFromObject(tank01);
+        }
+        if (scene.getObjectByName("Tank2")) {
+            tank02.tankBox.setFromObject(tank02);
+        }
+
+        if (scene.getObjectByName("explosion")) {
+            updateExplosion();
+        }
         
-    //only updates the boxes IF the tanks are still in the scene
-    if (scene.getObjectByName("Tank1")) {
-        tank01.tankBox.setFromObject(tank01);
+        if(goldenSnitchReload){
+            goldenSnitchReload = false;
+            goldenSnitch.position.set(goldenSnitch.position.x += (Math.random() * (Math.random() * 400) * (Math.round(Math.random()) * 2 - 1)) % X_SIZE,
+                          goldenSnitch.position.y,
+                          goldenSnitch.position.z += (Math.random() * (Math.random() * 400) * (Math.round(Math.random()) * 2 - 1)) % Z_SIZE);
+            goldenSnitchBox.setFromObject(goldenSnitch);
+            setTimeout(function () {
+                goldenSnitchReload = true;
+            }, 1000);
+            
+        }
     }
-    if (scene.getObjectByName("Tank2")) {
-        tank02.tankBox.setFromObject(tank02);
-    }
-    
-    if (scene.getObjectByName("explosion")) {
-        updateExplosion();
-    }
-    }      
-      
 /*******************************************************************************************************************************
 * Render
 *
@@ -420,6 +465,9 @@
 *******************************************************************************************************************************/
     function render() {
         renderer.clear();
+    if (audio.ended) {
+        audio.play();
+    }
 
         material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
         
@@ -440,7 +488,7 @@
             //Tank01
             if (keyboard.pressed("a")) {keyboardLeft(tank01, tank01Movement);}
             if (keyboard.pressed("d")) {keyboardRight(tank01, tank01Movement);}
-            if (keyboard.pressed("w")) {keyboardUp(tank01, tank01Movement);}
+            if (keyboard.pressed("w")) {keyboardUp(tank01, tank01Movement, tank02);}
             if (keyboard.pressed("s")) {keyboardDown(tank01, tank01Movement);}
             if (keyboard.pressed("f")) {keyboardShoot(tank01, tank01Movement);}
             if(keyboard.pressed("q")) { keyboardChangeCamera(tank01);}
@@ -451,7 +499,7 @@
             //Tank02
             if (keyboard.pressed("left")) {keyboardLeft(tank02, tank02Movement);}
             if (keyboard.pressed("right")) {keyboardRight(tank02, tank02Movement);}
-            if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Movement);}
+            if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Movement, tank01);}
             if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Movement);}
             if (keyboard.pressed("shift")) {keyboardShoot(tank02, tank02Movement);}
             if(keyboard.pressed("space")) { keyboardChangeCamera(tank02);}
@@ -463,13 +511,26 @@
 *
 *
 *******************************************************************************************************************************/
-    function setUpLight() {
-        var light = new THREE.AmbientLight(0xffffff);
-        light.position.set(-100,200,100);
-        scene.add(light);   
-    }
-
+        function setUpLight() {
+            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, .4 );
+            hemiLight.position.set( X_SIZE / 2, 100, Z_SIZE / 2 );
+            scene.add( hemiLight );
+        }
   </script>
 
+    <script>
+        $('#close').click(function() {
+            $('.howToPlayHolder').addClass("hide");
+            animate();
+            
+            
+
+        });
+    </script>
+
+<!--
+Sources for our project
+https://www.clicktorelease.com/blog/vertex-displacement-noise-3d-webgl-glsl-three-js
+-->
 </body>
 </html>
