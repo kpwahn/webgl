@@ -1,22 +1,17 @@
     function isOutOfBounds(tank){
 
                 if(tank.position.x > X_SIZE + 75){
-                    console.log("Here");
                     return true;
                 }
                 if(tank.position.z > Z_SIZE + 75){
-                    console.log("Here");
                     return true;
                 }
                 if(tank.position.x < -75){
-                    console.log("Here");
                     return true;
                 }
                 if(tank.position.z < -75){
-                    console.log("Here");
                     return true;
                 }
-
                 return false;
             }
 
@@ -52,6 +47,7 @@
 
             scene.add(bullet.model);
             var audio = new Audio('sounds/shoot.mp3');
+            audio.volume = .5;
             audio.play();
             setTimeout(function(){
                 tank.reload = false;
@@ -124,6 +120,7 @@
                 bulletSpeedBoostBox.setFromObject(bulletSpeedBoost);
             }, 25000);
             }
+          
         //Speed Boost
         if(tank.tankBox.intersectsBox(speedBoostBox)){
             //Boost their speed
@@ -148,6 +145,10 @@
                 speedBoostBox.setFromObject(speedBoost);
             }, 25000);
         }
+    
+          if(tank.tankBox.intersectsBox(goldenSnitchBox)){
+                console.log("Ultimate power-up");
+            }
           
         tank.position.x += Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 
         tank.position.z += Math.cos(-tankMovement.driveAngle) * tankMovement.speed;  

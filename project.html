@@ -325,7 +325,6 @@
         
     var explosion;
 
-
     init();
 /***********************************************************************************************************************
 * INIT()
@@ -402,6 +401,10 @@
         //IMPORTANT, draw on both sides 
         ground.doubleSided = true; 
         scene.add(ground);
+        
+        var audio = new Audio('sounds/battle.mp3');
+        audio.volume = .9;
+        audio.play();
 }
 
 /****************************************************************************************************************************
@@ -439,6 +442,18 @@
 
         if (scene.getObjectByName("explosion")) {
             updateExplosion();
+        }
+        
+        if(goldenSnitchReload){
+            goldenSnitchReload = false;
+            goldenSnitch.position.set(goldenSnitch.position.x += (Math.random() * (Math.random() * 400) * (Math.round(Math.random()) * 2 - 1)) % X_SIZE,
+                          goldenSnitch.position.y,
+                          goldenSnitch.position.z += (Math.random() * (Math.random() * 400) * (Math.round(Math.random()) * 2 - 1)) % Z_SIZE);
+            goldenSnitchBox.setFromObject(goldenSnitch);
+            setTimeout(function () {
+                goldenSnitchReload = true;
+            }, 1000);
+            
         }
     }
 /*******************************************************************************************************************************
@@ -492,7 +507,7 @@
 *
 *******************************************************************************************************************************/
         function setUpLight() {
-            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.2 );
+            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, .3 );
             hemiLight.position.set( X_SIZE / 2, 100, Z_SIZE / 2 );
             scene.add( hemiLight );
         }
@@ -500,9 +515,10 @@
 
     <script>
         $('#close').click(function() {
-            console.log("HI");
             $('.howToPlayHolder').addClass("hide");
             animate();
+            
+            
 
         });
     </script>

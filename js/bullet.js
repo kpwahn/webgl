@@ -79,15 +79,15 @@ function updateBullet(tank, otherTank) {
                     }
                 }
                 
-                //document.getElementById("tank02Health").innerHTML = tank02.health;
-                //document.getElementById("tank01Health").innerHTML = tank01.health;
-                
                 console.log(otherTank.health);
                 if (otherTank.health <= 0) {
-                    if(!otherTank.isThirdPerson){console.log("Changing camera"); keyboardChangeCamera(otherTank);}
+                    if(!otherTank.isThirdPerson){keyboardChangeCamera(otherTank);}
                     
                     setTimeout(function(){
                         console.log(otherTank.name + "Died");
+                        var audio = new Audio('sounds/explode.mp3');
+                        audio.volume = .75;
+                        audio.play();
                         scene.remove(otherTank);
                         otherTank.tankBox.setFromObject(theVoid);
 

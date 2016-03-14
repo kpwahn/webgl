@@ -57,6 +57,6 @@ function loadObjects() {
         
         tank02.tankBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
         tank02.tankBox.setFromObject(tank02);
-    });   
+    });     
       
 }
