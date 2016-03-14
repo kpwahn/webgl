@@ -1,0 +1,102 @@
+body {
+    margin: 0px;
+    overflow: hidden;
+}
+
+.howToPlay {
+    background: darkgray;
+    position:relative;
+    margin:auto;
+    top:12.5%;
+    width: 75%;
+    height: 75%;
+    z-index: 101;
+    opacity: 1;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 900;
+}
+p {
+    margin:10px;
+}
+#close {
+    height:10%;
+    width:80px;
+    margin-left:auto;
+    margin-right:auto;
+    position: relative;
+    top:50%;
+    /*right: 1px;*/
+    /*top: 1px;*/
+}
+#player1 {
+    height:100%;
+    width: 45%;
+    border-style: solid;
+    float:left;
+    margin-right:5px;
+}
+#player1 .controlDiv {
+    text-align: center;
+}
+#awsd {
+    margin-top: 15px;
+    width:270px;
+}
+#player2 {
+    border-style: solid;
+    height:100%;
+    width: 45%;
+    float:right;
+}
+#arrows {
+    margin-top: 15px;
+    width:270px;
+}
+.hide {
+    visibility: hidden;
+}
+.howToPlayHolder {
+    background: rgba(0,0,0,.7);
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+    position:absolute;
+    visibility: visible;
+}
+
+.tank1Health {
+    position: absolute;
+    top: 10px;
+    left: 400px;
+    background-color: white;
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.tank2Health {
+    position: absolute;
+    top: 10px;
+    right: 400px;
+    background-color: white;
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#info {
+    position: absolute;
+    top: 10px; width: 100%;
+    color: #ffffff;
+    padding: 5px;
+    font-family: Arial;
+    font-size: 13px;
+    text-align: center;
+    z-index:100;
+}
+
+p {
+    margin-top: 5px;
+    height: 14px;
+    margin-bottom: 5px;
+}
