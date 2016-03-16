@@ -5,6 +5,12 @@
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="default.css">
+    <script>
+        //Map variable
+        var X_SIZE = 600; //600
+        var Z_SIZE = 600; //600
+        var pads;
+    </script>
 
 </head>
 <body>
@@ -61,7 +67,7 @@
     <script src="js/bullet.js"></script>
     <script src="js/loadBullet.js"></script>
     <script src="js/powerUp.js"></script>
-
+    <script src="js/controls.js"></script>
     <script src="js/explosion.js"></script>
     <script src="js/parkingGarage.js"></script>
     <script src="js/brickWalls.js"></script>
@@ -313,10 +319,6 @@
     var scene, camera, camera2, renderer, keyboard;
     var WIDTH, HEIGHT;
     var theVoid;
-        
-    //Map variable
-    var X_SIZE = 600; //600
-    var Z_SIZE = 600; //600
 
     var mainBullet = new loadBullet();
     var bullet = null;
@@ -325,8 +327,15 @@
         
     var explosion;
 
+    var audio;
 
     init();
+
+    window.addEventListener("gamepadconnected", function(e) {
+        console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
+                e.gamepad.index, e.gamepad.id,
+                e.gamepad.buttons.length, e.gamepad.axes.length);
+    });
 /***********************************************************************************************************************
 * INIT()
 *    Sets up the scene.
@@ -341,7 +350,8 @@
         // Create a renderer and add it to the DOM.
         renderer = new THREE.WebGLRenderer({antialias:true});
         renderer.setSize(WIDTH, HEIGHT);
-        renderer.setClearColor(0x000000, 1);                                    // Set background color of scene
+        renderer.setClearColor(0x404040 , 1);                                    // Set background color of scene
+
         renderer.autoClear = false;
         document.body.appendChild(renderer.domElement);
 
@@ -355,6 +365,7 @@
 //        controls = new THREE.OrbitControls(camera, renderer.domElement);
 //        controls = new THREE.OrbitControls(camera2, renderer.domElement);
 
+
         // Create an event listener that resizes the renderer with the browser window.
         window.addEventListener('resize', function() {
         var WIDTH = window.innerWidth,
@@ -367,7 +378,7 @@
         // Set up controls for the keyboard
         keyboard = new THREEx.KeyboardState();
         
-        scene.fog=new THREE.Fog( 0x333333, 0.015, 175 );
+        //scene.fog=new THREE.Fog( 0x333333, 0.015, 175 );
         setUpLight();
         loadObjects();
 
@@ -402,6 +413,10 @@
         //IMPORTANT, draw on both sides 
         ground.doubleSided = true; 
         scene.add(ground);
+        
+        audio = new Audio('sounds/battle.mp3');
+        audio.volume = .9;
+        audio.play();
 }
 
 /****************************************************************************************************************************
@@ -410,11 +425,13 @@
 *
 ******************************************************************************************************************************/
     function animate() {
-
+        
         requestAnimationFrame(animate);
+        controllers();
         render();
 
         keypress();
+
         updateBullet(tank01, tank02);
         updateBullet(tank02, tank01);
         advance(tank01);
@@ -440,6 +457,17 @@
         if (scene.getObjectByName("explosion")) {
             updateExplosion();
         }
+        
+        if(goldenSnitchReload){
+            goldenSnitchReload = false;
+            goldenSnitch.position.set(goldenSnitch.position.x += (Math.random() * (Math.random() * 400) * (Math.round(Math.random()) * 2 - 1)) % X_SIZE,
+                          goldenSnitch.position.y,
+                          goldenSnitch.position.z += (Math.random() * (Math.random() * 400) * (Math.round(Math.random()) * 2 - 1)) % Z_SIZE);
+            goldenSnitchBox.setFromObject(goldenSnitch);
+            setTimeout(function () {
+            goldenSnitchReload = true;
+            }, 250);
+        }
     }
 /*******************************************************************************************************************************
 * Render
@@ -448,6 +476,10 @@
 *******************************************************************************************************************************/
     function render() {
         renderer.clear();
+    //controllers();
+    if (audio.ended) {
+        audio.play();
+    }
 
         material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
         
@@ -474,6 +506,34 @@
             if(keyboard.pressed("q")) { keyboardChangeCamera(tank01);}
             //if(keyboard.pressed("a")) { keyboardA(); }
             //if(keyboard.pressed("d")) { keyboardD(); }
+            var pad01 = pads[1];
+            if (pad01) {
+                if (pad01.buttons[7] != undefined && pad01.buttons[7].pressed == true ) {
+                    keyboardShoot(tank01, tank01Movement);
+                }
+                if (pad01.buttons[12] != undefined && pad01.buttons[12].pressed == true ) {
+                    keyboardUp(tank01, tank01Movement, tank02);
+                }
+                if (pad01.buttons[13] != undefined && pad01.buttons[13].pressed == true ) {
+                    keyboardDown(tank01, tank01Movement);
+                }
+                if (pad01.buttons[14] != undefined && pad01.buttons[14].pressed == true ) {
+                    keyboardLeft(tank01, tank01Movement);
+                }
+                if (pad01.buttons[15] != undefined && pad01.buttons[15].pressed == true ) {
+                    keyboardRight(tank01, tank01Movement);
+                }
+                if (pad01.buttons[1] != undefined && pad01.buttons[1].pressed == true ) {
+                    keyboardChangeCamera(tank01);
+                }
+                if (pad01.buttons[4] != undefined && pad01.buttons[4].pressed == true ) {
+                    keyboardA();
+                }
+                if (pad01.buttons[5] != undefined && pad01.buttons[5].pressed == true ) {
+                    keyboardD();
+                }
+                
+            }
         }
         if (scene.getObjectByName("Tank2")) {
             //Tank02
@@ -483,6 +543,9 @@
             if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Movement);}
             if (keyboard.pressed("shift")) {keyboardShoot(tank02, tank02Movement);}
             if(keyboard.pressed("space")) { keyboardChangeCamera(tank02);}
+            if (pads[1]) {
+//                console.log("CONNECTED");
+            }
         }
     }
 
@@ -492,7 +555,7 @@
 *
 *******************************************************************************************************************************/
         function setUpLight() {
-            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.2 );
+            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 1 );
             hemiLight.position.set( X_SIZE / 2, 100, Z_SIZE / 2 );
             scene.add( hemiLight );
         }
@@ -500,10 +563,8 @@
 
     <script>
         $('#close').click(function() {
-            console.log("HI");
             $('.howToPlayHolder').addClass("hide");
-            animate();
-
+            animate();   
         });
     </script>
 

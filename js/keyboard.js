@@ -1,22 +1,17 @@
     function isOutOfBounds(tank){
 
                 if(tank.position.x > X_SIZE + 75){
-                    console.log("Here");
                     return true;
                 }
                 if(tank.position.z > Z_SIZE + 75){
-                    console.log("Here");
                     return true;
                 }
                 if(tank.position.x < -75){
-                    console.log("Here");
                     return true;
                 }
                 if(tank.position.z < -75){
-                    console.log("Here");
                     return true;
                 }
-
                 return false;
             }
 
@@ -28,6 +23,8 @@
     function keyboardShoot(tank, tankMovement) {
         if (!tank.reload) {
             var bullet = new Bullet(mainBullet.model);
+
+            if(tank.isGiantBullet){bullet.model.scale.set(1, 1, 1);}
 
             bullet.speed = tank.shootSpeed;
             //Sets the bullet Angle
@@ -51,7 +48,9 @@
             tank.reload = true;
 
             scene.add(bullet.model);
-
+            var audio = new Audio('sounds/shoot.mp3');
+            audio.volume = .5;
+            audio.play();
             setTimeout(function(){
                 tank.reload = false;
             }, tank.reloadSpeed);
@@ -79,8 +78,26 @@
         if(isOutOfBounds(tank)){
             tank.health -= 1;
             updateHealth(tank)
-            tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
-        
+            
+            if(tank.health < 1){
+                if(!otherTank.isThirdPerson){keyboardChangeCamera(otherTank);}
+                
+                var audio = new Audio('sounds/explode.mp3');
+                    audio.volume = .75;
+                    audio.play();
+                    
+                    setTimeout(function(){
+                        console.log(tank.name + "Died");
+                        scene.remove(tank);
+                        tank.tankBox.setFromObject(theVoid);
+
+                        explosion.position.set(tank.position.x, tank.position.y, tank.position.z);
+                        explosion.scale.set(.25,.25,.25);
+                        scene.add(explosion); 
+                    }, 50);
+            }else {
+                tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
+            }
         }
 
           
@@ -123,6 +140,7 @@
                 bulletSpeedBoostBox.setFromObject(bulletSpeedBoost);
             }, 25000);
             }
+          
         //Speed Boost
         if(tank.tankBox.intersectsBox(speedBoostBox)){
             //Boost their speed
@@ -147,6 +165,33 @@
                 speedBoostBox.setFromObject(speedBoost);
             }, 25000);
         }
+    
+          if(tank.tankBox.intersectsBox(goldenSnitchBox)){
+                //Remove all other power ups
+                scene.remove(speedBoost);
+                scene.remove(speedBoostBox);
+                speedBoostBox.setFromObject(theVoid);
+              
+                scene.remove(healthPack);
+                scene.remove(healthPackBox);
+                healthPackBox.setFromObject(theVoid); 
+              
+                scene.remove(bulletSpeedBoost);
+                scene.remove(bulletSpeedBoostBox);
+                bulletSpeedBoostBox.setFromObject(theVoid);
+              
+              
+                tank.isGiantBullet = true;
+                tank.shootSpeed = 12;
+                tank.reloadSpeed = 250;
+                tankMovement.speed = 4;
+                tankMovement.turnSpeed = .06;
+                tank.health = 3;
+                updateHealth(tank);
+                scene.remove(goldenSnitch);
+                scene.remove(goldenSnitchBox);
+                goldenSnitchBox.setFromObject(theVoid); 
+            }
           
         tank.position.x += Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 
         tank.position.z += Math.cos(-tankMovement.driveAngle) * tankMovement.speed;  
@@ -162,7 +207,24 @@
         if(isOutOfBounds(tank)){
             tank.health -= 1;
             updateHealth(tank);
-            tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
+            
+            if(tank.health < 1){
+                var audio = new Audio('sounds/explode.mp3');
+                    audio.volume = .75;
+                    audio.play();
+                    
+                    setTimeout(function(){
+                        console.log(tank.name + "Died");
+                        scene.remove(tank);
+                        tank.tankBox.setFromObject(theVoid);
+
+                        explosion.position.set(tank.position.x, tank.position.y, tank.position.z);
+                        explosion.scale.set(.25,.25,.25);
+                        scene.add(explosion); 
+                    }, 50);
+            }else {
+                tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
+            }
         }
         
         tank.position.x -= Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 
@@ -237,7 +299,7 @@
     function keyboardA() {
         tank01.traverse( function ( child )
             {
-                child.children[6].rotation.z += 2 * Math.PI/180;
+                child.children[5].rotation.z += 2 * Math.PI/180;
                 tank01Movement.shootAngle -= 2 * Math.PI/180;
                 tank01Box.setFromObject(tank01);
             });
@@ -253,7 +315,7 @@
     function keyboardD() {
         tank01.traverse( function ( child )
             {
-                child.children[6].rotation.z -= 2 * Math.PI/180;
+                child.children[5].rotation.z -= 2 * Math.PI/180;
                 tank01Movement.shootAngle += 2 * Math.PI/180;
                 tank01Box.setFromObject(tank01);
             });
