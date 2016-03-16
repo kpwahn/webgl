@@ -9,11 +9,22 @@
         //Map variable
         var X_SIZE = 600; //600
         var Z_SIZE = 600; //600
-        var pads;
     </script>
 
 </head>
 <body>
+    <script>
+        var pads;
+
+        var fogOn = false;
+        var fogIntensity = 0;
+        var lightIntensity = 1;
+        var healthPackOn = false;
+        var speedBoostOn = false;
+        var BulletBoostOn = false;
+        var UltPowerOn = false;
+    </script>
+    <script src="js/userSettings.js"></script>
     <script src="js/jquery-1.11.3.min.js"></script>
 
     <!-- TODO tank driving backwards, camera changing around, find new object? etc. etc -->
@@ -28,30 +39,62 @@
 
     <div class="howToPlayHolder">
         <div class="howToPlay">
+            <div class="keyboardControls">
+                <div id="player1">
+                    <div class="controlDiv">
+                        <p>Controls</p>
+                        <p>Forward: W</p>
+                        <p>Left: A</p>
+                        <p>Right: D</p>
+                        <p>Backwards: S</p>
+                        <p>Shoot: F</p>
+                        <p>first Person: Q</p>
+                    </div>
+                </div>
+                    <div class="controlsLeft">
+                        <p class="userInput">
+                            <span class="checkboxText">Fog On</span>
+                            <input id="FogOn" type="checkbox" value="true">
+                        </p>
+                        <p class="userInput">
+                            <span class="checkboxText">Fog Intensity</span>
+                            <input id="FogInt" type="text" placeholder="3" min="0" max="1">
+                        </p>
+                        <p class="userInput">
+                            <span class="checkboxText">Light Intensity</span>
+                            <input id="lightInt" type="text" placeholder="3" min="0" max="1">
+                        </p>
+                        <p class="userInput">
+                            <span class="checkboxText">Health Power Up On</span>
+                            <input id="health" type="checkbox">
+                        </p>
+                        <p class="userInput">
+                            <span class="checkboxText">Speed Power Up On</span>
+                            <input id="speed" type="checkbox">
+                        </p>
+                        <p class="userInput">
+                            <span class="checkboxText">Bullet Power Up On</span>
+                            <input id="bullet" type="checkbox">
+                        </p>
+                        <p class="userInput">
+                            <span class="checkboxText">Ultimate Power Up On</span>
+                            <input id="ult" type="checkbox">
+                        </p>
+                        <button onclick="gameSettings()" id="close">Ready!</button>
 
-            <div id="player1">
-                <div class="controlDiv">
-                    <p>Controls</p>
-                    <p>Forward: W</p>
-                    <p>Left: A</p>
-                    <p>Right: D</p>
-                    <p>Backwards: S</p>
-                    <p>Shoot: F</p>
-                    <p>first Person: Q</p>
+                    </div>
+                <div id="player2">
+                    <div class="controlDiv">
+                        <p>Controls</p>
+                        <p>Forward: Up Arrow</p>
+                        <p>Left: Left Arrow</p>
+                        <p>Right: Right Arrow</p>
+                        <p>Backwards: Down Arrow</p>
+                        <p>Shoot: Shift</p>
+                        <p>first Person: Space Bar</p>
+                    </div>
                 </div>
             </div>
-            <div id="player2">
-                <div class="controlDiv">
-                    <p>Controls</p>
-                    <p>Forward: Up Arrow</p>
-                    <p>Left: Left Arrow</p>
-                    <p>Right: Right Arrow</p>
-                    <p>Backwards: Down Arrow</p>
-                    <p>Shoot: Shift</p>
-                    <p>first Person: Space Bar</p>
-                </div>
-            </div>
-            <button id="close">Ready!</button>
         </div>
     </div>
     
@@ -329,8 +372,6 @@
 
     var audio;
 
-    init();
-
     window.addEventListener("gamepadconnected", function(e) {
         console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
                 e.gamepad.index, e.gamepad.id,
@@ -377,10 +418,15 @@
         
         // Set up controls for the keyboard
         keyboard = new THREEx.KeyboardState();
-        
-        //scene.fog=new THREE.Fog( 0x333333, 0.015, 175 );
+
+    console.log(fogIntensity);
+    if (fogOn) {
+        scene.fog = new THREE.Fog(0x333333, fogIntensity *.01, fogIntensity*100);
+        console.log(scene.fog);
+    }
         setUpLight();
         loadObjects();
+        powerUPs();
 
         
         //The void
@@ -564,7 +610,8 @@
     <script>
         $('#close').click(function() {
             $('.howToPlayHolder').addClass("hide");
-            animate();   
+            init();
+            animate();
         });
     </script>
 
