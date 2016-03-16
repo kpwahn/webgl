@@ -23,11 +23,9 @@
     function keyboardShoot(tank, tankMovement) {
         if (!tank.reload) {
             var bullet = new Bullet(mainBullet.model);
-<<<<<<< HEAD
-            if(tank.isGiantBullet){bullet.model.scale.set(1, 1, 1);}
-=======
 
->>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
+            if(tank.isGiantBullet){bullet.model.scale.set(1, 1, 1);}
+
             bullet.speed = tank.shootSpeed;
             //Sets the bullet Angle
             bulletAngle = tankMovement.shootAngle;
@@ -80,7 +78,6 @@
         if(isOutOfBounds(tank)){
             tank.health -= 1;
             updateHealth(tank)
-<<<<<<< HEAD
             
             if(tank.health < 1){
                 var audio = new Audio('sounds/explode.mp3');
@@ -99,10 +96,6 @@
             }else {
                 tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
             }
-=======
-            tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
-        
->>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         }
 
           
@@ -172,14 +165,10 @@
         }
     
           if(tank.tankBox.intersectsBox(goldenSnitchBox)){
-<<<<<<< HEAD
                 tank.isGiantBullet = true;
                 scene.remove(goldenSnitch);
                 scene.remove(goldenSnitchBox);
                 goldenSnitchBox.setFromObject(theVoid); 
-=======
-                console.log("Ultimate power-up");
->>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
             }
           
         tank.position.x += Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 
@@ -196,8 +185,6 @@
         if(isOutOfBounds(tank)){
             tank.health -= 1;
             updateHealth(tank);
-<<<<<<< HEAD
-            
             
             if(tank.health < 1){
                 var audio = new Audio('sounds/explode.mp3');
@@ -216,9 +203,6 @@
             }else {
                 tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
             }
-=======
-            tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
->>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         }
         
         tank.position.x -= Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 

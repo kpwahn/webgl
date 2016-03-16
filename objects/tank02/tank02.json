@@ -368,30 +368,7 @@
             "matrix": [-1,0,0,0,0,0,1,0,0,1,0,0,0,1.98769,0.23772,1],
             "visible": true,
             "type": "Object",
-<<<<<<< HEAD
             "children": []
-=======
-            "children": [{
-                "name": "Sky_Light",
-                "uuid": "E6F99E53-23B9-39E5-916A-A64B3E57B841",
-                "matrix": [1,0,0,0,0,-0,1,0,0,-1,-0,0,0,0,0,1],
-                "visible": true,
-                "type": "HemisphereLight",
-                "color": 3376639,
-                "intensity": 0.6,
-                "distance": 0
-            },{
-                "name": "Sun_Light",
-                "uuid": "69DB222B-E563-3717-AE1D-6F4304516F23",
-                "matrix": [0.863248,-0.444444,0.239316,0,0.239316,0.777778,0.581196,0,-0.444444,-0.444444,0.777778,0,-13.8464,-13.8464,24.2311,1],
-                "visible": true,
-                "type": "DirectionalLight",
-                "castShadow": false,
-                "color": 16774373,
-                "intensity": 1,
-                "distance": 0
-            }]
->>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         }],
         "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
         "uuid": "F961B087-48A5-4FDE-9FEE-E8D3B7B0A058",

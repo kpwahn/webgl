@@ -41,7 +41,7 @@ function updateBullet(tank, otherTank) {
             //MODIFICATION
             for ( var b = 0; b < brickWalls.length; b++){
                 if(tank.bullets[i].bulletBox.intersectsBox(brickWalls[b])){
-<<<<<<< HEAD
+
                     if(!tank.isGiantBullet){
                         var tmp = tank.bullets[i];
                         //increment my bulletsRemoved to know where to start next time in the array.
@@ -57,12 +57,11 @@ function updateBullet(tank, otherTank) {
                             parkingGarages[j].setFromObject(theVoid);
                         }
                     }
-=======
+
                     var tmp = tank.bullets[i];
                     //increment my bulletsRemoved to know where to start next time in the array.
                     tank.bulletsRemoved++;
                     scene.remove(tmp.model);
->>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
                 }
             }
             
@@ -102,6 +101,7 @@ function updateBullet(tank, otherTank) {
                     if(!otherTank.isThirdPerson){keyboardChangeCamera(otherTank);}
                     
 <<<<<<< HEAD
+<<<<<<< HEAD
                     var audio = new Audio('sounds/explode.mp3');
                     audio.volume = .75;
                     audio.play();
@@ -109,12 +109,17 @@ function updateBullet(tank, otherTank) {
                     setTimeout(function(){
                         console.log(otherTank.name + "Died");
 =======
+=======
+>>>>>>> 58a2928c29ef42b40373a66fdb74b34a469654c8
                     setTimeout(function(){
                         console.log(otherTank.name + "Died");
                         var audio = new Audio('sounds/explode.mp3');
                         audio.volume = .75;
                         audio.play();
+<<<<<<< HEAD
 >>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
+=======
+>>>>>>> 58a2928c29ef42b40373a66fdb74b34a469654c8
                         scene.remove(otherTank);
                         otherTank.tankBox.setFromObject(theVoid);
 
