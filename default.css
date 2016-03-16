@@ -3,6 +3,28 @@ body {
     overflow: hidden;
 }
 
+
+input[type=checkbox] {
+    /* All browsers except webkit*/
+    transform: scale(2.5);
+
+    /* Webkit browsers*/
+    -webkit-transform: scale(2.5);
+}
+input[type=text] {
+    width: 50px;
+}
+.checkboxText {
+    margin-left: 10px;
+    margin-right: 10px;
+    /*margin:10px;*/
+    min-width: 225px;
+    float:left;
+}
+.userInput {
+    margin-top:20px;
+    margin-bottom:20px;
+}
 .howToPlay {
     background: darkgray;
     position:relative;
@@ -20,18 +42,19 @@ p {
     margin:10px;
 }
 #close {
-    height:10%;
+    height:60px;
     width:80px;
     margin-left:auto;
     margin-right:auto;
     position: relative;
-    top:50%;
+    top:5%;
     /*right: 1px;*/
     /*top: 1px;*/
 }
 #player1 {
-    height:100%;
-    width: 45%;
+    /*height:50%;*/
+    width: 33%;
+    padding-bottom:10px;
     border-style: solid;
     float:left;
     margin-right:5px;
@@ -40,13 +63,22 @@ p {
     text-align: center;
 }
 #awsd {
-    margin-top: 15px;
+    /*margin-top: 15px;*/
     width:270px;
+}
+.keyboardControls {
+    height: 25%;
+}
+.controlsLeft {
+    float:left;
+    /*height:20%;*/
+    width:33%;
 }
 #player2 {
     border-style: solid;
-    height:100%;
-    width: 45%;
+    /*height:50%;*/
+    padding-bottom:10px;
+    width: 33%;
     float:right;
 }
 #arrows {
