@@ -5,6 +5,15 @@
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="default.css">
+<<<<<<< HEAD
+=======
+    <script>
+        //Map variable
+        var X_SIZE = 600; //600
+        var Z_SIZE = 600; //600
+        var pads;
+    </script>
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
 
 </head>
 <body>
@@ -61,6 +70,10 @@
     <script src="js/bullet.js"></script>
     <script src="js/loadBullet.js"></script>
     <script src="js/powerUp.js"></script>
+<<<<<<< HEAD
+=======
+    <script src="js/controls.js"></script>
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
 
     <script src="js/explosion.js"></script>
     <script src="js/parkingGarage.js"></script>
@@ -313,10 +326,13 @@
     var scene, camera, camera2, renderer, keyboard;
     var WIDTH, HEIGHT;
     var theVoid;
+<<<<<<< HEAD
         
     //Map variable
     var X_SIZE = 600; //600
     var Z_SIZE = 600; //600
+=======
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
 
     var mainBullet = new loadBullet();
     var bullet = null;
@@ -327,6 +343,10 @@
 
     var audio;
 
+<<<<<<< HEAD
+=======
+    controllers();
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
     init();
 /***********************************************************************************************************************
 * INIT()
@@ -342,7 +362,11 @@
         // Create a renderer and add it to the DOM.
         renderer = new THREE.WebGLRenderer({antialias:true});
         renderer.setSize(WIDTH, HEIGHT);
+<<<<<<< HEAD
         renderer.setClearColor(0x404040 , 1);                                    // Set background color of scene
+=======
+        renderer.setClearColor(0x000000, 1);                                    // Set background color of scene
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         renderer.autoClear = false;
         document.body.appendChild(renderer.domElement);
 
@@ -353,8 +377,13 @@
         scene.add(camera2);
         
         // Add OrbitControls so that we can pan around with the mouse.
+<<<<<<< HEAD
         controls = new THREE.OrbitControls(camera, renderer.domElement);
         controls = new THREE.OrbitControls(camera2, renderer.domElement);
+=======
+//        controls = new THREE.OrbitControls(camera, renderer.domElement);
+//        controls = new THREE.OrbitControls(camera2, renderer.domElement);
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
 
         // Create an event listener that resizes the renderer with the browser window.
         window.addEventListener('resize', function() {
@@ -419,7 +448,11 @@
         requestAnimationFrame(animate);
         render();
 
+<<<<<<< HEAD
         keypress();
+=======
+        keypress(pads);
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         updateBullet(tank01, tank02);
         updateBullet(tank02, tank01);
         advance(tank01);
@@ -454,7 +487,11 @@
             goldenSnitchBox.setFromObject(goldenSnitch);
             setTimeout(function () {
                 goldenSnitchReload = true;
+<<<<<<< HEAD
             }, 1000000);
+=======
+            }, 1000);
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
             
         }
     }
@@ -483,7 +520,11 @@
 *
 *
 *******************************************************************************************************************************/
+<<<<<<< HEAD
     function keypress() {
+=======
+    function keypress(pads) {
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         if (scene.getObjectByName("Tank1")) {
             //Tank01
             if (keyboard.pressed("a")) {keyboardLeft(tank01, tank01Movement);}
@@ -492,6 +533,14 @@
             if (keyboard.pressed("s")) {keyboardDown(tank01, tank01Movement);}
             if (keyboard.pressed("f")) {keyboardShoot(tank01, tank01Movement);}
             if(keyboard.pressed("q")) { keyboardChangeCamera(tank01);}
+<<<<<<< HEAD
+=======
+            //if(keyboard.pressed("a")) { keyboardA(); }
+            //if(keyboard.pressed("d")) { keyboardD(); }
+            if (pads[0]) {
+                console.log("CONNECTED");
+            }
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         }
         if (scene.getObjectByName("Tank2")) {
             //Tank02
@@ -499,8 +548,16 @@
             if (keyboard.pressed("right")) {keyboardRight(tank02, tank02Movement);}
             if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Movement, tank01);}
             if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Movement);}
+<<<<<<< HEAD
             if (keyboard.pressed("shift")) {keyboardShoot(tank02, tank02Movement);}
             if(keyboard.pressed("space")) { keyboardChangeCamera(tank02);}
+=======
+            if (keyboard.pressed("?")) {keyboardShoot(tank02, tank02Movement);}
+            if(keyboard.pressed("space")) { keyboardChangeCamera(tank02);}
+            if (pads[1]) {
+                console.log("CONNECTED");
+            }
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         }
     }
 
@@ -510,7 +567,11 @@
 *
 *******************************************************************************************************************************/
         function setUpLight() {
+<<<<<<< HEAD
             hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 1 );
+=======
+            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, .4 );
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
             hemiLight.position.set( X_SIZE / 2, 100, Z_SIZE / 2 );
             scene.add( hemiLight );
         }
@@ -519,7 +580,14 @@
     <script>
         $('#close').click(function() {
             $('.howToPlayHolder').addClass("hide");
+<<<<<<< HEAD
             animate();   
+=======
+            animate();
+            
+            
+
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         });
     </script>
 

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3b47892-4d0d-414e-a8ca-996c9d82547f" name="Default" comment="">
+
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.html" afterPath="$PROJECT_DIR$/project.html" />
     </list>
@@ -37,8 +38,13 @@
       <file leaf-file-name="project.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.79020333">
               <caret line="467" column="19" selection-start-line="467" selection-start-column="19" selection-end-line="467" selection-end-column="19" />
+=======
+            <state vertical-scroll-proportion="0.90850276">
+              <caret line="513" column="41" selection-start-line="513" selection-start-column="41" selection-end-line="513" selection-end-column="41" />
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -49,6 +55,21 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+=======
+      <file leaf-file-name="controls.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/controls.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+              <folding>
+                <element signature="e#0#45#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
       <file leaf-file-name="explosion.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/explosion.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -66,6 +87,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+<<<<<<< HEAD
               <folding>
                 <marker date="1457974441690" expanded="true" signature="32:106" placeholder="{...}" />
                 <marker date="1457974441690" expanded="true" signature="84:106" placeholder="{...}" />
@@ -80,6 +102,9 @@
                 <marker date="1457974441690" expanded="true" signature="9969:10242" placeholder="/** updateHealth ...*/" />
                 <marker date="1457974441690" expanded="true" signature="11732:12012" placeholder="/** Extra Code Snippets ...*/" />
               </folding>
+=======
+              <folding />
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
             </state>
           </provider>
         </entry>
@@ -135,6 +160,10 @@
         <option value="$PROJECT_DIR$/js/loadObjects.js" />
         <option value="$PROJECT_DIR$/js/explosion.js" />
         <option value="$PROJECT_DIR$/default.css" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/js/controls.js" />
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         <option value="$PROJECT_DIR$/project.html" />
       </list>
     </option>
@@ -175,6 +204,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+=======
+      <pane id="Scratches" />
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -193,9 +226,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+<<<<<<< HEAD
         </subPane>
       </pane>
       <pane id="Scratches" />
+=======
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webgl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webgl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
       <pane id="Scope" />
     </panes>
   </component>
@@ -316,6 +368,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/js/loadBullet.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -324,10 +377,13 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
     <entry file="file://$PROJECT_DIR$/js/keyboard.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+<<<<<<< HEAD
           <folding>
             <marker date="1457974441690" expanded="true" signature="32:106" placeholder="{...}" />
             <marker date="1457974441690" expanded="true" signature="84:106" placeholder="{...}" />
@@ -342,6 +398,9 @@
             <marker date="1457974441690" expanded="true" signature="9969:10242" placeholder="/** updateHealth ...*/" />
             <marker date="1457974441690" expanded="true" signature="11732:12012" placeholder="/** Extra Code Snippets ...*/" />
           </folding>
+=======
+          <folding />
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         </state>
       </provider>
     </entry>
@@ -404,6 +463,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+<<<<<<< HEAD
           <folding>
             <marker date="1457974441690" expanded="true" signature="32:106" placeholder="{...}" />
             <marker date="1457974441690" expanded="true" signature="84:106" placeholder="{...}" />
@@ -418,6 +478,9 @@
             <marker date="1457974441690" expanded="true" signature="9969:10242" placeholder="/** updateHealth ...*/" />
             <marker date="1457974441690" expanded="true" signature="11732:12012" placeholder="/** Extra Code Snippets ...*/" />
           </folding>
+=======
+          <folding />
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         </state>
       </provider>
     </entry>
@@ -480,6 +543,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+<<<<<<< HEAD
           <folding>
             <marker date="1457974441690" expanded="true" signature="32:106" placeholder="{...}" />
             <marker date="1457974441690" expanded="true" signature="84:106" placeholder="{...}" />
@@ -494,6 +558,9 @@
             <marker date="1457974441690" expanded="true" signature="9969:10242" placeholder="/** updateHealth ...*/" />
             <marker date="1457974441690" expanded="true" signature="11732:12012" placeholder="/** Extra Code Snippets ...*/" />
           </folding>
+=======
+          <folding />
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         </state>
       </provider>
     </entry>
@@ -548,6 +615,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+<<<<<<< HEAD
           <folding>
             <marker date="1457974441690" expanded="true" signature="32:106" placeholder="{...}" />
             <marker date="1457974441690" expanded="true" signature="84:106" placeholder="{...}" />
@@ -562,6 +630,9 @@
             <marker date="1457974441690" expanded="true" signature="9969:10242" placeholder="/** updateHealth ...*/" />
             <marker date="1457974441690" expanded="true" signature="11732:12012" placeholder="/** Extra Code Snippets ...*/" />
           </folding>
+=======
+          <folding />
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         </state>
       </provider>
     </entry>
@@ -608,6 +679,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+<<<<<<< HEAD
           <folding>
             <marker date="1457974441690" expanded="true" signature="32:106" placeholder="{...}" />
             <marker date="1457974441690" expanded="true" signature="84:106" placeholder="{...}" />
@@ -622,6 +694,9 @@
             <marker date="1457974441690" expanded="true" signature="9969:10242" placeholder="/** updateHealth ...*/" />
             <marker date="1457974441690" expanded="true" signature="11732:12012" placeholder="/** Extra Code Snippets ...*/" />
           </folding>
+=======
+          <folding />
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         </state>
       </provider>
     </entry>
@@ -666,6 +741,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="48" column="9" selection-start-line="43" selection-start-column="8" selection-end-line="48" selection-end-column="9" />
+<<<<<<< HEAD
           <folding>
             <marker date="1457974441690" expanded="true" signature="32:106" placeholder="{...}" />
             <marker date="1457974441690" expanded="true" signature="84:106" placeholder="{...}" />
@@ -680,6 +756,9 @@
             <marker date="1457974441690" expanded="true" signature="9969:10242" placeholder="/** updateHealth ...*/" />
             <marker date="1457974441690" expanded="true" signature="11732:12012" placeholder="/** Extra Code Snippets ...*/" />
           </folding>
+=======
+          <folding />
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         </state>
       </provider>
     </entry>
@@ -724,6 +803,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="48" column="9" selection-start-line="43" selection-start-column="8" selection-end-line="48" selection-end-column="9" />
+<<<<<<< HEAD
           <folding>
             <marker date="1457974441690" expanded="true" signature="32:106" placeholder="{...}" />
             <marker date="1457974441690" expanded="true" signature="84:106" placeholder="{...}" />
@@ -738,6 +818,9 @@
             <marker date="1457974441690" expanded="true" signature="9969:10242" placeholder="/** updateHealth ...*/" />
             <marker date="1457974441690" expanded="true" signature="11732:12012" placeholder="/** Extra Code Snippets ...*/" />
           </folding>
+=======
+          <folding />
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
         </state>
       </provider>
     </entry>
@@ -815,6 +898,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/js/keyboard.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -836,6 +920,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
     <entry file="file://$PROJECT_DIR$/js/explosion.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -862,10 +948,35 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/project.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.79020333">
           <caret line="467" column="19" selection-start-line="467" selection-start-column="19" selection-end-line="467" selection-end-column="19" />
+=======
+    <entry file="file://$PROJECT_DIR$/js/controls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#45#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/keyboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.90850276">
+          <caret line="513" column="41" selection-start-line="513" selection-start-column="41" selection-end-line="513" selection-end-column="41" />
+>>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
