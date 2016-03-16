@@ -330,7 +330,6 @@
 
     var audio;
 
-    controllers();
     init();
 /***********************************************************************************************************************
 * INIT()
@@ -421,9 +420,10 @@
     function animate() {
 
         requestAnimationFrame(animate);
+        controllers();
         render();
 
-        keypress(pads);
+        keypress();
         updateBullet(tank01, tank02);
         updateBullet(tank02, tank01);
         advance(tank01);
@@ -469,6 +469,7 @@
 *******************************************************************************************************************************/
     function render() {
         renderer.clear();
+    //controllers();
     if (audio.ended) {
         audio.play();
     }
@@ -487,7 +488,7 @@
 *
 *
 *******************************************************************************************************************************/
-    function keypress(pads) {
+    function keypress() {
         if (scene.getObjectByName("Tank1")) {
             //Tank01
             if (keyboard.pressed("a")) {keyboardLeft(tank01, tank01Movement);}
@@ -498,8 +499,12 @@
             if(keyboard.pressed("q")) { keyboardChangeCamera(tank01);}
             //if(keyboard.pressed("a")) { keyboardA(); }
             //if(keyboard.pressed("d")) { keyboardD(); }
-            if (pads[0]) {
-                console.log("CONNECTED");
+            var pad01 = pads[3];
+            if (pad01) {
+//                console.log("CONNECTED");
+                if (pad01.buttons[2] != undefined && pad01.buttons[2].pressed == true ) {
+                    console.log("2 Button")
+                }
             }
         }
         if (scene.getObjectByName("Tank2")) {
@@ -511,7 +516,7 @@
             if (keyboard.pressed("?")) {keyboardShoot(tank02, tank02Movement);}
             if(keyboard.pressed("space")) { keyboardChangeCamera(tank02);}
             if (pads[1]) {
-                console.log("CONNECTED");
+//                console.log("CONNECTED");
             }
         }
     }
