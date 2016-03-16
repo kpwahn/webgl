@@ -372,7 +372,7 @@
         // Set up controls for the keyboard
         keyboard = new THREEx.KeyboardState();
         
-        scene.fog=new THREE.Fog( 0x333333, 0.015, 175 );
+        //scene.fog=new THREE.Fog( 0x333333, 0.015, 175 );
         setUpLight();
         loadObjects();
 
@@ -419,8 +419,6 @@
 *
 ******************************************************************************************************************************/
     function animate() {
-
-        controllers();
         
         requestAnimationFrame(animate);
         controllers();
@@ -461,7 +459,7 @@
                           goldenSnitch.position.z += (Math.random() * (Math.random() * 400) * (Math.round(Math.random()) * 2 - 1)) % Z_SIZE);
             goldenSnitchBox.setFromObject(goldenSnitch);
             setTimeout(function () {
-                goldenSnitchReload = true;
+            goldenSnitchReload = true;
             }, 250);
         }
     }
@@ -502,12 +500,33 @@
             if(keyboard.pressed("q")) { keyboardChangeCamera(tank01);}
             //if(keyboard.pressed("a")) { keyboardA(); }
             //if(keyboard.pressed("d")) { keyboardD(); }
-            var pad01 = pads[3];
+            var pad01 = pads[1];
             if (pad01) {
-//                console.log("CONNECTED");
-                if (pad01.buttons[2] != undefined && pad01.buttons[2].pressed == true ) {
-                    console.log("2 Button")
+                if (pad01.buttons[7] != undefined && pad01.buttons[7].pressed == true ) {
+                    keyboardShoot(tank01, tank01Movement);
                 }
+                if (pad01.buttons[12] != undefined && pad01.buttons[12].pressed == true ) {
+                    keyboardUp(tank01, tank01Movement, tank02);
+                }
+                if (pad01.buttons[13] != undefined && pad01.buttons[13].pressed == true ) {
+                    keyboardDown(tank01, tank01Movement);
+                }
+                if (pad01.buttons[14] != undefined && pad01.buttons[14].pressed == true ) {
+                    keyboardLeft(tank01, tank01Movement);
+                }
+                if (pad01.buttons[15] != undefined && pad01.buttons[15].pressed == true ) {
+                    keyboardRight(tank01, tank01Movement);
+                }
+                if (pad01.buttons[1] != undefined && pad01.buttons[1].pressed == true ) {
+                    keyboardChangeCamera(tank01);
+                }
+                if (pad01.buttons[4] != undefined && pad01.buttons[4].pressed == true ) {
+                    keyboardA();
+                }
+                if (pad01.buttons[5] != undefined && pad01.buttons[5].pressed == true ) {
+                    keyboardD();
+                }
+                
             }
         }
         if (scene.getObjectByName("Tank2")) {
