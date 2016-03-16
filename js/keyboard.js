@@ -80,6 +80,8 @@
             updateHealth(tank)
             
             if(tank.health < 1){
+                if(!otherTank.isThirdPerson){keyboardChangeCamera(otherTank);}
+                
                 var audio = new Audio('sounds/explode.mp3');
                     audio.volume = .75;
                     audio.play();
@@ -165,7 +167,27 @@
         }
     
           if(tank.tankBox.intersectsBox(goldenSnitchBox)){
+                //Remove all other power ups
+                scene.remove(speedBoost);
+                scene.remove(speedBoostBox);
+                speedBoostBox.setFromObject(theVoid);
+              
+                scene.remove(healthPack);
+                scene.remove(healthPackBox);
+                healthPackBox.setFromObject(theVoid); 
+              
+                scene.remove(bulletSpeedBoost);
+                scene.remove(bulletSpeedBoostBox);
+                bulletSpeedBoostBox.setFromObject(theVoid);
+              
+              
                 tank.isGiantBullet = true;
+                tank.shootSpeed = 12;
+                tank.reloadSpeed = 250;
+                tankMovement.speed = 4;
+                tankMovement.turnSpeed = .06;
+                tank.health = 3;
+                updateHealth(tank);
                 scene.remove(goldenSnitch);
                 scene.remove(goldenSnitchBox);
                 goldenSnitchBox.setFromObject(theVoid); 
@@ -277,7 +299,7 @@
     function keyboardA() {
         tank01.traverse( function ( child )
             {
-                child.children[6].rotation.z += 2 * Math.PI/180;
+                child.children[5].rotation.z += 2 * Math.PI/180;
                 tank01Movement.shootAngle -= 2 * Math.PI/180;
                 tank01Box.setFromObject(tank01);
             });
@@ -293,7 +315,7 @@
     function keyboardD() {
         tank01.traverse( function ( child )
             {
-                child.children[6].rotation.z -= 2 * Math.PI/180;
+                child.children[5].rotation.z -= 2 * Math.PI/180;
                 tank01Movement.shootAngle += 2 * Math.PI/180;
                 tank01Box.setFromObject(tank01);
             });
