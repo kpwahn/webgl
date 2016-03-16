@@ -7,5 +7,5 @@ function controllers() {
 
     pads = navigator.getGamepads();
 
-    console.log(pads);
+    //console.log(pads);
 }
