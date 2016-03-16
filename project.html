@@ -420,6 +420,8 @@
 ******************************************************************************************************************************/
     function animate() {
 
+        controllers();
+        
         requestAnimationFrame(animate);
         controllers();
         render();
@@ -460,7 +462,7 @@
             goldenSnitchBox.setFromObject(goldenSnitch);
             setTimeout(function () {
                 goldenSnitchReload = true;
-            }, 1000000);
+            }, 250);
         }
     }
 /*******************************************************************************************************************************
