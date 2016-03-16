@@ -99,27 +99,14 @@ function updateBullet(tank, otherTank) {
                 console.log(otherTank.health);
                 if (otherTank.health <= 0) {
                     if(!otherTank.isThirdPerson){keyboardChangeCamera(otherTank);}
-                    
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                     var audio = new Audio('sounds/explode.mp3');
                     audio.volume = .75;
                     audio.play();
                     
                     setTimeout(function(){
                         console.log(otherTank.name + "Died");
-=======
-=======
->>>>>>> 58a2928c29ef42b40373a66fdb74b34a469654c8
-                    setTimeout(function(){
-                        console.log(otherTank.name + "Died");
-                        var audio = new Audio('sounds/explode.mp3');
-                        audio.volume = .75;
-                        audio.play();
-<<<<<<< HEAD
->>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
-=======
->>>>>>> 58a2928c29ef42b40373a66fdb74b34a469654c8
+
                         scene.remove(otherTank);
                         otherTank.tankBox.setFromObject(theVoid);
 

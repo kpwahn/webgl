@@ -50,13 +50,7 @@ function loadObjects() {
         tank02.canChangeCamera = true;
         tank02.shootSpeed = 8;
         tank02.reloadSpeed = 500;
-<<<<<<< HEAD
-<<<<<<< HEAD
         tank01.isGiantBullet = false;
-=======
->>>>>>> 033fb5fdfaf4d802f2ece864c243bfd3494cf382
-=======
->>>>>>> 58a2928c29ef42b40373a66fdb74b34a469654c8
         
         tank02.add(camera2);
         camera2.position.set( 0, 25, 50 );    
