@@ -5,6 +5,12 @@
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="default.css">
+    <script>
+        //Map variable
+        var X_SIZE = 600; //600
+        var Z_SIZE = 600; //600
+        var pads;
+    </script>
 
 </head>
 <body>
@@ -61,6 +67,7 @@
     <script src="js/bullet.js"></script>
     <script src="js/loadBullet.js"></script>
     <script src="js/powerUp.js"></script>
+    <script src="js/controls.js"></script>
 
     <script src="js/explosion.js"></script>
     <script src="js/parkingGarage.js"></script>
@@ -313,10 +320,6 @@
     var scene, camera, camera2, renderer, keyboard;
     var WIDTH, HEIGHT;
     var theVoid;
-        
-    //Map variable
-    var X_SIZE = 600; //600
-    var Z_SIZE = 600; //600
 
     var mainBullet = new loadBullet();
     var bullet = null;
@@ -327,6 +330,7 @@
 
     var audio;
 
+    controllers();
     init();
 /***********************************************************************************************************************
 * INIT()
@@ -419,7 +423,7 @@
         requestAnimationFrame(animate);
         render();
 
-        keypress();
+        keypress(pads);
         updateBullet(tank01, tank02);
         updateBullet(tank02, tank01);
         advance(tank01);
@@ -483,7 +487,7 @@
 *
 *
 *******************************************************************************************************************************/
-    function keypress() {
+    function keypress(pads) {
         if (scene.getObjectByName("Tank1")) {
             //Tank01
             if (keyboard.pressed("a")) {keyboardLeft(tank01, tank01Movement);}
@@ -494,6 +498,9 @@
             if(keyboard.pressed("q")) { keyboardChangeCamera(tank01);}
             //if(keyboard.pressed("a")) { keyboardA(); }
             //if(keyboard.pressed("d")) { keyboardD(); }
+            if (pads[0]) {
+                console.log("CONNECTED");
+            }
         }
         if (scene.getObjectByName("Tank2")) {
             //Tank02
@@ -501,8 +508,11 @@
             if (keyboard.pressed("right")) {keyboardRight(tank02, tank02Movement);}
             if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Movement, tank01);}
             if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Movement);}
-            if (keyboard.pressed("shift")) {keyboardShoot(tank02, tank02Movement);}
+            if (keyboard.pressed("?")) {keyboardShoot(tank02, tank02Movement);}
             if(keyboard.pressed("space")) { keyboardChangeCamera(tank02);}
+            if (pads[1]) {
+                console.log("CONNECTED");
+            }
         }
     }
 
