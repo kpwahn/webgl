@@ -68,7 +68,6 @@
     <script src="js/loadBullet.js"></script>
     <script src="js/powerUp.js"></script>
     <script src="js/controls.js"></script>
-
     <script src="js/explosion.js"></script>
     <script src="js/parkingGarage.js"></script>
     <script src="js/brickWalls.js"></script>
@@ -345,7 +344,8 @@
         // Create a renderer and add it to the DOM.
         renderer = new THREE.WebGLRenderer({antialias:true});
         renderer.setSize(WIDTH, HEIGHT);
-        renderer.setClearColor(0x000000, 1);                                    // Set background color of scene
+        renderer.setClearColor(0x404040 , 1);                                    // Set background color of scene
+
         renderer.autoClear = false;
         document.body.appendChild(renderer.domElement);
 
@@ -358,6 +358,7 @@
         // Add OrbitControls so that we can pan around with the mouse.
 //        controls = new THREE.OrbitControls(camera, renderer.domElement);
 //        controls = new THREE.OrbitControls(camera2, renderer.domElement);
+
 
         // Create an event listener that resizes the renderer with the browser window.
         window.addEventListener('resize', function() {
@@ -424,6 +425,7 @@
         render();
 
         keypress();
+
         updateBullet(tank01, tank02);
         updateBullet(tank02, tank01);
         advance(tank01);
@@ -458,8 +460,7 @@
             goldenSnitchBox.setFromObject(goldenSnitch);
             setTimeout(function () {
                 goldenSnitchReload = true;
-            }, 1000);
-            
+            }, 1000000);
         }
     }
 /*******************************************************************************************************************************
@@ -513,7 +514,7 @@
             if (keyboard.pressed("right")) {keyboardRight(tank02, tank02Movement);}
             if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Movement, tank01);}
             if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Movement);}
-            if (keyboard.pressed("?")) {keyboardShoot(tank02, tank02Movement);}
+            if (keyboard.pressed("shift")) {keyboardShoot(tank02, tank02Movement);}
             if(keyboard.pressed("space")) { keyboardChangeCamera(tank02);}
             if (pads[1]) {
 //                console.log("CONNECTED");
@@ -527,7 +528,7 @@
 *
 *******************************************************************************************************************************/
         function setUpLight() {
-            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, .4 );
+            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 1 );
             hemiLight.position.set( X_SIZE / 2, 100, Z_SIZE / 2 );
             scene.add( hemiLight );
         }
@@ -536,10 +537,7 @@
     <script>
         $('#close').click(function() {
             $('.howToPlayHolder').addClass("hide");
-            animate();
-            
-            
-
+            animate();   
         });
     </script>
 
