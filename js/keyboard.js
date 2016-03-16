@@ -23,7 +23,7 @@
     function keyboardShoot(tank, tankMovement) {
         if (!tank.reload) {
             var bullet = new Bullet(mainBullet.model);
-
+            if(tank.isGiantBullet){bullet.model.scale.set(1, 1, 1);}
             bullet.speed = tank.shootSpeed;
             //Sets the bullet Angle
             bulletAngle = tankMovement.shootAngle;
@@ -76,8 +76,24 @@
         if(isOutOfBounds(tank)){
             tank.health -= 1;
             updateHealth(tank)
-            tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
-        
+            
+            if(tank.health < 1){
+                var audio = new Audio('sounds/explode.mp3');
+                    audio.volume = .75;
+                    audio.play();
+                    
+                    setTimeout(function(){
+                        console.log(tank.name + "Died");
+                        scene.remove(tank);
+                        tank.tankBox.setFromObject(theVoid);
+
+                        explosion.position.set(tank.position.x, tank.position.y, tank.position.z);
+                        explosion.scale.set(.25,.25,.25);
+                        scene.add(explosion); 
+                    }, 50);
+            }else {
+                tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
+            }
         }
 
           
@@ -147,7 +163,10 @@
         }
     
           if(tank.tankBox.intersectsBox(goldenSnitchBox)){
-                console.log("Ultimate power-up");
+                tank.isGiantBullet = true;
+                scene.remove(goldenSnitch);
+                scene.remove(goldenSnitchBox);
+                goldenSnitchBox.setFromObject(theVoid); 
             }
           
         tank.position.x += Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 
@@ -164,7 +183,25 @@
         if(isOutOfBounds(tank)){
             tank.health -= 1;
             updateHealth(tank);
-            tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
+            
+            
+            if(tank.health < 1){
+                var audio = new Audio('sounds/explode.mp3');
+                    audio.volume = .75;
+                    audio.play();
+                    
+                    setTimeout(function(){
+                        console.log(tank.name + "Died");
+                        scene.remove(tank);
+                        tank.tankBox.setFromObject(theVoid);
+
+                        explosion.position.set(tank.position.x, tank.position.y, tank.position.z);
+                        explosion.scale.set(.25,.25,.25);
+                        scene.add(explosion); 
+                    }, 50);
+            }else {
+                tank.position.set(Math.random() * X_SIZE ,0, Math.random() * Z_SIZE);
+            }
         }
         
         tank.position.x -= Math.sin(-tankMovement.driveAngle) * tankMovement.speed; 

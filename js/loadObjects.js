@@ -16,6 +16,7 @@ function loadObjects() {
         tank01.canChangeCamera = true;
         tank01.shootSpeed = 8;
         tank01.reloadSpeed = 500;
+        tank01.isGiantBullet = false;
 
         //Set the camera relative to this object
         tank01.add( camera );
@@ -26,7 +27,6 @@ function loadObjects() {
         //tank01.tank01BoxDisplay = new THREE.BoundingBoxHelper( tank01 );
         //scene.add(tank01.tank01BoxDisplay);
 
-        //TODO why is this box different?
         tank01.tankBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
         tank01.tankBox.setFromObject(tank01);
         
@@ -50,6 +50,7 @@ function loadObjects() {
         tank02.canChangeCamera = true;
         tank02.shootSpeed = 8;
         tank02.reloadSpeed = 500;
+        tank01.isGiantBullet = false;
         
         tank02.add(camera2);
         camera2.position.set( 0, 25, 50 );    

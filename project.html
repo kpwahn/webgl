@@ -342,7 +342,7 @@
         // Create a renderer and add it to the DOM.
         renderer = new THREE.WebGLRenderer({antialias:true});
         renderer.setSize(WIDTH, HEIGHT);
-        renderer.setClearColor(0x000000, 1);                                    // Set background color of scene
+        renderer.setClearColor(0x404040 , 1);                                    // Set background color of scene
         renderer.autoClear = false;
         document.body.appendChild(renderer.domElement);
 
@@ -353,8 +353,8 @@
         scene.add(camera2);
         
         // Add OrbitControls so that we can pan around with the mouse.
-//        controls = new THREE.OrbitControls(camera, renderer.domElement);
-//        controls = new THREE.OrbitControls(camera2, renderer.domElement);
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls = new THREE.OrbitControls(camera2, renderer.domElement);
 
         // Create an event listener that resizes the renderer with the browser window.
         window.addEventListener('resize', function() {
@@ -454,7 +454,7 @@
             goldenSnitchBox.setFromObject(goldenSnitch);
             setTimeout(function () {
                 goldenSnitchReload = true;
-            }, 1000);
+            }, 1000000);
             
         }
     }
@@ -492,8 +492,6 @@
             if (keyboard.pressed("s")) {keyboardDown(tank01, tank01Movement);}
             if (keyboard.pressed("f")) {keyboardShoot(tank01, tank01Movement);}
             if(keyboard.pressed("q")) { keyboardChangeCamera(tank01);}
-            //if(keyboard.pressed("a")) { keyboardA(); }
-            //if(keyboard.pressed("d")) { keyboardD(); }
         }
         if (scene.getObjectByName("Tank2")) {
             //Tank02
@@ -512,7 +510,7 @@
 *
 *******************************************************************************************************************************/
         function setUpLight() {
-            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, .4 );
+            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 1 );
             hemiLight.position.set( X_SIZE / 2, 100, Z_SIZE / 2 );
             scene.add( hemiLight );
         }
@@ -521,10 +519,7 @@
     <script>
         $('#close').click(function() {
             $('.howToPlayHolder').addClass("hide");
-            animate();
-            
-            
-
+            animate();   
         });
     </script>
 
