@@ -21,8 +21,8 @@
         var lightIntensity = 1;
         var healthPackOn = false;
         var speedBoostOn = false;
-        var BulletBoostOn = false;
-        var UltPowerOn = false;
+        var bulletBoostOn = false;
+        var ultPowerOn = false;
     </script>
     <script src="js/userSettings.js"></script>
     <script src="js/jquery-1.11.3.min.js"></script>
@@ -58,11 +58,11 @@
                         </p>
                         <p class="userInput">
                             <span class="checkboxText">Fog Intensity</span>
-                            <input id="FogInt" type="text" placeholder="3" min="0" max="1">
+                            <input id="FogInt" type="text" value="3" min="0" max="1">
                         </p>
                         <p class="userInput">
                             <span class="checkboxText">Light Intensity</span>
-                            <input id="lightInt" type="text" placeholder="3" min="0" max="1">
+                            <input id="lightInt" type="text" value="3" min="0" max="1">
                         </p>
                         <p class="userInput">
                             <span class="checkboxText">Health Power Up On</span>
@@ -371,11 +371,15 @@
     var explosion;
 
     var audio;
+    var pad01, pad02;
 
+    controllers();
     window.addEventListener("gamepadconnected", function(e) {
         console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
                 e.gamepad.index, e.gamepad.id,
                 e.gamepad.buttons.length, e.gamepad.axes.length);
+        console.log(e);
+        pad01 = pads[e.gamepad.index];
     });
 /***********************************************************************************************************************
 * INIT()
@@ -470,7 +474,7 @@
 *   Renders the scene and updates the render as needed.
 *
 ******************************************************************************************************************************/
-    function animate() {
+function animate() {
         
         requestAnimationFrame(animate);
         controllers();
@@ -483,7 +487,8 @@
         advance(tank01);
         advance(tank02);
 
-        if(healthPackReload){
+    if (healthPackOn) {
+        if (healthPackReload) {
             healthPackReload = false;
             healthPack.position.set(Math.random() * X_SIZE, 2.5, Math.random() * Z_SIZE);
             healthPackBox.setFromObject(healthPack);
@@ -491,6 +496,7 @@
                 healthPackReload = true;
             }, 10000);
         }
+    }
 
         //only updates the boxes IF the tanks are still in the scene
         if (scene.getObjectByName("Tank1")) {
@@ -503,108 +509,113 @@
         if (scene.getObjectByName("explosion")) {
             updateExplosion();
         }
-        
-        if(goldenSnitchReload){
+
+    if (ultPowerOn) {
+        if (goldenSnitchReload) {
             goldenSnitchReload = false;
             goldenSnitch.position.set(goldenSnitch.position.x += (Math.random() * (Math.random() * 400) * (Math.round(Math.random()) * 2 - 1)) % X_SIZE,
-                          goldenSnitch.position.y,
-                          goldenSnitch.position.z += (Math.random() * (Math.random() * 400) * (Math.round(Math.random()) * 2 - 1)) % Z_SIZE);
+                    goldenSnitch.position.y,
+                    goldenSnitch.position.z += (Math.random() * (Math.random() * 400) * (Math.round(Math.random()) * 2 - 1)) % Z_SIZE);
             goldenSnitchBox.setFromObject(goldenSnitch);
             setTimeout(function () {
-            goldenSnitchReload = true;
-            }, 250);
+                goldenSnitchReload = true;
+            }, 1000);
         }
     }
+}
 /*******************************************************************************************************************************
 * Render
 *
 *
 *******************************************************************************************************************************/
-    function render() {
+function render() {
         renderer.clear();
     //controllers();
     if (audio.ended) {
         audio.play();
     }
 
-        material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
+    material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
         
-        renderer.setViewport( 0, 0, WIDTH / 2, HEIGHT);   
-        renderer.render( scene, camera);   
+    renderer.setViewport( 0, 0, WIDTH / 2, HEIGHT);
+    renderer.render( scene, camera);
 
-        renderer.setViewport( WIDTH / 2, 0, WIDTH / 2, HEIGHT);
-        renderer.render( scene, camera2 );
-    }
+    renderer.setViewport( WIDTH / 2, 0, WIDTH / 2, HEIGHT);
+    renderer.render( scene, camera2 );
+}
 
 /*******************************************************************************************************************************
 * Keyboard
 *
 *
 *******************************************************************************************************************************/
-    function keypress() {
-        if (scene.getObjectByName("Tank1")) {
-            //Tank01
-            if (keyboard.pressed("a")) {keyboardLeft(tank01, tank01Movement);}
-            if (keyboard.pressed("d")) {keyboardRight(tank01, tank01Movement);}
-            if (keyboard.pressed("w")) {keyboardUp(tank01, tank01Movement, tank02);}
-            if (keyboard.pressed("s")) {keyboardDown(tank01, tank01Movement);}
-            if (keyboard.pressed("f")) {keyboardShoot(tank01, tank01Movement);}
-            if(keyboard.pressed("q")) { keyboardChangeCamera(tank01);}
-            //if(keyboard.pressed("a")) { keyboardA(); }
-            //if(keyboard.pressed("d")) { keyboardD(); }
-            var pad01 = pads[1];
-            if (pad01) {
-                if (pad01.buttons[7] != undefined && pad01.buttons[7].pressed == true ) {
-                    keyboardShoot(tank01, tank01Movement);
-                }
-                if (pad01.buttons[12] != undefined && pad01.buttons[12].pressed == true ) {
-                    keyboardUp(tank01, tank01Movement, tank02);
-                }
-                if (pad01.buttons[13] != undefined && pad01.buttons[13].pressed == true ) {
-                    keyboardDown(tank01, tank01Movement);
-                }
-                if (pad01.buttons[14] != undefined && pad01.buttons[14].pressed == true ) {
-                    keyboardLeft(tank01, tank01Movement);
-                }
-                if (pad01.buttons[15] != undefined && pad01.buttons[15].pressed == true ) {
-                    keyboardRight(tank01, tank01Movement);
-                }
-                if (pad01.buttons[1] != undefined && pad01.buttons[1].pressed == true ) {
-                    keyboardChangeCamera(tank01);
-                }
-                if (pad01.buttons[4] != undefined && pad01.buttons[4].pressed == true ) {
-                    keyboardA();
-                }
-                if (pad01.buttons[5] != undefined && pad01.buttons[5].pressed == true ) {
-                    keyboardD();
-                }
-                
-            }
+function keypress() {
+    if (scene.getObjectByName("Tank1")) {
+        //Tank01
+        if (keyboard.pressed("a")) {keyboardLeft(tank01, tank01Movement);}
+        if (keyboard.pressed("d")) {keyboardRight(tank01, tank01Movement);}
+        if (keyboard.pressed("w")) {keyboardUp(tank01, tank01Movement, tank02);}
+        if (keyboard.pressed("s")) {keyboardDown(tank01, tank01Movement);}
+        if (keyboard.pressed("f")) {keyboardShoot(tank01, tank01Movement);}
+        if(keyboard.pressed("q")) { keyboardChangeCamera(tank01);}
+        //if(keyboard.pressed("a")) { keyboardA(); }
+        //if(keyboard.pressed("d")) { keyboardD(); }
+        if (pads[0] != undefined) {
+            pad01 = pads[0];
         }
-        if (scene.getObjectByName("Tank2")) {
-            //Tank02
-            if (keyboard.pressed("left")) {keyboardLeft(tank02, tank02Movement);}
-            if (keyboard.pressed("right")) {keyboardRight(tank02, tank02Movement);}
-            if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Movement, tank01);}
-            if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Movement);}
-            if (keyboard.pressed("shift")) {keyboardShoot(tank02, tank02Movement);}
-            if(keyboard.pressed("space")) { keyboardChangeCamera(tank02);}
-            if (pads[1]) {
-//                console.log("CONNECTED");
+
+        if (pad01) {
+            if (pad01.buttons[7] != undefined && pad01.buttons[7].pressed == true ) {
+                keyboardShoot(tank01, tank01Movement);
             }
+            if (pad01.buttons[12] != undefined && pad01.buttons[12].pressed == true ) {
+                keyboardUp(tank01, tank01Movement, tank02);
+            }
+            if (pad01.buttons[13] != undefined && pad01.buttons[13].pressed == true ) {
+                keyboardDown(tank01, tank01Movement);
+            }
+            if (pad01.buttons[14] != undefined && pad01.buttons[14].pressed == true ) {
+                keyboardLeft(tank01, tank01Movement);
+            }
+            if (pad01.buttons[15] != undefined && pad01.buttons[15].pressed == true ) {
+                keyboardRight(tank01, tank01Movement);
+            }
+            if (pad01.buttons[1] != undefined && pad01.buttons[1].pressed == true ) {
+                keyboardChangeCamera(tank01);
+            }
+            if (pad01.buttons[4] != undefined && pad01.buttons[4].pressed == true ) {
+                keyboardA();
+            }
+            if (pad01.buttons[5] != undefined && pad01.buttons[5].pressed == true ) {
+                keyboardD();
+            }
+
         }
     }
+    if (scene.getObjectByName("Tank2")) {
+        //Tank02
+        if (keyboard.pressed("left")) {keyboardLeft(tank02, tank02Movement);}
+        if (keyboard.pressed("right")) {keyboardRight(tank02, tank02Movement);}
+        if (keyboard.pressed("up")) {keyboardUp(tank02, tank02Movement, tank01);}
+        if (keyboard.pressed("down")) {keyboardDown(tank02, tank02Movement);}
+        if (keyboard.pressed("shift")) {keyboardShoot(tank02, tank02Movement);}
+        if(keyboard.pressed("space")) { keyboardChangeCamera(tank02);}
+        if (pads[1]) {
+//                console.log("CONNECTED");
+        }
+    }
+}
 
 /*******************************************************************************************************************************
 * setUpLight
 *
 *
 *******************************************************************************************************************************/
-        function setUpLight() {
-            hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 1 );
-            hemiLight.position.set( X_SIZE / 2, 100, Z_SIZE / 2 );
-            scene.add( hemiLight );
-        }
+function setUpLight() {
+    hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 1 );
+    hemiLight.position.set( X_SIZE / 2, 100, Z_SIZE / 2 );
+    scene.add( hemiLight );
+}
   </script>
 
     <script>
