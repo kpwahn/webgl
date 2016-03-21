@@ -37,4 +37,7 @@ function controller(pad, tank, tankMovement, otherTank) {
     if (pad.buttons[1] != undefined && pad.buttons[1].pressed == true ) {
         keyboardChangeCamera(tank);
     }
+    if(pad.buttons[9] != undefined && pad.buttons[9].pressed){
+        location.reload();   
+    }
 }

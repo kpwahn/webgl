@@ -62,7 +62,7 @@
                         </p>
                         <p class="userInput">
                             <span class="checkboxText">Light Intensity</span>
-                            <input id="lightInt" type="text" value="3" min="0" max="1">
+                            <input id="lightInt" type="text" value="7" min="0" max="1">
                         </p>
                         <p class="userInput">
                             <span class="checkboxText">Health Power Up On</span>
@@ -599,7 +599,7 @@ function keypress() {
 *
 *******************************************************************************************************************************/
 function setUpLight() {
-    hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 1 );
+    hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, lightIntensity * .2 );
     hemiLight.position.set( X_SIZE / 2, 100, Z_SIZE / 2 );
     scene.add( hemiLight );
 }
