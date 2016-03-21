@@ -505,11 +505,11 @@ function animate() {
         //only updates the boxes IF the tanks are still in the scene
         if (scene.getObjectByName("Tank1")) {
             tank01.tankBox.setFromObject(tank01);
-            tank01BoxDisplay.update();
+//            tank01BoxDisplay.update();
         }
         if (scene.getObjectByName("Tank2")) {
             tank02.tankBox.setFromObject(tank02);
-            tank02.tank02BoxDisplay.update();
+//            tank02.tank02BoxDisplay.update();
         }
 
         if (scene.getObjectByName("explosion")) {
@@ -571,24 +571,7 @@ function keypress() {
         }
 
         if (pad01) {
-            if (pad01.buttons[7] != undefined && pad01.buttons[7].pressed == true ) {
-                keyboardShoot(tank01, tank01Movement);
-            }
-            if (pad01.buttons[12] != undefined && pad01.buttons[12].pressed == true ) {
-                keyboardUp(tank01, tank01Movement, tank02);
-            }
-            if (pad01.buttons[13] != undefined && pad01.buttons[13].pressed == true ) {
-                keyboardDown(tank01, tank01Movement);
-            }
-            if (pad01.buttons[14] != undefined && pad01.buttons[14].pressed == true ) {
-                keyboardLeft(tank01, tank01Movement);
-            }
-            if (pad01.buttons[15] != undefined && pad01.buttons[15].pressed == true ) {
-                keyboardRight(tank01, tank01Movement);
-            }
-            if (pad01.buttons[1] != undefined && pad01.buttons[1].pressed == true ) {
-                keyboardChangeCamera(tank01);
-            }
+            controller(pad01, tank01, tank01Movement, tank02);
 
         }
     }
@@ -606,24 +589,7 @@ function keypress() {
         }
         
         if (pad02) {
-            if (pad02.buttons[7] != undefined && pad02.buttons[7].pressed == true ) {
-                keyboardShoot(tank02, tank02Movement);
-            }
-            if (pad02.buttons[12] != undefined && pad02.buttons[12].pressed == true ) {
-                keyboardUp(tank02, tank02Movement, tank01);
-            }
-            if (pad02.buttons[13] != undefined && pad02.buttons[13].pressed == true ) {
-                keyboardDown(tank02, tank02Movement);
-            }
-            if (pad02.buttons[14] != undefined && pad02.buttons[14].pressed == true ) {
-                keyboardLeft(tank02, tank02Movement);
-            }
-            if (pad02.buttons[15] != undefined && pad02.buttons[15].pressed == true ) {
-                keyboardRight(tank02, tank02Movement);
-            }
-            if (pad02.buttons[1] != undefined && pad02.buttons[1].pressed == true ) {
-                keyboardChangeCamera(tank02);
-            }
+            controller(pad02, tank02, tank02Movement, tank01);
         }
     }
 }

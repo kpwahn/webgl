@@ -17,3 +17,24 @@ function gameSettings() {
     ultPowerOn = $("#ult:checked").length > 0;
 
 }
+
+function controller(pad, tank, tankMovement, otherTank) {
+    if (pad.buttons[7] != undefined && pad.buttons[7].pressed == true ) {
+        keyboardShoot(tank, tankMovement);
+    }
+    if (pad.buttons[12] != undefined && pad.buttons[12].pressed == true ) {
+        keyboardUp(tank, tankMovement, otherTank);
+    }
+    if (pad.buttons[13] != undefined && pad.buttons[13].pressed == true ) {
+        keyboardDown(tank, tankMovement);
+    }
+    if (pad.buttons[14] != undefined && pad.buttons[14].pressed == true ) {
+        keyboardLeft(tank, tankMovement);
+    }
+    if (pad.buttons[15] != undefined && pad.buttons[15].pressed == true ) {
+        keyboardRight(tank, tankMovement);
+    }
+    if (pad.buttons[1] != undefined && pad.buttons[1].pressed == true ) {
+        keyboardChangeCamera(tank);
+    }
+}
