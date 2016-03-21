@@ -379,7 +379,11 @@
                 e.gamepad.index, e.gamepad.id,
                 e.gamepad.buttons.length, e.gamepad.axes.length);
         console.log(e);
-        pad01 = pads[e.gamepad.index];
+        if (pad01 == undefined) {
+            pad01 = pads[e.gamepad.index];
+        } else {
+            pad02 = pads[e.gamepad.index];
+        }
     });
 /***********************************************************************************************************************
 * INIT()
@@ -566,23 +570,23 @@ function keypress() {
             pad01 = pads[0];
         }
 
-        if (pad0) {
-            if (pad0.buttons[7] != undefined && pad0.buttons[7].pressed == true ) {
+        if (pad01) {
+            if (pad01.buttons[7] != undefined && pad01.buttons[7].pressed == true ) {
                 keyboardShoot(tank01, tank01Movement);
             }
-            if (pad0.buttons[12] != undefined && pad0.buttons[12].pressed == true ) {
+            if (pad01.buttons[12] != undefined && pad01.buttons[12].pressed == true ) {
                 keyboardUp(tank01, tank01Movement, tank02);
             }
-            if (pad0.buttons[13] != undefined && pad0.buttons[13].pressed == true ) {
+            if (pad01.buttons[13] != undefined && pad01.buttons[13].pressed == true ) {
                 keyboardDown(tank01, tank01Movement);
             }
-            if (pad0.buttons[14] != undefined && pad0.buttons[14].pressed == true ) {
+            if (pad01.buttons[14] != undefined && pad01.buttons[14].pressed == true ) {
                 keyboardLeft(tank01, tank01Movement);
             }
-            if (pad0.buttons[15] != undefined && pad0.buttons[15].pressed == true ) {
+            if (pad01.buttons[15] != undefined && pad01.buttons[15].pressed == true ) {
                 keyboardRight(tank01, tank01Movement);
             }
-            if (pad0.buttons[1] != undefined && pad0.buttons[1].pressed == true ) {
+            if (pad01.buttons[1] != undefined && pad01.buttons[1].pressed == true ) {
                 keyboardChangeCamera(tank01);
             }
 
@@ -598,26 +602,26 @@ function keypress() {
         if(keyboard.pressed("space")) { keyboardChangeCamera(tank02);}
         
         if (pads[1] != undefined) {
-            pad1 = pads[0];
+            pad02 = pads[1];
         }
         
-        if (pad01) {
-            if (pad1.buttons[7] != undefined && pad1.buttons[7].pressed == true ) {
+        if (pad02) {
+            if (pad02.buttons[7] != undefined && pad02.buttons[7].pressed == true ) {
                 keyboardShoot(tank02, tank02Movement);
             }
-            if (pad1.buttons[12] != undefined && pad1.buttons[12].pressed == true ) {
+            if (pad02.buttons[12] != undefined && pad02.buttons[12].pressed == true ) {
                 keyboardUp(tank02, tank02Movement, tank01);
             }
-            if (pad1.buttons[13] != undefined && pad1.buttons[13].pressed == true ) {
+            if (pad02.buttons[13] != undefined && pad02.buttons[13].pressed == true ) {
                 keyboardDown(tank02, tank02Movement);
             }
-            if (pad1.buttons[14] != undefined && pad1.buttons[14].pressed == true ) {
+            if (pad02.buttons[14] != undefined && pad02.buttons[14].pressed == true ) {
                 keyboardLeft(tank02, tank02Movement);
             }
-            if (pad1.buttons[15] != undefined && pad1.buttons[15].pressed == true ) {
+            if (pad02.buttons[15] != undefined && pad02.buttons[15].pressed == true ) {
                 keyboardRight(tank02, tank02Movement);
             }
-            if (pad1.buttons[1] != undefined && pad1.buttons[1].pressed == true ) {
+            if (pad02.buttons[1] != undefined && pad02.buttons[1].pressed == true ) {
                 keyboardChangeCamera(tank02);
             }
         }
