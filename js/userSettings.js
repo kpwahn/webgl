@@ -15,7 +15,12 @@ function gameSettings() {
     speedBoostOn = $("#speed:checked").length > 0;
     bulletBoostOn = $("#bullet:checked").length > 0;
     ultPowerOn = $("#ult:checked").length > 0;
-
+    numWalls = $("#numWalls")[0].value;
+    X_SIZE = parseInt($("#arenaSize")[0].value);
+    Z_SIZE = X_SIZE;
+    
+    init();
+    animate();
 }
 
 function controller(pad, tank, tankMovement, otherTank) {
@@ -36,5 +41,8 @@ function controller(pad, tank, tankMovement, otherTank) {
     }
     if (pad.buttons[1] != undefined && pad.buttons[1].pressed == true ) {
         keyboardChangeCamera(tank);
+    }
+    if(pad.buttons[9] != undefined && pad.buttons[9].pressed){
+        location.reload();   
     }
 }
