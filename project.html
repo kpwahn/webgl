@@ -5,11 +5,6 @@
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="default.css">
-    <script>
-        //Map variable
-        var X_SIZE = 600; //600
-        var Z_SIZE = 600; //600
-    </script>
 
 </head>
 <body>
@@ -23,6 +18,10 @@
         var speedBoostOn = false;
         var bulletBoostOn = false;
         var ultPowerOn = false;
+        var numWalls = 10;
+        
+        var X_SIZE = 600;
+        var Z_SIZE = 600;
     </script>
     <script src="js/userSettings.js"></script>
     <script src="js/jquery-1.11.3.min.js"></script>
@@ -79,6 +78,14 @@
                         <p class="userInput">
                             <span class="checkboxText">Ultimate Power Up On</span>
                             <input id="ult" type="checkbox" checked>
+                        </p>
+                        <p class="userInput">
+                            <span class="checkboxText">Number of Walls</span>
+                            <input id="numWalls" type="text" value="10" min="0" max="1">
+                        </p>
+                        <p class="userInput">
+                            <span class="checkboxText">Size of Arena</span>
+                            <input id="arenaSize" type="text" value="600" min="0" max="1">
                         </p>
                         <button onclick="gameSettings()" id="close">Ready!</button>
 
@@ -435,6 +442,7 @@
         setUpLight();
         loadObjects();
         powerUPs();
+        createBrickWalls();
 
         
         //The void
@@ -460,7 +468,8 @@
         grassTex.repeat.x = 100; 
         grassTex.repeat.y = 100; 
         var groundMat = new THREE.MeshLambertMaterial({map:grassTex}); 
-        var groundGeo = new THREE.PlaneGeometry(X_SIZE + 150, Z_SIZE + 150); 
+        console.log(X_SIZE);
+        var groundGeo = new THREE.PlaneGeometry(X_SIZE+150, Z_SIZE+150); 
         var ground = new THREE.Mesh(groundGeo,groundMat); 
         ground.position.set(X_SIZE / 2, 0, Z_SIZE / 2);
         ground.rotation.x = -Math.PI/2; //-90 degrees around the xaxis 
@@ -608,8 +617,6 @@ function setUpLight() {
     <script>
         $('#close').click(function() {
             $('.howToPlayHolder').addClass("hide");
-            init();
-            animate();
         });
     </script>
 

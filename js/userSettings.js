@@ -15,7 +15,12 @@ function gameSettings() {
     speedBoostOn = $("#speed:checked").length > 0;
     bulletBoostOn = $("#bullet:checked").length > 0;
     ultPowerOn = $("#ult:checked").length > 0;
-
+    numWalls = $("#numWalls")[0].value;
+    X_SIZE = parseInt($("#arenaSize")[0].value);
+    Z_SIZE = X_SIZE;
+    
+    init();
+    animate();
 }
 
 function controller(pad, tank, tankMovement, otherTank) {

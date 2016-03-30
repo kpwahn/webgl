@@ -56,7 +56,7 @@ function loadObjects() {
         camera2.position.set( 0, 25, 50 );    
         camera2.lookAt( new THREE.Vector3( 0, 0, 0 ) );
         
-        //Just for visual box
+//        Just for visual box
 //        tank02.tank02BoxDisplay = new THREE.BoundingBoxHelper( tank02 );
 //        scene.add(tank02.tank02BoxDisplay);
         
