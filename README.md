@@ -1,7 +1,5 @@
 # webgl
-cs312
-
-Our project from CS313 at BYU-Idaho
+Our project from CS312 at BYU-Idaho
 
 Local splitscreen tank battles
 
